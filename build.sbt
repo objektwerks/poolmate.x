@@ -1,4 +1,4 @@
-name := "poolmate.web"
+name := "poolmate.x"
 
 lazy val caskVersion = "0.8.0"
 lazy val laminarVersion = "0.14.2"
