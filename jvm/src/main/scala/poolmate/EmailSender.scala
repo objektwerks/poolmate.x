@@ -1,4 +1,4 @@
-package pool
+package poolmate
 
 import com.typesafe.config.Config
 import com.typesafe.scalalogging.LazyLogging
@@ -70,7 +70,7 @@ final class EmailSender(conf: Config,
       account = store.addAccount(account)
       logger.info("*** EmailSender added account: {}", account)
 
-      val email = pool.Email(messageId, account.license, account.emailAddress)
+      val email = poolmate.Email(messageId, account.license, account.emailAddress)
       store.addEmail(email)
       logger.info("*** EmailSender added email: {}", email)
       

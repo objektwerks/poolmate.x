@@ -1,4 +1,4 @@
-package pool
+package poolmate
 
 sealed trait License:
   val license: String

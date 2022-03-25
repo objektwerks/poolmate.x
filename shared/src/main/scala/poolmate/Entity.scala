@@ -1,4 +1,4 @@
-package pool
+package poolmate
 
 import java.util.UUID
 

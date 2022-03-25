@@ -1,4 +1,4 @@
-package pool
+package poolmate
 
 object Serializers:
   import upickle.default.*

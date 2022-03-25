@@ -1,4 +1,4 @@
-package pool
+package poolmate
 
 import cask.main.Routes
 import cask.model.{Request, Response}

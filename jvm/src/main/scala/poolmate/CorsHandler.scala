@@ -1,4 +1,4 @@
-package pool
+package poolmate
 
 import cask.main.Main
 import cask.internal.DispatchTrie
