@@ -1,4 +1,4 @@
-package pool
+package poolmate
 
 object Url:
   var root: String = ""
