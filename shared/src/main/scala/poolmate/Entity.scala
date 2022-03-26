@@ -164,12 +164,12 @@ final case class Supply(id: Long = 0,
                         item: String = "",
                         amount: Double = 0.0,
                         unit: String = "",
-                        cost: Double = 0.0) extends Entity:
+                        cost: Int = 0) extends Entity:
   def display = s"$purchased: $item"
 
 final case class Repair(id: Long = 0,
                         poolId: Long = 0,
                         repaired: Int = 0,
                         repair: String = "",
-                        cost: Double = 0.0) extends Entity:
+                        cost: Int = 0) extends Entity:
   def display = s"$repaired: $repair"
