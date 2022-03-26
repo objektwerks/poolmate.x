@@ -105,7 +105,8 @@ final case class TimerSetting(id: Long = 0,
 final case class Heater(id: Long = 0,
                         poolId: Long = 0,
                         installed: Int = 0,
-                        model: String = "") extends Entity:
+                        model: String = "",
+                        cost: Int = 0) extends Entity:
   def display = installed.toString
 
 final case class HeaterSetting(id: Long = 0,
