@@ -118,7 +118,7 @@ CREATE TABLE supply (
   item VARCHAR NOT NULL,
   amount NUMERIC(4, 2) NOT NULL,
   unit VARCHAR NOT NULL,
-  cost NUMERIC(5, 2) NOT NULL
+  cost Int NOT NULL
 );
 
 CREATE TABLE repair (
@@ -126,7 +126,7 @@ CREATE TABLE repair (
   pool_id BIGINT REFERENCES pool(id),
   repaired INT NOT NULL,
   repair VARCHAR NOT NULL,
-  cost NUMERIC(7, 2) NOT NULL
+  cost INT NOT NULL
 );
 
 CREATE TABLE email (
