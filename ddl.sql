@@ -63,7 +63,8 @@ CREATE TABLE heater (
   id BIGSERIAL PRIMARY KEY,
   pool_id BIGINT REFERENCES pool(id),
   installed INT NOT NULL,
-  model VARCHAR NOT NULL
+  model VARCHAR NOT NULL,
+  cost INT NOT NULL
 );
 
 CREATE TABLE heater_setting (
