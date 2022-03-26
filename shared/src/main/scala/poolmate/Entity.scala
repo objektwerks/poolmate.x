@@ -63,7 +63,8 @@ final case class Pool(id: Long = 0,
                       license: String = "",
                       name: String = "",
                       built: Int = 0,
-                      volume: Int = 1000) extends Entity:
+                      volume: Int = 1000,
+                      cost: Int = 0) extends Entity:
   def display = name
 
 final case class Surface(id: Long = 0,
