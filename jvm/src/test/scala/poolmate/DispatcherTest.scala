@@ -39,7 +39,7 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
     account = testDeactivate(dispatcher, account)
     account = testReactivate(dispatcher, account)
 
-    var pool = Pool(license = account.license, name = "test", built = 20010101)
+    var pool = Pool(license = account.license, name = "test", built = 20010101, cost = 25000)
     pool = testAddPool(dispatcher, pool)
     testListPools(dispatcher, account)
     testUpdatePool(dispatcher, pool.copy(volume = 10000))
