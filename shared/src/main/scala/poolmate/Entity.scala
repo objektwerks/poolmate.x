@@ -70,7 +70,8 @@ final case class Pool(id: Long = 0,
 final case class Surface(id: Long = 0,
                          poolId: Long = 0,
                          installed: Int = 0,
-                         kind: String = "") extends Entity:
+                         kind: String = "",
+                         cost: Int = 0) extends Entity:
   def display = kind
 
 final case class Deck(id: Long = 0,
