@@ -416,7 +416,7 @@ final class Store(conf: Config,
   def listRepairs(): List[Repair] =
     DB readOnly { implicit session =>
       sql"select * from repair order by repaired desc"
-        .map(rs => Repair(rs.long("id"), rs.long("pool_id"), rs.int("repaired"), rs.string("repair"), rs.double("cost")))
+        .map(rs => Repair(rs.long("id"), rs.long("pool_id"), rs.int("repaired"), rs.string("repair"), rs.int("cost")))
         .list()
     }
 
