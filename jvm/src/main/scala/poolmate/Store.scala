@@ -395,7 +395,7 @@ final class Store(conf: Config,
   def listSupplies(): List[Supply] =
     DB readOnly { implicit session =>
       sql"select * from supply order by purchased desc"
-        .map(rs => Supply(rs.long("id"), rs.long("pool_id"), rs.int("purchased"), rs.string("item"), rs.double("amount"), rs.string("unit"), rs.double("cost")))
+        .map(rs => Supply(rs.long("id"), rs.long("pool_id"), rs.int("purchased"), rs.string("item"), rs.double("amount"), rs.string("unit"), rs.int("cost")))
         .list()
     }
 
