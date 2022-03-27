@@ -257,20 +257,20 @@ final class Store(conf: Config,
   def listHeaters(): List[Heater] =
     DB readOnly { implicit session =>
       sql"select * from heater order by installed desc"
-        .map(rs => Heater(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("model")))
+        .map(rs => Heater(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("model"), rs.int("cost")))
         .list()
     }
 
   def addHeater(heater: Heater): Heater =
     val id = DB localTx { implicit session =>
-      sql"insert into heater(pool_id, installed, model) values(${heater.poolId}, ${heater.installed}, ${heater.model})"
+      sql"insert into heater(pool_id, installed, model, cost) values(${heater.poolId}, ${heater.installed}, ${heater.model}, ${heater.cost})"
       .updateAndReturnGeneratedKey()
     }
     heater.copy(id = id)
 
   def updateHeater(heater: Heater): Unit =
     DB localTx { implicit session =>
-      sql"update heater set installed = ${heater.installed}, model = ${heater.model} where id = ${heater.id}"
+      sql"update heater set installed = ${heater.installed}, model = ${heater.model}, cost = ${heater.cost} where id = ${heater.id}"
       .update()
     }
     ()
