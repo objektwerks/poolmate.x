@@ -22,7 +22,7 @@ object PoolView extends View:
               clearErrors()
               model.addEntity(pool)
               route(PoolsPage)
-            case _ => log(s"Pool view add handler failed: $event")
+            case _ => log(s"Pool add view add handler failed: $event")
         case Left(fault) => errorBus.emit(s"Add pool failed: ${fault.cause}")
 
     def updateHandler(event: Either[Fault, Event]): Unit =
@@ -32,7 +32,7 @@ object PoolView extends View:
             case Updated() =>
               clearErrors()
               route(PoolsPage)
-            case _ => log(s"Pool view update handler failed: $event")
+            case _ => log(s"Pool update view update handler failed: $event")
         case Left(fault) => errorBus.emit(s"Update pool failed: ${fault.cause}")
 
     div(
