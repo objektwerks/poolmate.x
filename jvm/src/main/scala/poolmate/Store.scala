@@ -165,7 +165,7 @@ final class Store(conf: Config,
 
   def updateSurface(surface: Surface): Unit =
     DB localTx { implicit session =>
-      sql"update surface set installed = ${surface.installed}, kind = ${surface.kind}, cost = {surface.cost} where id = ${surface.id}"
+      sql"update surface set installed = ${surface.installed}, kind = ${surface.kind}, cost = ${surface.cost} where id = ${surface.id}"
       .update()
     }
     ()
