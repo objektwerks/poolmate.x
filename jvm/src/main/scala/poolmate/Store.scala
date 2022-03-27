@@ -152,20 +152,20 @@ final class Store(conf: Config,
   def listSurfaces(): List[Surface] =
     DB readOnly { implicit session =>
       sql"select * from surface order by installed desc"
-        .map(rs => Surface(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("kind")))
+        .map(rs => Surface(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("kind"), rs.int("cost")))
         .list()
     }
 
   def addSurface(surface: Surface): Surface =
     val id = DB localTx { implicit session =>
-      sql"insert into surface(pool_id, installed, kind) values(${surface.poolId}, ${surface.installed}, ${surface.kind})"
+      sql"insert into surface(pool_id, installed, kind, cost) values(${surface.poolId}, ${surface.installed}, ${surface.kind}, ${surface.cost})"
       .updateAndReturnGeneratedKey()
     }
     surface.copy(id = id)
 
   def updateSurface(surface: Surface): Unit =
     DB localTx { implicit session =>
-      sql"update surface set installed = ${surface.installed}, kind = ${surface.kind} where id = ${surface.id}"
+      sql"update surface set installed = ${surface.installed}, kind = ${surface.kind}, cost = {surface.cost} where id = ${surface.id}"
       .update()
     }
     ()
