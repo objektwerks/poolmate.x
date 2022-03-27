@@ -15,7 +15,7 @@ object PoolsView extends View:
             case PoolsListed(pools: Seq[Pool]) =>
               clearErrors()
               model.setEntities(pools)
-            case _ =>
+            case _ => log(s"Pools view handler failed: $event")
         case Left(fault) => errorBus.emit(s"List pools failed: ${fault.cause}")
 
     div(
