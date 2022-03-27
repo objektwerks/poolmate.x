@@ -43,7 +43,7 @@ object Account:
     Random.shuffle(
       Random
         .alphanumeric
-        .take(4)
+        .take(5)
         .mkString
         .prepended(newSpecialChar)
         .appended(newSpecialChar)
