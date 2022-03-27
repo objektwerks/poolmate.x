@@ -59,7 +59,7 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
     testListPumps(dispatcher, pool)
     testUpdatePump(dispatcher, pool, pump.copy(model = "pentair"))
 
-    var timer = Timer(poolId = pool.id, installed = 20010101, model = "intermatic")
+    var timer = Timer(poolId = pool.id, installed = 20010101, model = "intermatic", cost = 75)
     timer = testAddTimer(dispatcher, pool, timer)
     testListTimers(dispatcher, pool)
     testUpdateTimer(dispatcher, pool, timer.copy(model = "smartpool"))
