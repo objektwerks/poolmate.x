@@ -19,7 +19,7 @@ object Components:
     button(cls("w3-button w3-round-xxlarge w3-light-grey w3-text-indigo"), text)
 
   def rbtn(text: String): Button =
-    button(cls("w3-button w3-round-xxlarge w3-mobile w3-light-grey w3-text-indigo w3-right"), text)
+    button(cls("w3-button w3-round-xxlarge w3-light-grey w3-text-indigo w3-right"), text)
   
   def dropdown(header: Button, buttons: Button*): Div =
     div(cls("w3-dropdown-hover"), header, div(cls("w3-dropdown-content w3-bar-block w3-card-4"), buttons))
