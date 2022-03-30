@@ -52,6 +52,7 @@ object Proxy:
         response <- dom.fetch(Url.command, params)
         text     <- response.text()
       yield
+        log(s"Proxy:post text: $text")
         val event = read[Event](text)
         log(s"Proxy:post event: $event")
         event
