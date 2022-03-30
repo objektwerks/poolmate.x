@@ -16,7 +16,7 @@ object Components:
     div(cls("w3-bar w3-margin-top w3-center"), elms)
 
   def btn(text: String): Button =
-    button(cls("w3-button w3-round-xxlarge w3-mobile w3-light-grey w3-text-indigo"), text)
+    button(cls("w3-button w3-round-xxlarge w3-light-grey w3-text-indigo"), text)
 
   def rbtn(text: String): Button =
     button(cls("w3-button w3-round-xxlarge w3-mobile w3-light-grey w3-text-indigo w3-right"), text)
