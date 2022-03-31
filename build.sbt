@@ -71,7 +71,7 @@ lazy val jvm = (project in file("jvm"))
         "com.twelvemonkeys.imageio" % "imageio-bmp" % twelveMonkeysVersion,
         "com.github.blemale" %% "scaffeine" % "5.1.2",
         "org.jodd" % "jodd-mail" % "6.0.5",
-        "com.typesafe" % "config" % "1.4.1",
+        "com.typesafe" % "config" % "1.4.2",
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.4",
         "ch.qos.logback" % "logback-classic" % "1.2.10",
         "org.scalatest" %% "scalatest" % scalaTestVersion % Test
