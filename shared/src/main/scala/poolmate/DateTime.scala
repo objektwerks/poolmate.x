@@ -1,12 +1,18 @@
 package poolmate
 
-import java.time._
+import java.time.*
 
 object DateTime:
-  val dateFormatter = format.DateTimeFormatter.ofPattern("yyyy-MM-dd")
-  val timeFormatter = format.DateTimeFormatter.ofPattern("HH:mm")
+  private var zoneId = ZoneId.of("EST", ZoneId.SHORT_IDS)
+  zoneId = if zoneId == null then ZoneId.of("EST") else zoneId
 
-  def currentDate: Int = localDateToInt(LocalDate.now)
+  private val yearFormatter = format.DateTimeFormatter.ofPattern("yyyy")
+  private val dateFormatter = format.DateTimeFormatter.ofPattern("yyyy-MM-dd")
+  private val timeFormatter = format.DateTimeFormatter.ofPattern("HH:mm")
+
+  def currentYear: Int = LocalDate.now(zoneId).format(yearFormatter).toInt
+
+  def currentDate: Int = localDateToInt(LocalDate.now(zoneId))
 
   def localDateToInt(localDate: LocalDate): Int =
     localDateToString(localDate).replace("-", "").toInt
@@ -27,7 +33,7 @@ object DateTime:
     val dd = localDateAsString.substring(6, 8)
     LocalDate.of(yyyy.toInt, mm.toInt, dd.toInt).format(dateFormatter)
 
-  def currentTime: Int = localTimeToInt(LocalTime.now)
+  def currentTime: Int = localTimeToInt(LocalTime.now(zoneId))
 
   def localTimeToInt(localTime: LocalTime): Int =
     localTimeToString(localTime).replace(":", "").toInt
