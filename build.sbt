@@ -7,7 +7,7 @@ lazy val upickleVersion = "1.5.0"
 lazy val postgresqlVersion = "42.3.1"
 lazy val scalaJavaTimeVersion = "2.3.0"
 lazy val twelveMonkeysVersion = "3.8.1"
-lazy val scalaTestVersion = "3.2.10"
+lazy val scalaTestVersion = "3.2.11"
 
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
