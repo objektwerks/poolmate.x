@@ -6,8 +6,7 @@ import scala.scalajs.js.Date
 
 object Components:
   private val inputCss = "w3-input w3-hover-light-gray w3-text-indigo"
-  private val currentYear = new Date().getFullYear().toInt.toString
-  // Calling DateTime causes this error: unknown timezone id: america/new york
+  private val currentYear = DateTime.currentYear
 
   def bar(elms: HtmlElement*): Div =
     div(cls("w3-bar"), elms)
@@ -45,7 +44,7 @@ object Components:
   def year: Input =
     input(
       cls(inputCss), typ("number"), pattern("\\d*"),
-      stepAttr("1"), minAttr("1900"), maxAttr(currentYear),
+      stepAttr("1"), minAttr("1900"), maxAttr(currentYear.toString),
       required(true)
     )
 
