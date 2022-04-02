@@ -3,12 +3,12 @@ package poolmate
 import java.time.*
 
 object DateTime:
-  private var zoneId = ZoneId.of("EST", ZoneId.SHORT_IDS)
+  var zoneId = ZoneId.of("EST", ZoneId.SHORT_IDS)
   zoneId = if zoneId == null then ZoneId.of("EST") else zoneId
 
-  private val yearFormatter = format.DateTimeFormatter.ofPattern("yyyy")
-  private val dateFormatter = format.DateTimeFormatter.ofPattern("yyyy-MM-dd")
-  private val timeFormatter = format.DateTimeFormatter.ofPattern("HH:mm")
+  val yearFormatter = format.DateTimeFormatter.ofPattern("yyyy")
+  val dateFormatter = format.DateTimeFormatter.ofPattern("yyyy-MM-dd")
+  val timeFormatter = format.DateTimeFormatter.ofPattern("HH:mm")
 
   def currentYear: Int = LocalDate.now(zoneId).format(yearFormatter).toInt
 
