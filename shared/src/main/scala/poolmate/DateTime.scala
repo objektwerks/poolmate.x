@@ -3,7 +3,7 @@ package poolmate
 import java.time.*
 
 object DateTime:
-  var zoneId = ZoneId.of("EST", ZoneId.SHORT_IDS)
+  var zoneId = ZoneId.systemDefault()
   zoneId = if zoneId == null then ZoneId.of("EST") else zoneId
 
   val yearFormatter = format.DateTimeFormatter.ofPattern("yyyy")
