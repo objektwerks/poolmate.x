@@ -3,7 +3,7 @@ package poolmate
 import java.time.*
 
 object DateTime:
-  var zoneId = ZoneId.systemDefault()
+  var zoneId = ZoneId.of("UTC", ZoneId.SHORT_IDS)
   zoneId = if zoneId == null then ZoneId.of("UTC") else zoneId
 
   val yearFormatter = format.DateTimeFormatter.ofPattern("yyyy")
