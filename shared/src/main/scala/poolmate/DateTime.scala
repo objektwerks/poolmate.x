@@ -4,7 +4,7 @@ import java.time.*
 
 object DateTime:
   var zoneId = ZoneId.systemDefault()
-  zoneId = if zoneId == null then ZoneId.of("EST") else zoneId
+  zoneId = if zoneId == null then ZoneId.of("UTC") else zoneId
 
   val yearFormatter = format.DateTimeFormatter.ofPattern("yyyy")
   val dateFormatter = format.DateTimeFormatter.ofPattern("yyyy-MM-dd")
