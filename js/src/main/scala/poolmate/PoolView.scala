@@ -47,17 +47,17 @@ object PoolView extends View:
           btn("Maintenance"),
           btn("Measurements").amend {
             onClick --> { _ =>
-              log("Maintenance -> Measurements menu item onClick")
+              log("Measurements menu item onClick")
             }
           },
           btn("Cleanings").amend {
             onClick --> { _ =>
-              log("Hardware -> Cleanings menu item onClick")
+              log("Cleanings menu item onClick")
             }
           },
           btn("Chemicals").amend {
             onClick --> { _ =>
-              log("Hardware -> Chemicals menu item onClick")
+              log("Chemicals menu item onClick")
             }
           }
         ),
@@ -65,12 +65,12 @@ object PoolView extends View:
           btn("Expenses"),
           btn("Supplies").amend {
             onClick --> { _ =>
-              log("Expenses -> Supplies menu item onClick")
+              log("Supplies menu item onClick")
             }
           },
           btn("Repairs").amend {
             onClick --> { _ =>
-              log("Hardware -> Repairs menu item onClick")
+              log("Repairs menu item onClick")
             }
           }
         ),
@@ -78,17 +78,17 @@ object PoolView extends View:
           btn("Hardware"),
           btn("Pumps").amend {
             onClick --> { _ =>
-              log("Hardware -> Pumps menu item onClick")
+              log("Pumps menu item onClick")
             }
           },
           btn("Timers").amend {
             onClick --> { _ =>
-              log("Hardware -> Timers menu item onClick")
+              log("Timers menu item onClick")
             }
           },
           btn("Heaters").amend {
             onClick --> { _ =>
-              log("Hardware -> Heaters menu item onClick")
+              log("Heaters menu item onClick")
             }
           }
         ),
@@ -96,12 +96,12 @@ object PoolView extends View:
           btn("Aesthetics"),
           btn("Surfaces").amend {
             onClick --> { _ =>
-              log("Aesthetics -> Surfaces menu item onClick")
+              log("Surfaces menu item onClick")
             }
           },
           btn("Decks").amend {
             onClick --> { _ =>
-              log("Aesthetics -> Decks menu item onClick")
+              log("Decks menu item onClick")
             }
           },
         )
