@@ -37,7 +37,7 @@ object Account:
 
   /**
    * 26 letters + 10 numbers + 18 special characters = 54 combinations
-   * 6 alphanumeric char pin = 54^6 ( 24,794,911,296 )
+   * 7 alphanumeric char pin = 54^7 ( 1,338,925,209,984 )
    */
   private def newPin: String =
     Random.shuffle(
