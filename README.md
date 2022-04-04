@@ -59,6 +59,14 @@ Account
 * Deactivate( license ) => Deactivated( account )
 * Reactivate( license ) => Reactivated( account )
 
+Use Cases
+---------
+1. **measure** water
+2. **clean** artifacts
+3. **add** chemicals
+4. **set** timer | heater
+5. **expense** supplies, repairs, pumps, timers, heaters, surfaces, decks
+
 View(Menu) ! Action -> Page
 ---------------------------
 1. Root
