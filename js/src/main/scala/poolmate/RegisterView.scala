@@ -25,7 +25,7 @@ object RegisterView extends View:
               accountVar.set(account)
               pinVar.set(account.pin)
               route(LoginPage)
-            case _ => log(s"Register view handler failed: $event")
+            case _ => log(s"Register -> handler failed: $event")
         case Left(fault) => errorBus.emit(s"Register failed: ${fault.cause}")
       
     div(
@@ -45,7 +45,7 @@ object RegisterView extends View:
         btn("Register").amend {
           disabled <-- emailAddressVar.signal.map(email => !email.isEmailAddress)
           onClick --> { _ =>
-            log(s"Register onClick -> email address: ${emailAddressVar.now()}")
+            log(s"Register button onClick -> email address: ${emailAddressVar.now()}")
             val command = Register(emailAddressVar.now())
             call(command, handler)
           }

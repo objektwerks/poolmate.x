@@ -15,14 +15,14 @@ object PoolsView extends View:
             case PoolsListed(pools: Seq[Pool]) =>
               clearErrors()
               model.setEntities(pools)
-            case _ => log(s"Pools view handler failed: $event")
+            case _ => log(s"Pools -> handler failed: $event")
         case Left(fault) => errorBus.emit(s"List pools failed: ${fault.cause}")
 
     div(
       bar(
-        btn("Home").amend {
+        btn("App").amend {
           onClick --> { _ =>
-            log("Pools -> Home menu item onClick")
+            log("Pools -> App menu item onClick")
             route(AppPage)
           }
         }      
@@ -40,13 +40,13 @@ object PoolsView extends View:
       cbar(
         btn("New").amend {
           onClick --> { _ =>
-            log(s"Pools -> New onClick")
+            log(s"Pools -> New button onClick")
             route(PoolPage())
           }
         },        
         btn("Refresh").amend {
           onClick --> { _ =>
-            log(s"Pools -> Refresh onClick")
+            log(s"Pools -> Refresh button onClick")
             val command = ListPools(accountVar.now().license)
             call(command, handler)
           }

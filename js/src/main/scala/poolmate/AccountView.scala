@@ -17,7 +17,7 @@ object AccountView extends View:
               clearErrors()
               accountVar.set(account)
               route(AppPage)
-            case _ => log(s"Account deactivate view handler failed: $event")
+            case _ => log(s"Account -> deactivate handler failed: $event")
         case Left(fault) => errorBus.emit(s"Deactivate failed: ${fault.cause}")
  
     def reactivateHandler(event: Either[Fault, Event]): Unit =
@@ -28,14 +28,14 @@ object AccountView extends View:
               clearErrors()
               accountVar.set(account)
               route(AppPage)
-            case _ => log(s"Account reactivate view handler failed: $event")
+            case _ => log(s"Account -> reactivate handler failed: $event")
         case Left(fault) => errorBus.emit(s"Reactivate failed: ${fault.cause}")
 
     div(
       bar(
-        btn("Home").amend {
+        btn("App").amend {
           onClick --> { _ =>
-            log("Account -> Home onClick")
+            log("Account -> App menu item onClick")
             route(AppPage)
           }
         }      
@@ -66,7 +66,7 @@ object AccountView extends View:
           btn("Deactivate").amend {
             disabled <-- accountVar.signal.map { account => account.isDeactivated }
             onClick --> { _ =>
-              log("Account -> Deactivate onClick")
+              log("Account -> Deactivate button onClick")
               val command = Deactivate(accountVar.now().license)
               call(command, deactivateHandler)
             }
@@ -74,7 +74,7 @@ object AccountView extends View:
           btn("Reactivate").amend {
             disabled <-- accountVar.signal.map { account => account.isActivated }
             onClick --> { _ =>
-              log("Account -> Reactivate onClick")
+              log("Account -> Reactivate button onClick")
               val command = Reactivate(accountVar.now().license)
               call(command, reactivateHandler)
             }

@@ -22,7 +22,7 @@ object LoginView extends View:
               clearErrors()
               accountVar.set(account)
               route(AppPage)
-            case _ => log(s"Login view handler failed: $event")
+            case _ => log(s"Login -> handler failed: $event")
         case Left(fault) => errorBus.emit(s"Login failed: ${fault.cause}")
       
     div(      
@@ -52,7 +52,7 @@ object LoginView extends View:
             (email, pin) => !(email.isEmailAddress && pin.isPin)
           }
           onClick --> { _ =>
-            log(s"Login onClick -> email address: ${emailAddressVar.now()} pin: ${pinVar.now()}")
+            log(s"Login button onClick -> email address: ${emailAddressVar.now()} pin: ${pinVar.now()}")
             val command = Login(emailAddressVar.now(), pinVar.now())
             call(command, handler)
           }
