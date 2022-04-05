@@ -14,26 +14,26 @@ object PoolView extends View:
     val builtErrorBus = new EventBus[String]
     val volumeErrorBus = new EventBus[String]
 
-    def addHandler(event: Either[Fault, Event]): Unit =
-      event match
+    def addHandler(either: Either[Fault, Event]): Unit =
+      either match
+        case Left(fault) => errorBus.emit(s"Add pool failed: ${fault.cause}")
         case Right(event) =>
           event match
             case PoolAdded(pool) =>
               clearErrors()
               model.addEntity(pool)
               route(PoolsPage)
-            case _ => log(s"Pool add view add handler failed: $event")
-        case Left(fault) => errorBus.emit(s"Add pool failed: ${fault.cause}")
+            case _ => log(s"Pool -> add handler failed: $event")
 
-    def updateHandler(event: Either[Fault, Event]): Unit =
-      event match
+    def updateHandler(either: Either[Fault, Event]): Unit =
+      either match
+        case Left(fault) => errorBus.emit(s"Update pool failed: ${fault.cause}")
         case Right(event) =>
           event match
             case Updated() =>
               clearErrors()
               route(PoolsPage)
-            case _ => log(s"Pool update view update handler failed: $event")
-        case Left(fault) => errorBus.emit(s"Update pool failed: ${fault.cause}")
+            case _ => log(s"Pool -> update handler failed: $event")
 
     div(
       bar(

@@ -8,15 +8,15 @@ import Components.*
 
 object PoolsView extends View:
   def apply(model: Model[Pool], accountVar: Var[Account]): HtmlElement =
-    def handler(event: Either[Fault, Event]): Unit =
-      event match
+    def handler(either: Either[Fault, Event]): Unit =
+      either match
+        case Left(fault) => errorBus.emit(s"List pools failed: ${fault.cause}")
         case Right(event) =>
           event match
             case PoolsListed(pools: Seq[Pool]) =>
               clearErrors()
               model.setEntities(pools)
             case _ => log(s"Pools -> handler failed: $event")
-        case Left(fault) => errorBus.emit(s"List pools failed: ${fault.cause}")
 
     div(
       bar(

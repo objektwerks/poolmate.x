@@ -9,8 +9,9 @@ import Validators.*
 
 object AccountView extends View:
   def apply(accountVar: Var[Account]): HtmlElement =
-    def deactivateHandler(event: Either[Fault, Event]): Unit =
-      event match
+    def deactivateHandler(either: Either[Fault, Event]): Unit =
+      either match
+        case Left(fault) => errorBus.emit(s"Deactivate failed: ${fault.cause}")
         case Right(event) =>
           event match
             case Deactivated(account) =>
@@ -18,10 +19,10 @@ object AccountView extends View:
               accountVar.set(account)
               route(AppPage)
             case _ => log(s"Account -> deactivate handler failed: $event")
-        case Left(fault) => errorBus.emit(s"Deactivate failed: ${fault.cause}")
  
-    def reactivateHandler(event: Either[Fault, Event]): Unit =
-      event match
+    def reactivateHandler(either: Either[Fault, Event]): Unit =
+      either match
+        case Left(fault) => errorBus.emit(s"Reactivate failed: ${fault.cause}")
         case Right(event) =>
           event match
             case Reactivated(account) =>
@@ -29,7 +30,6 @@ object AccountView extends View:
               accountVar.set(account)
               route(AppPage)
             case _ => log(s"Account -> reactivate handler failed: $event")
-        case Left(fault) => errorBus.emit(s"Reactivate failed: ${fault.cause}")
 
     div(
       bar(
