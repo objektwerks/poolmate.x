@@ -52,13 +52,6 @@ Server
 1. Now: /now
 2. Api: /command
 
-Account
--------
-* Register( email ) => Registered( account )
-* Login( email, pin ) => LoggedIn( account )
-* Deactivate( license ) => Deactivated( account )
-* Reactivate( license ) => Reactivated( account )
-
 Use Cases
 ---------
 1. **measure** water
@@ -66,6 +59,13 @@ Use Cases
 3. **add** chemicals
 4. **set** timer | heater
 5. **expense** supplies, repairs, pumps, timers, heaters, surfaces, decks
+
+Account
+-------
+* Register( email address ) => Registered( account )
+* Login( email address, pin ) => LoggedIn( account )
+* Deactivate( license ) => Deactivated( account )
+* Reactivate( license ) => Reactivated( account )
 
 View(Menu) ! Action -> Page
 ---------------------------
