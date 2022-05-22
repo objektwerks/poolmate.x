@@ -62,8 +62,8 @@ Use Cases
 
 Account
 -------
-* Register( email address ) => Registered( account )
-* Login( email address, pin ) => LoggedIn( account )
+* Register( emailAddress ) => Registered( account )
+* Login( emailAddress, pin ) => LoggedIn( account )
 * Deactivate( license ) => Deactivated( account )
 * Reactivate( license ) => Reactivated( account )
 
