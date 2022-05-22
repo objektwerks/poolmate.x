@@ -74,24 +74,24 @@ View(Menu) ! Action -> Page
    * Login ! Login -> App
 2. App
    * App(Account, Pools)
-   * Account(App) ! Deactivate, Reactivate -> App
-   * Pools(App) ! N -> Pool(Pools, Hardware, Maintenance, Expenses) ! AU -> Pools
+   * Account(App) ! Deactivate, Reactivate
+   * Pools(App) ! N -> Pool(Pools, Hardware, Maintenance, Expenses) ! AU
 3. Maintenance **, ***
-   * Measurements(Pool) ! N -> Measurement(Measurements) ! AU -> Measurements
-   * Cleanings(Pool) ! N -> Cleaning(Cleanings) ! AU -> Cleanings
-   * Chemicals(Pool) ! N -> Chemical(Chemicals) ! AU -> Chemicals
+   * Measurements(Pool) ! N -> Measurement(Measurements) ! AU
+   * Cleanings(Pool) ! N -> Cleaning(Cleanings) ! AU
+   * Chemicals(Pool) ! N -> Chemical(Chemicals) ! AU
 4. Expenses **, ***
-   * Supplies(Pool) ! N -> Supply(Supplies) ! AU -> Supplies
-   * Repairs(Pool) ! N -> Repair(Repairs) ! AU -> Repairs
+   * Supplies(Pool) ! N -> Supply(Supplies) ! AU
+   * Repairs(Pool) ! N -> Repair(Repairs) ! AU
 5. Hardware **
-   * Pumps(Pool) ! N -> Pump(Pumps) ! AU -> Pumps
-   * Timers(Pool) ! N -> Timer(Timers) ! AU -> Timers
-     * Timer ! N -> TimerSettings(Timer) ! N -> TimerSetting ! AU -> TimerSettings
+   * Pumps(Pool) ! N -> Pump(Pumps) ! AU
+   * Timers(Pool) ! N -> Timer(Timers) ! AU
+     * Timer ! N -> TimerSettings(Timer) ! N -> TimerSetting ! AU
    * Heaters(Pool) ! N -> Heater(Heaters) ! AU -> Heaters
-     * Heater ! N -> HeaterSettings(Heater) ! N -> HeaterSetting ! AU -> HeaterSettings
+     * Heater ! N -> HeaterSettings(Heater) ! N -> HeaterSetting ! AU
 6. Aesthetics **
-   * Surfaces(Pool) ! N -> Surface(Surfaces) ! AU -> Surfaces
-   * Decks(Pool) ! N -> Deck(Surfaces) ! AU -> Decks
+   * Surfaces(Pool) ! N -> Surface(Surfaces) ! AU
+   * Decks(Pool) ! N -> Deck(Surfaces) ! AU
 
 ** Actions:
 * New = N
