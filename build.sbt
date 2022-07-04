@@ -66,7 +66,7 @@ lazy val jvm = (project in file("jvm"))
         "org.scalikejdbc" %% "scalikejdbc" % "4.0.0",
         "org.postgresql" % "postgresql" % postgresqlVersion,
         "io.github.cquiroz" %% "scala-java-time" % "2.3.0",
-        "com.github.blemale" %% "scaffeine" % "5.1.2",
+        "com.github.blemale" %% "scaffeine" % "5.2.0",
         "org.jodd" % "jodd-mail" % "6.0.5",
         "com.typesafe" % "config" % "1.4.2",
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
