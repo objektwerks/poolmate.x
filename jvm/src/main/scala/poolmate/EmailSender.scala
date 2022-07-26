@@ -64,6 +64,8 @@ final class EmailSender(conf: Config,
       session.open()
 
       var account = Account(emailAddress = register.emailAddress)
+      logger.info("*** EmailSender prepared account: {}", account)
+
       val messageId = session.sendMail(buildEmail(account))
       logger.info("*** EmailSender sent message id: {}", messageId)
 
