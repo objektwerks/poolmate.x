@@ -22,7 +22,7 @@ final class Service(store: Store):
     if store.isAuthorized(license) then Authorized(license)
     else Unauthorized(s"Invalid license: $license")
   
-  def listPools(): Either[Throwable, List[Pool]] = Try( store.listPools() ).toEither
+  def listPools(license: String): Either[Throwable, List[Pool]] = Try( store.listPools(license) ).toEither
   def addPool(pool: Pool): Either[Throwable, Pool] = Try( store.addPool(pool) ).toEither
   def updatePool(pool: Pool): Either[Throwable, Unit] = Try( store.updatePool(pool) ).toEither
 
