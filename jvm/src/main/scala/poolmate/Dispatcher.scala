@@ -24,7 +24,7 @@ final class Dispatcher(authorizer: Authorizer,
         service.reactivate(reactivate.license).fold(throwable => Fault(throwable), account => Reactivated(account))
 
       case list: ListPools =>
-        service.listPools().fold(throwable => Fault(throwable), entities => PoolsListed(entities))
+        service.listPools(list.license).fold(throwable => Fault(throwable), entities => PoolsListed(entities))
       case add: AddPool =>
         service.addPool(add.pool).fold(throwable => Fault(throwable), entity => PoolAdded(entity))
       case update: UpdatePool =>
