@@ -128,9 +128,9 @@ final class Store(conf: Config,
       else None
     }
 
-  def listPools(): List[Pool] =
+  def listPools(license: String): List[Pool] =
     DB readOnly { implicit session =>
-      sql"select * from pool order by built desc"
+      sql"select * from pool where license = $license order by built desc"
         .map(rs => Pool(rs.long("id"), rs.string("license"), rs.string("name"), rs.int("built"), rs.int("volume"), rs.int("cost")))
         .list()
     }
