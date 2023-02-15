@@ -54,9 +54,7 @@ object Proxy:
         json     <- response.text()
       yield
         log(s"Proxy:post json: $json")
-        val event = read[Event](json)
-        log(s"Proxy:post event: $event")
-        event
+        read[Event](json)
     ).recover {
       case failure: Exception =>
         log(s"Proxy:post failure: ${failure.getCause}")
