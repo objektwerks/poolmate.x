@@ -69,13 +69,13 @@ object Components:
   def msg(noteBus: EventBus[String]): Div =
     div(cls("w3-border-white w3-text-indigo"), child.text <-- noteBus.events)
 
-  def list(liSignal: Signal[Seq[Li]]): Div =
+  def list(liSignal: Signal[Seq[LI]]): Div =
     div(cls("w3-container"), ul(cls("w3-ul w3-hoverable"), children <-- liSignal))
 
-  def item(strSignal: Signal[String]): Li =
+  def item(strSignal: Signal[String]): LI =
     li(cls("w3-text-indigo w3-display-container"), child.text <-- strSignal)
 
-  def split[E <: Entity](entities: Var[Seq[E]], toEntityPage: Long => EntityPage): Signal[Seq[Li]] =
+  def split[E <: Entity](entities: Var[Seq[E]], toEntityPage: Long => EntityPage): Signal[Seq[LI]] =
     entities.signal.split(_.id)( (id, _, entitySignal) =>
       item( entitySignal.map(_.display) ).amend {
         onClick --> { _ =>
