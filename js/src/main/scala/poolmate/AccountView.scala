@@ -18,16 +18,14 @@ object AccountView extends View:
           route(AppPage)
         case _ => log(s"Account -> deactivate handler failed: $event")
  
-    def reactivateHandler(either: Either[Fault, Event]): Unit =
-      either match
-        case Left(fault) => errorBus.emit(s"Reactivate failed: ${fault.cause}")
-        case Right(event) =>
-          event match
-            case Reactivated(account) =>
-              clearErrors()
-              accountVar.set(account)
-              route(AppPage)
-            case _ => log(s"Account -> reactivate handler failed: $event")
+    def reactivateHandler(event: Event): Unit =
+      event match
+        case Fault(_, _, _, cause) => errorBus.emit(s"Reactivate failed: $cause")
+        case Reactivated(account) =>
+          clearErrors()
+          accountVar.set(account)
+          route(AppPage)
+        case _ => log(s"Account -> reactivate handler failed: $event")
 
     div(
       bar(
