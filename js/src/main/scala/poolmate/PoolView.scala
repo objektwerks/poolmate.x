@@ -23,15 +23,13 @@ object PoolView extends View:
           route(PoolsPage)
         case _ => log(s"Pool -> add handler failed: $event")
 
-    def updateHandler(either: Either[Fault, Event]): Unit =
-      either match
-        case Left(fault) => errorBus.emit(s"Update pool failed: ${fault.cause}")
-        case Right(event) =>
-          event match
-            case Updated() =>
-              clearErrors()
-              route(PoolsPage)
-            case _ => log(s"Pool -> update handler failed: $event")
+    def updateHandler(event: Event): Unit =
+      event match
+        case Fault(_, _, _, cause) => errorBus.emit(s"Update pool failed: $cause")
+        case Updated() =>
+          clearErrors()
+          route(PoolsPage)
+        case _ => log(s"Pool -> update handler failed: $event")
 
     div(
       bar(
