@@ -19,11 +19,12 @@ import upickle.default.{read, write}
 
 object Proxy:
   private val hdrs = new Headers {
-      js.Array(
-        js.Array("Content-Type", "application/json; charset=utf-8"),
-        js.Array("Accept", "application/json")
-      )
-    }
+    js.Array(
+      js.Array("Content-Type", "application/json; charset=utf-8"),
+      js.Array("Accept", "application/json")
+    )
+  }
+
   private val params = new RequestInit {
     method = HttpMethod.POST
     headers = hdrs
