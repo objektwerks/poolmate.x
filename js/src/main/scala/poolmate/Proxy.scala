@@ -40,7 +40,7 @@ object Proxy:
     }
 
   def call(command: Command,
-           handler: (either: Either[Fault, Event]) => Unit) =
+           handler: Event => Unit) =
     val event = post(command)
     handle(event, handler)
 
@@ -51,10 +51,10 @@ object Proxy:
     (
       for
         response <- dom.fetch(Url.command, params)
-        text     <- response.text()
+        json     <- response.text()
       yield
-        log(s"Proxy:post text: $text")
-        val event = read[Event](text)
+        log(s"Proxy:post json: $json")
+        val event = read[Event](json)
         log(s"Proxy:post event: $event")
         event
     ).recover {
@@ -64,15 +64,8 @@ object Proxy:
     }
 
   private def handle(future: Future[Event],
-                     handler: (either: Either[Fault, Event]) => Unit): Unit =
+                     handler: Event => Unit): Unit =
     future map { event =>
-      handler(
-        event match
-          case fault: Fault =>
-            log(s"Proxy:handle fault: $fault")
-            Left(fault)
-          case event: Event =>
-            log(s"Proxy:handle event: $event")
-            Right(event)
-      )
+      log(s"Proxy:handle event: $event")
+      handler(event)
     }
