@@ -7,7 +7,9 @@ import Message.*
 import Validators.*
 
 object RegisterView extends View:
-  def apply(emailAddressVar: Var[String], pinVar: Var[String], accountVar: Var[Account]): HtmlElement =
+  def apply(emailAddressVar: Var[String],
+            pinVar: Var[String],
+            accountVar: Var[Account]): HtmlElement =
     def handler(event: Event): Unit =
       event match
         case Fault(_, _, _, cause) => emitError(s"Register failed: $cause")
