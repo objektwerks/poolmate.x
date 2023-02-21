@@ -100,24 +100,30 @@ object PoolView extends View:
         err(errorBus),
         lbl("Name"),
         txt.amend {
-          value <-- model.selectedEntityVar.signal.map(_.name)
-          onInput.mapToValue.filter(_.nonEmpty) --> { name =>
-            model.updateSelectedEntity( model.selectedEntityVar.now().copy(name = name) )
-          }
+          controlled(
+            value <-- model.selectedEntityVar.signal.map(_.name),
+            onInput.mapToValue.filter(_.nonEmpty) --> { name =>
+              model.updateSelectedEntity( model.selectedEntityVar.now().copy(name = name) )
+            }
+          )
         },
         lbl("Built"),
         year.amend {
-          value <-- model.selectedEntityVar.signal.map(_.built.toString)
-          onInput.mapToValue.filter(_.toIntOption.nonEmpty).map(_.toInt) --> { built =>
-            model.updateSelectedEntity( model.selectedEntityVar.now().copy(built = built) )
-          }
+          controlled(
+            value <-- model.selectedEntityVar.signal.map(_.built.toString),
+            onInput.mapToValue.filter(_.toIntOption.nonEmpty).map(_.toInt) --> { built =>
+              model.updateSelectedEntity( model.selectedEntityVar.now().copy(built = built) )
+            }
+          )
         },
         lbl("Volume"),
         txt.amend {
-          value <-- model.selectedEntityVar.signal.map(_.volume.toString)
-          onInput.mapToValue.filter(_.toIntOption.nonEmpty).map(_.toInt) --> { volume =>
-            model.updateSelectedEntity( model.selectedEntityVar.now().copy(volume = volume) )
-          }
+          controlled(
+            value <-- model.selectedEntityVar.signal.map(_.volume.toString),
+            onInput.mapToValue.filter(_.toIntOption.nonEmpty).map(_.toInt) --> { volume =>
+              model.updateSelectedEntity( model.selectedEntityVar.now().copy(volume = volume) )
+            }
+          )
         },
       ),
       cbar(
