@@ -2,7 +2,7 @@ package poolmate
 
 import com.raquo.laminar.api.L.*
 
-import org.scalajs.dom.console
+import org.scalajs.dom.console.log
 
 trait View:
   protected[this] val errorBus = new EventBus[String]
@@ -11,10 +11,14 @@ trait View:
   
   def route(page: Page): Unit = PageRouter.router.pushState(page)
 
-  def clear(bus: EventBus[String]): Unit = bus.emit("")
+  def log(message: String): Unit = log(message)
 
-  def emit(bus: EventBus[String], message: String): Unit = bus.emit(message)
+  def emitError(message: String): Unit =
+    errorBus.emit(message)
+    log(message)
 
   def clearErrors(): Unit = errorBus.emit("")
 
-  def log(message: String): Unit = console.log(message)
+  def emit(eventBus: EventBus[String], message: String): Unit = eventBus.emit(message)
+
+  def clear(eventBus: EventBus[String]): Unit = eventBus.emit("")
