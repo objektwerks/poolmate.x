@@ -3,7 +3,6 @@ package poolmate
 import com.raquo.laminar.api.L.*
 
 import Components.*
-import Error.*
 import Message.*
 import Validators.*
 
