@@ -2,11 +2,6 @@ package poolmate
 
 import com.raquo.laminar.api.L.*
 
-import org.scalajs.dom.console.log
-
-import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.Future
-
 import Components.*
 import Error.*
 import Message.*
