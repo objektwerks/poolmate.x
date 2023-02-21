@@ -3,15 +3,10 @@ package poolmate
 import com.raquo.laminar.api.L.*
 
 import Components.*
-import Error.*
 import Validators.*
 
 object PoolView extends View:
   def apply(model: Model[Pool], accountVar: Var[Account]): HtmlElement =
-    val nameErrorBus = new EventBus[String]
-    val builtErrorBus = new EventBus[String]
-    val volumeErrorBus = new EventBus[String]
-
     def addHandler(event: Event): Unit =
       event match
         case Fault(_, _, _, cause) => emitError(s"Add pool failed: $cause")
@@ -109,33 +104,21 @@ object PoolView extends View:
           onInput.mapToValue.filter(_.nonEmpty) --> { name =>
             model.updateSelectedEntity( model.selectedEntityVar.now().copy(name = name) )
           }
-          onKeyUp.mapToValue --> { name =>
-            if name.isName then clear(nameErrorBus) else emit(nameErrorBus, nameError)
-          }
         },
-        err(nameErrorBus),
         lbl("Built"),
         year.amend {
           value <-- model.selectedEntityVar.signal.map(_.built.toString)
           onInput.mapToValue.filter(_.toIntOption.nonEmpty).map(_.toInt) --> { built =>
             model.updateSelectedEntity( model.selectedEntityVar.now().copy(built = built) )
           }
-          onKeyUp.mapToValue.map(_.toInt) --> { built =>
-            if built.isGreaterThan1899 then clear(builtErrorBus) else emit(builtErrorBus, builtError)
-          }
         },
-        err(builtErrorBus),
         lbl("Volume"),
         txt.amend {
           value <-- model.selectedEntityVar.signal.map(_.volume.toString)
           onInput.mapToValue.filter(_.toIntOption.nonEmpty).map(_.toInt) --> { volume =>
             model.updateSelectedEntity( model.selectedEntityVar.now().copy(volume = volume) )
           }
-          onKeyUp.mapToValue.map(_.toInt) --> { volume =>
-            if volume.isGreaterThan999 then clear(volumeErrorBus) else emit(volumeErrorBus, volumeError)
-          }
         },
-        err(volumeErrorBus)
       ),
       cbar(
         btn("Add").amend {
