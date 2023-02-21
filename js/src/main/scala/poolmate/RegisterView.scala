@@ -18,7 +18,7 @@ object RegisterView extends View:
 
     def handler(event: Event): Unit =
       event match
-        case Fault(_, _, _, cause) => errorBus.emit(s"Register failed: $cause")
+        case Fault(_, _, _, cause) => emitError(s"Register failed: $cause")
         case Registered(account) =>
           clearErrors()
           accountVar.set(account)
@@ -28,6 +28,7 @@ object RegisterView extends View:
       
     div(
       hdr("Register"),
+      err(errorBus),
       info(registerMessage),
       err(errorBus),
       lbl("Email Address"),
