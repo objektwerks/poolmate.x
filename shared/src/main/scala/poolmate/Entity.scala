@@ -1,9 +1,5 @@
 package poolmate
 
-import java.util.UUID
-
-import scala.util.Random
-
 enum UoM(val abrv: String):
   case ounce extends UoM("oz")
   case gallon extends UoM("gl")
