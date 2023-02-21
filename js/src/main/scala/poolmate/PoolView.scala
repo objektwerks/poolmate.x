@@ -37,16 +37,19 @@ object PoolView extends View:
           btn("Measurements").amend {
             onClick --> { _ =>
               log("Measurements menu item onClick")
+              // route(MeasurementsPage)
             }
           },
           btn("Cleanings").amend {
             onClick --> { _ =>
               log("Cleanings menu item onClick")
+              // route(CleaningsPage)
             }
           },
           btn("Chemicals").amend {
             onClick --> { _ =>
               log("Chemicals menu item onClick")
+              // route(ChemicalsPage)
             }
           }
         ),
@@ -55,11 +58,13 @@ object PoolView extends View:
           btn("Supplies").amend {
             onClick --> { _ =>
               log("Supplies menu item onClick")
+              // route(SuppliesPage)
             }
           },
           btn("Repairs").amend {
             onClick --> { _ =>
               log("Repairs menu item onClick")
+              // route(RepairsPate)
             }
           }
         ),
@@ -68,16 +73,19 @@ object PoolView extends View:
           btn("Pumps").amend {
             onClick --> { _ =>
               log("Pumps menu item onClick")
+              // route(PumpsPage)
             }
           },
           btn("Timers").amend {
             onClick --> { _ =>
               log("Timers menu item onClick")
+              // route(TimersPage)
             }
           },
           btn("Heaters").amend {
             onClick --> { _ =>
               log("Heaters menu item onClick")
+              // route(HeatersPage)
             }
           }
         ),
@@ -86,11 +94,13 @@ object PoolView extends View:
           btn("Surfaces").amend {
             onClick --> { _ =>
               log("Surfaces menu item onClick")
+              // route(SurfacesPage)
             }
           },
           btn("Decks").amend {
             onClick --> { _ =>
               log("Decks menu item onClick")
+              // route(DecksPage)
             }
           },
         )
