@@ -139,7 +139,7 @@ object PoolView extends View:
       ),
       cbar(
         btn("Add").amend {
-          disabled <-- model.selectedEntityVar.signal.map { pool => pool.id.isGreaterThanZero }
+          disabled <-- model.selectedEntityVar.signal.map { pool => !(pool.id.isZero && pool.isValid) }
           onClick --> { _ =>
             log(s"Pool -> Add onClick")
             val command = AddPool(accountVar.now().license, model.selectedEntityVar.now())
@@ -148,7 +148,7 @@ object PoolView extends View:
           }
         },
         btn("Update").amend {
-          disabled <-- model.selectedEntityVar.signal.map { pool => pool.id.isZero }
+          disabled <-- model.selectedEntityVar.signal.map { pool => !(pool.id.isGreaterThanZero && pool.isValid) }
           onClick --> { _ =>
             log(s"Pool -> Update onClick")
             val command = UpdatePool(accountVar.now().license, model.selectedEntityVar.now())
