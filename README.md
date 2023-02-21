@@ -2,6 +2,11 @@ Pool
 ----
 >Web pool management app using Cask, uPickle, Scalikejdbc, ScalaJs, Laminar, Waypoint, W3.CSS, Scaffeine, JoddMail, Postgresql, Snowpack and Scala 3.
 
+Todo
+----
+1. Complete ScalaJs UI
+2. Test ScalaJs UI
+
 Install
 -------
 1. brew install postgresql
