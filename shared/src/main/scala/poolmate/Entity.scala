@@ -19,7 +19,7 @@ sealed trait Entity:
 
 final case class Account(id: Long = 0,
                          license: String = "",
-                         emailAddress: String,
+                         emailAddress: String = "",
                          pin: String = "",
                          activated: Int = DateTime.currentDate,
                          deactivated: Int = 0) extends Entity:

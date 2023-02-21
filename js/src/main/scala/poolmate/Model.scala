@@ -7,7 +7,7 @@ import org.scalajs.dom.console.log
 object Model:
   val emailAddressVar = Var("")
   val pinVar = Var("")
-  val accountVar = Var(Account.empty)
+  val accountVar = Var(Account())
   val pools = Model[Pool](Var(Seq.empty[Pool]), Var(Pool()), Pool())
 
 final case class Model[E <: Entity](entitiesVar: Var[Seq[E]],
