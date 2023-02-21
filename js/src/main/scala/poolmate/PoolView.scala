@@ -4,7 +4,7 @@ import com.raquo.laminar.api.L.*
 
 import Components.*
 import Error.*
-import Validators.*rem
+import Validators.*
 
 object PoolView extends View:
   def apply(model: Model[Pool], accountVar: Var[Account]): HtmlElement =
@@ -14,7 +14,7 @@ object PoolView extends View:
 
     def addHandler(event: Event): Unit =
       event match
-        case Fault(_, _, _, cause) => errorBus.emit(s"Add pool failed: $cause")
+        case Fault(_, _, _, cause) => emitError(s"Add pool failed: $cause")
         case PoolAdded(pool) =>
           clearErrors()
           model.addEntity(pool)
@@ -23,7 +23,7 @@ object PoolView extends View:
 
     def updateHandler(event: Event): Unit =
       event match
-        case Fault(_, _, _, cause) => errorBus.emit(s"Update pool failed: $cause")
+        case Fault(_, _, _, cause) => emitError(s"Update pool failed: $cause")
         case Updated() =>
           clearErrors()
           route(PoolsPage)
@@ -102,6 +102,7 @@ object PoolView extends View:
       ),
       div(
         hdr("Pool"),
+        err(errorBus),
         lbl("Name"),
         txt.amend {
           value <-- model.selectedEntityVar.signal.map(_.name)
