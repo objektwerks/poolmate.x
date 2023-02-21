@@ -63,7 +63,7 @@ final class EmailSender(conf: Config,
     Using( smtpServer.createSession ) { session =>
       session.open()
 
-      var account = Account(emailAddress = register.emailAddress)
+      var account = Account(license = Ids.newLicense, emailAddress = register.emailAddress, pin = Ids.newPin)
       logger.info("*** EmailSender prepared account: {}", account)
 
       val messageId = session.sendMail(buildEmail(account))
