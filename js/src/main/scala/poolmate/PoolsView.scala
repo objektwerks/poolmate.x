@@ -2,8 +2,6 @@ package poolmate
 
 import com.raquo.laminar.api.L.*
 
-import org.scalajs.dom.console.log
-
 import Components.*
 
 object PoolsView extends View:
