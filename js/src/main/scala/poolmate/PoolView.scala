@@ -2,11 +2,9 @@ package poolmate
 
 import com.raquo.laminar.api.L.*
 
-import org.scalajs.dom.console.log
-
 import Components.*
 import Error.*
-import Validators.*
+import Validators.*rem
 
 object PoolView extends View:
   def apply(model: Model[Pool], accountVar: Var[Account]): HtmlElement =
