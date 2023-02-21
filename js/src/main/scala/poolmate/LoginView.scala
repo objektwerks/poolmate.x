@@ -16,7 +16,7 @@ object LoginView extends View:
 
     def handler(event: Event): Unit =
       event match
-        case Fault(_, _, _, cause) => errorBus.emit(s"Login failed: $cause")
+        case Fault(_, _, _, cause) => emitError(s"Login failed: $cause")
         case LoggedIn(account) =>
           clearErrors()
           accountVar.set(account)
@@ -25,6 +25,7 @@ object LoginView extends View:
       
     div(      
       hdr("Login"),
+      err(errorBus),
       lbl("Email Address"),
       email.amend {
         value <-- emailAddressVar
