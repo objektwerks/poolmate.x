@@ -22,6 +22,7 @@ object Entity:
   given surfaceOrdering: Ordering[Surface] = Ordering.by[Surface, Int](s => s.installed).reverse
   given deckOrdering: Ordering[Deck] = Ordering.by[Deck, Int](d => d.installed).reverse
   given pumpOrdering: Ordering[Pump] = Ordering.by[Pump, Int](p => p.installed).reverse
+  given timerOrdering: Ordering[Timer] = Ordering.by[Timer, Int](t => t.installed).reverse
 
   given cleaningOrdering: Ordering[Cleaning] = Ordering.by[Cleaning, Int](c => c.cleaned).reverse
   given measurementOrdering: Ordering[Measurement] = Ordering.by[Measurement, Int](m => m.measured).reverse
