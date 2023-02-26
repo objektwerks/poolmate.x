@@ -24,6 +24,8 @@ object Entity:
   given pumpOrdering: Ordering[Pump] = Ordering.by[Pump, Int](p => p.installed).reverse
   given timerOrdering: Ordering[Timer] = Ordering.by[Timer, Int](t => t.installed).reverse
 
+  given heaterOrdering: Ordering[Heater] = Ordering.by[Heater, Int](t => t.installed).reverse
+
   given cleaningOrdering: Ordering[Cleaning] = Ordering.by[Cleaning, Int](c => c.cleaned).reverse
   given measurementOrdering: Ordering[Measurement] = Ordering.by[Measurement, Int](m => m.measured).reverse
   given chemicalOrdering: Ordering[Chemical] = Ordering.by[Chemical, Int](c => c.added).reverse
