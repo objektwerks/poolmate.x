@@ -15,6 +15,8 @@ object Model:
   val decks = Model[Deck](Var(List.empty[Deck]), Var(Deck()), Deck(), deckOrdering)
   val pumps = Model[Pump](Var(List.empty[Pump]), Var(Pump()), Pump(), pumpOrdering)
   val timers = Model[Timer](Var(List.empty[Timer]), Var(Timer()), Timer(), timerOrdering)
+  val timersetings = Model[TimerSetting](Var(List.empty[TimerSetting]), Var(TimerSetting()), TimerSetting(), timerSettingOrdering)
+  val heaters = Model[Heater](Var(List.empty[Heater]), Var(Heater()), Heater(), heaterOrdering)
 
 final case class Model[E <: Entity](entitiesVar: Var[List[E]],
                                     selectedEntityVar: Var[E],
