@@ -18,6 +18,7 @@ object Model:
   val timersetings = Model[TimerSetting](Var(List.empty[TimerSetting]), Var(TimerSetting()), TimerSetting(), timerSettingOrdering)
   val heaters = Model[Heater](Var(List.empty[Heater]), Var(Heater()), Heater(), heaterOrdering)
   val heatersetings = Model[HeaterSetting](Var(List.empty[HeaterSetting]), Var(HeaterSetting()), HeaterSetting(), heaterSettingOrdering)
+  val measurementsModel = Model[Measurement](Var(List.empty[Measurement]), Var(Measurement()), Measurement(), measurementOrdering)
 
 final case class Model[E <: Entity](entitiesVar: Var[List[E]],
                                     selectedEntityVar: Var[E],
