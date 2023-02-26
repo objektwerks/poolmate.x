@@ -13,6 +13,7 @@ object Model:
   val pools = Model[Pool](Var(List.empty[Pool]), Var(Pool()), Pool(), poolOrdering)
   val surfaces = Model[Surface](Var(List.empty[Surface]), Var(Surface()), Surface(), surfaceOrdering)
   val decks = Model[Deck](Var(List.empty[Deck]), Var(Deck()), Deck(), deckOrdering)
+  val pumps = Model[Pump](Var(List.empty[Pump]), Var(Pump()), Pump(), pumpOrdering)
 
 final case class Model[E <: Entity](entitiesVar: Var[List[E]],
                                     selectedEntityVar: Var[E],
