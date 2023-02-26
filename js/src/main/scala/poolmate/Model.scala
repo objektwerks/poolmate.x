@@ -22,6 +22,7 @@ object Model:
   val cleanings = Model[Cleaning](Var(List.empty[Cleaning]), Var(Cleaning()), Cleaning(), cleaningOrdering)
   val chemicals = Model[Chemical](Var(List.empty[Chemical]), Var(Chemical()), Chemical(), chemicalOrdering)
   val supplies = Model[Supply](Var(List.empty[Supply]), Var(Supply()), Supply(), supplyOrdering)
+  val repairs = Model[Repair](Var(List.empty[Repair]), Var(Repair()), Repair(), repairOrdering)
 
 final case class Model[E <: Entity](entitiesVar: Var[List[E]],
                                     selectedEntityVar: Var[E],
