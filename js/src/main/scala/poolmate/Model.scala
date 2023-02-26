@@ -20,6 +20,7 @@ object Model:
   val heatersetings = Model[HeaterSetting](Var(List.empty[HeaterSetting]), Var(HeaterSetting()), HeaterSetting(), heaterSettingOrdering)
   val measurements = Model[Measurement](Var(List.empty[Measurement]), Var(Measurement()), Measurement(), measurementOrdering)
   val cleanings = Model[Cleaning](Var(List.empty[Cleaning]), Var(Cleaning()), Cleaning(), cleaningOrdering)
+  val chemicals = Model[Chemical](Var(List.empty[Chemical]), Var(Chemical()), Chemical(), chemicalOrdering)
 
 final case class Model[E <: Entity](entitiesVar: Var[List[E]],
                                     selectedEntityVar: Var[E],
