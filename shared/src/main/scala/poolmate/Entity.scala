@@ -23,6 +23,7 @@ object Entity:
   given deckOrdering: Ordering[Deck] = Ordering.by[Deck, Int](d => d.installed).reverse
   given pumpOrdering: Ordering[Pump] = Ordering.by[Pump, Int](p => p.installed).reverse
   given timerOrdering: Ordering[Timer] = Ordering.by[Timer, Int](t => t.installed).reverse
+  given timerSettingOrdering: Ordering[TimerSetting] = Ordering.by[TimerSetting, Int](ts => ts.created).reverse
 
   given heaterOrdering: Ordering[Heater] = Ordering.by[Heater, Int](t => t.installed).reverse
 
