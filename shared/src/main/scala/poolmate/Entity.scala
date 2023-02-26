@@ -19,6 +19,8 @@ sealed trait Entity:
 
 object Entity:
   given poolOrdering: Ordering[Pool] = Ordering.by[Pool, String](p => p.name).reverse
+  given cleaningOrdering: Ordering[Cleaning] = Ordering.by[Cleaning, Long](c => c.cleaned).reverse
+
 
 final case class Account(id: Long = 0,
                          license: String = "",
