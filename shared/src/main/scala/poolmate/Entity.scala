@@ -20,6 +20,7 @@ sealed trait Entity:
 object Entity:
   given poolOrdering: Ordering[Pool] = Ordering.by[Pool, String](p => p.name).reverse
   given surfaceOrdering: Ordering[Surface] = Ordering.by[Surface, Int](s => s.installed).reverse
+  given deckOrdering: Ordering[Deck] = Ordering.by[Deck, Int](d => d.installed).reverse
 
   given cleaningOrdering: Ordering[Cleaning] = Ordering.by[Cleaning, Int](c => c.cleaned).reverse
   given measurementOrdering: Ordering[Measurement] = Ordering.by[Measurement, Int](m => m.measured).reverse
