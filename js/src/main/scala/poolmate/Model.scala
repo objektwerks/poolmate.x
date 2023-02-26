@@ -11,6 +11,7 @@ object Model:
   val pinVar = Var("")
   val accountVar = Var(Account())
   val pools = Model[Pool](Var(List.empty[Pool]), Var(Pool()), Pool(), poolOrdering)
+  val surfaces = Model[Surface](Var(List.empty[Surface]), Var(Surface()), Surface(), surfaceOrdering)
 
 final case class Model[E <: Entity](entitiesVar: Var[List[E]],
                                     selectedEntityVar: Var[E],
