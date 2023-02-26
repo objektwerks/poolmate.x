@@ -30,6 +30,7 @@ object Entity:
   given cleaningOrdering: Ordering[Cleaning] = Ordering.by[Cleaning, Int](c => c.cleaned).reverse
   given chemicalOrdering: Ordering[Chemical] = Ordering.by[Chemical, Int](c => c.added).reverse
   given supplyOrdering: Ordering[Supply] = Ordering.by[Supply, Int](s => s.purchased).reverse
+  given repairOrdering: Ordering[Repair] = Ordering.by[Repair, Int](r => r.repaired).reverse
 
 final case class Account(id: Long = 0,
                          license: String = "",
