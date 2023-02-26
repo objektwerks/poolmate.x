@@ -26,10 +26,10 @@ object Entity:
   given timerSettingOrdering: Ordering[TimerSetting] = Ordering.by[TimerSetting, Int](ts => ts.created).reverse
   given heaterOrdering: Ordering[Heater] = Ordering.by[Heater, Int](t => t.installed).reverse
   given heaterSettingOrdering: Ordering[HeaterSetting] = Ordering.by[HeaterSetting, Int](ts => ts.dateOn).reverse
-
-  given cleaningOrdering: Ordering[Cleaning] = Ordering.by[Cleaning, Int](c => c.cleaned).reverse
   given measurementOrdering: Ordering[Measurement] = Ordering.by[Measurement, Int](m => m.measured).reverse
+  given cleaningOrdering: Ordering[Cleaning] = Ordering.by[Cleaning, Int](c => c.cleaned).reverse
   given chemicalOrdering: Ordering[Chemical] = Ordering.by[Chemical, Int](c => c.added).reverse
+  given supplyOrdering: Ordering[Supply] = Ordering.by[Supply, Int](s => s.purchased).reverse
 
 final case class Account(id: Long = 0,
                          license: String = "",
