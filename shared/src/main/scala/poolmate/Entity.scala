@@ -19,9 +19,11 @@ sealed trait Entity:
 
 object Entity:
   given poolOrdering: Ordering[Pool] = Ordering.by[Pool, String](p => p.name).reverse
-  given cleaningOrdering: Ordering[Cleaning] = Ordering.by[Cleaning, Long](c => c.cleaned).reverse
-  given measurementOrdering: Ordering[Measurement] = Ordering.by[Measurement, Long](m => m.measured).reverse
-  given chemicalOrdering: Ordering[Chemical] = Ordering.by[Chemical, Long](c => c.added).reverse
+  given surfaceOrdering: Ordering[Surface] = Ordering.by[Surface, Int](s => s.installed).reverse
+
+  given cleaningOrdering: Ordering[Cleaning] = Ordering.by[Cleaning, Int](c => c.cleaned).reverse
+  given measurementOrdering: Ordering[Measurement] = Ordering.by[Measurement, Int](m => m.measured).reverse
+  given chemicalOrdering: Ordering[Chemical] = Ordering.by[Chemical, Int](c => c.added).reverse
 
 final case class Account(id: Long = 0,
                          license: String = "",
