@@ -17,6 +17,9 @@ sealed trait Entity:
   val id: Long
   def display: String
 
+object Entity:
+  given poolOrdering: Ordering[Pool] = Ordering.by[Pool, String](p => p.name).reverse
+
 final case class Account(id: Long = 0,
                          license: String = "",
                          emailAddress: String = "",
