@@ -70,7 +70,7 @@ object Component:
     div(cls("w3-border-white w3-text-indigo"), child.text <-- noteBus.events)
 
   def list(liSignal: Signal[List[LI]]): Div =
-    div(cls("w3-container"), ul(cls("w3-ul w3-hoverable"), children <-- liSignal))
+    div(cls("w3-container"), ul(cls("w3-ul w3-hoverable"), overflow("overflow: auto;"), children <-- liSignal))
 
   def item(strSignal: Signal[String]): LI =
     li(cls("w3-text-indigo w3-display-container"), child.text <-- strSignal)
