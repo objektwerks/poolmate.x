@@ -4,8 +4,8 @@ Pool
 
 Todo
 ----
-1. Complete ScalaJs UI
-2. Test ScalaJs UI
+1. Complete UI
+2. Test UI
 
 Install
 -------
