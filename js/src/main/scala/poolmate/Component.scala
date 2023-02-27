@@ -69,6 +69,11 @@ object Component:
   def msg(noteBus: EventBus[String]): Div =
     div(cls("w3-border-white w3-text-indigo"), child.text <-- noteBus.events)
 
+  def listbox(items: List[String]): Select =
+    select(cls("w3-select w3-text-indigo"),
+      children <-- Var(items.map(item => option(item))).signal
+    )
+
   def list(liSignal: Signal[List[LI]]): Div =
     div(cls("w3-container"), ul(cls("w3-ul w3-hoverable"), overflow("overflow: auto;"), children <-- liSignal))
 
