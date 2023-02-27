@@ -4,7 +4,7 @@ import com.raquo.laminar.api.L.*
 
 import scala.scalajs.js.Date
 
-object Components:
+object Component:
   private val inputCss = "w3-input w3-hover-light-gray w3-text-indigo"
   private val currentYear = DateTime.currentYear
 

@@ -2,7 +2,7 @@ package poolmate
 
 import com.raquo.laminar.api.L.*
 
-import Components.*
+import Component.*
 import Validators.*
 
 object PoolView extends View:

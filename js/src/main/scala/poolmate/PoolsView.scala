@@ -2,7 +2,7 @@ package poolmate
 
 import com.raquo.laminar.api.L.*
 
-import Components.*
+import Component.*
 
 object PoolsView extends View:
   def apply(model: Model[Pool], accountVar: Var[Account]): HtmlElement =
