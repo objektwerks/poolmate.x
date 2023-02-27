@@ -35,7 +35,7 @@ final case class Model[E <: Entity](entitiesVar: Var[List[E]],
   def setEntities(entities: List[E]): Unit = entitiesVar.set(entities)
 
   def setSelectedEntityById(id: Long): Model[E] =
-    selectedEntityVar.set(entitiesVar.now().find(_.id == id).getOrElse(emptyEntity))
+    selectedEntityVar.set( entitiesVar.now().find(_.id == id).getOrElse(emptyEntity) )
     this
 
   def sort(): Unit =
