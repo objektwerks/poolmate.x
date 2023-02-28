@@ -77,7 +77,7 @@ final case class Timer(id: Long = 0,
                        model: String = "",
                        cost: Int = 0) extends Entity:
   def display = model
-e
+
 final case class TimerSetting(id: Long = 0,
                               timerId: Long = 0,
                               created: Long = 0,
@@ -152,7 +152,7 @@ final case class Supply(id: Long = 0,
 
 final case class Repair(id: Long = 0,
                         poolId: Long = 0,
-                        repaired: Int = 0,
+                        repaired: Long = 0,
                         repair: String = "",
                         cost: Int = 0) extends Entity:
   def display = s"$repaired: $repair"
