@@ -6,8 +6,8 @@ CREATE TABLE account (
   license VARCHAR(36) UNIQUE NOT NULL,
   email_address VARCHAR NOT NULL,
   pin VARCHAR(7) NOT NULL,
-  activated INT NOT NULL,
-  deactivated INT NOT NULL
+  activated BIGINT NOT NULL,
+  deactivated BIGINT NOT NULL
 );
 
 CREATE TABLE pool (
@@ -22,7 +22,7 @@ CREATE TABLE pool (
 CREATE TABLE surface (
   id BIGSERIAL PRIMARY KEY,
   pool_id BIGINT REFERENCES pool(id),
-  installed INT NOT NULL,
+  installed BIGINT NOT NULL,
   kind VARCHAR NOT NULL,
   cost INT NOT NULL
 );
@@ -30,7 +30,7 @@ CREATE TABLE surface (
 CREATE TABLE deck (
   id BIGSERIAL PRIMARY KEY,
   pool_id BIGINT REFERENCES pool(id),
-  installed INT NOT NULL,
+  installed BIGINT NOT NULL,
   kind VARCHAR NOT NULL,
   cost INT NOT NULL
 );
@@ -38,7 +38,7 @@ CREATE TABLE deck (
 CREATE TABLE pump (
   id BIGSERIAL PRIMARY KEY,
   pool_id BIGINT REFERENCES pool(id),
-  installed INT NOT NULL,
+  installed BIGINT NOT NULL,
   model VARCHAR NOT NULL,
   cost INT NOT NULL
 );
@@ -46,7 +46,7 @@ CREATE TABLE pump (
 CREATE TABLE timer (
   id BIGSERIAL PRIMARY KEY,
   pool_id BIGINT REFERENCES pool(id),
-  installed INT NOT NULL,
+  installed BIGINT NOT NULL,
   model VARCHAR NOT NULL,
   cost INT NOT NULL
 );
@@ -54,7 +54,7 @@ CREATE TABLE timer (
 CREATE TABLE timer_setting (
   id BIGSERIAL PRIMARY KEY,
   timer_id BIGINT REFERENCES timer(id),
-  created INT NOT NULL,
+  created BIGINT NOT NULL,
   time_on SMALLINT NOT NULL,
   time_off SMALLINT NOT NULL
 );
@@ -62,7 +62,7 @@ CREATE TABLE timer_setting (
 CREATE TABLE heater (
   id BIGSERIAL PRIMARY KEY,
   pool_id BIGINT REFERENCES pool(id),
-  installed INT NOT NULL,
+  installed BIGINT NOT NULL,
   model VARCHAR NOT NULL,
   cost INT NOT NULL
 );
@@ -71,14 +71,14 @@ CREATE TABLE heater_setting (
   id BIGSERIAL PRIMARY KEY,
   heater_id BIGINT REFERENCES heater(id),
   temp INT NOT NULL,
-  date_on INT NOT NULL,
-  date_off INT NOT NULL
+  date_on BIGINT NOT NULL,
+  date_off BIGINT NOT NULL
 );
 
 CREATE TABLE measurement (
   id BIGSERIAL PRIMARY KEY,
   pool_id BIGINT REFERENCES pool(id),
-  measured INT NOT NULL,
+  measured BIGINT NOT NULL,
   temp INT NOT NULL,
   total_hardness INT NOT NULL,
   total_chlorine INT NOT NULL,
@@ -92,7 +92,7 @@ CREATE TABLE measurement (
 CREATE TABLE cleaning (
   id BIGSERIAL PRIMARY KEY,
   pool_id BIGINT REFERENCES pool(id),
-  cleaned INT NOT NULL,
+  cleaned BIGINT NOT NULL,
   brush BOOL NOT NULL,
   net BOOL NOT NULL,
   vacuum BOOL NOT NULL,
@@ -105,7 +105,7 @@ CREATE TABLE cleaning (
 CREATE TABLE chemical (
   id BIGSERIAL PRIMARY KEY,
   pool_id BIGINT REFERENCES pool(id),
-  added INT NOT NULL,
+  added BIGINT NOT NULL,
   chemical VARCHAR NOT NULL,
   amount NUMERIC(5, 2),
   unit VARCHAR NOT NULL
@@ -114,7 +114,7 @@ CREATE TABLE chemical (
 CREATE TABLE supply (
   id BIGSERIAL PRIMARY KEY,
   pool_id BIGINT REFERENCES pool(id),
-  purchased INT NOT NULL,
+  purchased BIGINT NOT NULL,
   item VARCHAR NOT NULL,
   amount NUMERIC(4, 2) NOT NULL,
   unit VARCHAR NOT NULL,
@@ -124,7 +124,7 @@ CREATE TABLE supply (
 CREATE TABLE repair (
   id BIGSERIAL PRIMARY KEY,
   pool_id BIGINT REFERENCES pool(id),
-  repaired INT NOT NULL,
+  repaired BIGINT NOT NULL,
   repair VARCHAR NOT NULL,
   cost INT NOT NULL
 );
@@ -133,16 +133,16 @@ CREATE TABLE email (
   id VARCHAR PRIMARY KEY,
   license VARCHAR(36) REFERENCES account(license),
   address VARCHAR NOT NULL,
-  date_sent INT NOT NULL,
-  time_sent INT NOT NULL,
+  date_sent BIGINT NOT NULL,
+  time_sent BIGINT NOT NULL,
   processed BOOL NOT NULL,
   valid BOOL NOT NULL
 );
 
 CREATE TABLE fault (
-  date_of INT NOT NULL,
-  time_of INT NOT NULL,
-  nano_of Int NOT NULL,
+  date_of BIGINT NOT NULL,
+  time_of BIGINT NOT NULL,
+  nano_of BIGINT NOT NULL,
   cause VARCHAR NOT NULL,
   PRIMARY KEY (date_of, time_of, nano_of)
 );
