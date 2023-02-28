@@ -11,7 +11,7 @@ import org.scalatest.matchers.should.Matchers
 import scala.concurrent.duration._
 import scala.sys.process.Process
 
-import Validators.*
+import Validator.*
 
 class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
   val conf = ConfigFactory.load("test.server.conf")
@@ -23,8 +23,7 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
     val emailSender = EmailSender(conf, store)
     val service = Service(store)
     val authorizer = Authorizer(service)
-    val validator = Validator()
-    val dispatcher = Dispatcher(authorizer, validator, service, emailSender)
+    val dispatcher = Dispatcher(authorizer, service, emailSender)
 
     testDispatcher(dispatcher, store)
     testEmail(store)
