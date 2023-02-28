@@ -135,7 +135,7 @@ final case class Cleaning(id: Long = 0,
 
 final case class Chemical(id: Long = 0,
                           poolId: Long = 0,
-                          added: Int = 0,
+                          added: Long = 0,
                           chemical: String = "",
                           amount: Double = 0.0,
                           unit: String = "") extends Entity:
