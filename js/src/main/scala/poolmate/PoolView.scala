@@ -9,7 +9,7 @@ object PoolView extends View:
   def apply(model: Model[Pool], accountVar: Var[Account]): HtmlElement =
     def addHandler(event: Event): Unit =
       event match
-        case Fault(_, _, _, cause) => emitError(s"Add pool failed: $cause")
+        case Fault(_, _, cause) => emitError(s"Add pool failed: $cause")
         case PoolAdded(pool) =>
           clearErrors()
           model.addEntity(pool)
@@ -18,7 +18,7 @@ object PoolView extends View:
 
     def updateHandler(event: Event): Unit =
       event match
-        case Fault(_, _, _, cause) => emitError(s"Update pool failed: $cause")
+        case Fault(_, _, cause) => emitError(s"Update pool failed: $cause")
         case Updated() =>
           clearErrors()
           route(PoolsPage)
