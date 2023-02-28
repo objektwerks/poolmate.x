@@ -4,7 +4,7 @@ import com.raquo.laminar.api.L.*
 
 import Component.*
 import Message.*
-import Validators.*
+import Validator.*
 
 object RegisterView extends View:
   def apply(emailAddressVar: Var[String],
