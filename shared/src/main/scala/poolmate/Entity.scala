@@ -77,10 +77,10 @@ final case class Timer(id: Long = 0,
                        model: String = "",
                        cost: Int = 0) extends Entity:
   def display = model
-
+e
 final case class TimerSetting(id: Long = 0,
                               timerId: Long = 0,
-                              created: Int = 0,
+                              created: Long = 0,
                               timeOn: Int = 0,
                               timeOff: Int = 0) extends Entity:
   def display = s"$created: $timeOn - $timeOff"
