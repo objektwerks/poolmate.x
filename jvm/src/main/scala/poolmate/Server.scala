@@ -19,8 +19,7 @@ object Server extends Main with LazyLogging:
   val emailSender = EmailSender(conf, store)
   val service = Service(store)
   val authorizer = Authorizer(service)
-  val validator = Validator()
-  val dispatcher = Dispatcher(authorizer, validator, service, emailSender)
+  val dispatcher = Dispatcher(authorizer, service, emailSender)
 
   val emailProcesor = EmailProcessor(conf, store)
   val scheduler = Scheduler(emailProcesor)

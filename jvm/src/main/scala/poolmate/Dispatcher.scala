@@ -1,14 +1,15 @@
 package poolmate
 
+import Validator.*
+
 final class Dispatcher(authorizer: Authorizer,
-                       validator: Validator,
                        service: Service,
                        emailSender: EmailSender):
   def dispatch(command: Command): Event =
     authorizer.authorize(command) match
       case unauthorized: Unauthorized => unauthorized
       case _ => 
-        if validator.isValid(command) then handle(command)
+        if command.isValid then handle(command)
         else Fault(s"Invalid command: $command")
 
   private def handle(command: Command): Event =
