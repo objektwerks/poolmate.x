@@ -38,8 +38,8 @@ final case class Account(id: Long = 0,
                          license: String = "",
                          emailAddress: String = "",
                          pin: String = "",
-                         activated: Int = DateTime.currentDate,
-                         deactivated: Int = 0) extends Entity:
+                         activated: Long = LocalDate.now.toEpochDay,
+                         deactivated: Long = 0) extends Entity:
   def display = emailAddress
 
 final case class Pool(id: Long = 0,
