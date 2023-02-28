@@ -1,5 +1,7 @@
 package poolmate
 
+import java.time.{LocalDate, LocalTime}
+
 enum UoM(val abrv: String):
   case ounce extends UoM("oz")
   case gallon extends UoM("gl")
@@ -8,8 +10,8 @@ enum UoM(val abrv: String):
 final case class Email(id: String,
                        license: String,
                        address: String,
-                       dateSent: Int = DateTime.currentDate,
-                       timeSent: Int = DateTime.currentTime,
+                       dateSent: Long = LocalDate.now.toEpochDay,
+                       timeSent: Int = LocalTime.now.toSecondOfDay,
                        processed: Boolean = false,
                        valid: Boolean = false)
 
