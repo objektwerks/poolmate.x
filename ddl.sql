@@ -134,7 +134,7 @@ CREATE TABLE email (
   license VARCHAR(36) REFERENCES account(license),
   address VARCHAR NOT NULL,
   date_sent BIGINT NOT NULL,
-  time_sent BIGINT NOT NULL,
+  time_sent INT NOT NULL,
   processed BOOL NOT NULL,
   valid BOOL NOT NULL
 );
