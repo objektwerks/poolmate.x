@@ -21,18 +21,18 @@ sealed trait Entity:
 
 object Entity:
   given poolOrdering: Ordering[Pool] = Ordering.by[Pool, String](p => p.name).reverse
-  given surfaceOrdering: Ordering[Surface] = Ordering.by[Surface, Int](s => s.installed).reverse
-  given deckOrdering: Ordering[Deck] = Ordering.by[Deck, Int](d => d.installed).reverse
-  given pumpOrdering: Ordering[Pump] = Ordering.by[Pump, Int](p => p.installed).reverse
-  given timerOrdering: Ordering[Timer] = Ordering.by[Timer, Int](t => t.installed).reverse
-  given timerSettingOrdering: Ordering[TimerSetting] = Ordering.by[TimerSetting, Int](ts => ts.created).reverse
-  given heaterOrdering: Ordering[Heater] = Ordering.by[Heater, Int](t => t.installed).reverse
-  given heaterSettingOrdering: Ordering[HeaterSetting] = Ordering.by[HeaterSetting, Int](ts => ts.dateOn).reverse
-  given measurementOrdering: Ordering[Measurement] = Ordering.by[Measurement, Int](m => m.measured).reverse
-  given cleaningOrdering: Ordering[Cleaning] = Ordering.by[Cleaning, Int](c => c.cleaned).reverse
-  given chemicalOrdering: Ordering[Chemical] = Ordering.by[Chemical, Int](c => c.added).reverse
-  given supplyOrdering: Ordering[Supply] = Ordering.by[Supply, Int](s => s.purchased).reverse
-  given repairOrdering: Ordering[Repair] = Ordering.by[Repair, Int](r => r.repaired).reverse
+  given surfaceOrdering: Ordering[Surface] = Ordering.by[Surface, Long](s => s.installed).reverse
+  given deckOrdering: Ordering[Deck] = Ordering.by[Deck, Long](d => d.installed).reverse
+  given pumpOrdering: Ordering[Pump] = Ordering.by[Pump, Long](p => p.installed).reverse
+  given timerOrdering: Ordering[Timer] = Ordering.by[Timer, Long](t => t.installed).reverse
+  given timerSettingOrdering: Ordering[TimerSetting] = Ordering.by[TimerSetting, Long](ts => ts.created).reverse
+  given heaterOrdering: Ordering[Heater] = Ordering.by[Heater, Long](t => t.installed).reverse
+  given heaterSettingOrdering: Ordering[HeaterSetting] = Ordering.by[HeaterSetting, Long](ts => ts.dateOn).reverse
+  given measurementOrdering: Ordering[Measurement] = Ordering.by[Measurement, Long](m => m.measured).reverse
+  given cleaningOrdering: Ordering[Cleaning] = Ordering.by[Cleaning, Long](c => c.cleaned).reverse
+  given chemicalOrdering: Ordering[Chemical] = Ordering.by[Chemical, Long](c => c.added).reverse
+  given supplyOrdering: Ordering[Supply] = Ordering.by[Supply, Long](s => s.purchased).reverse
+  given repairOrdering: Ordering[Repair] = Ordering.by[Repair, Long](r => r.repaired).reverse
 
 final case class Account(id: Long = 0,
                          license: String = "",
