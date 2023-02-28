@@ -123,7 +123,7 @@ object Measurement:
 
 final case class Cleaning(id: Long = 0,
                           poolId: Long = 0,
-                          cleaned: Int = 0,
+                          cleaned: Long = 0,
                           brush: Boolean = true,
                           net: Boolean = true,
                           vacuum: Boolean = false,
