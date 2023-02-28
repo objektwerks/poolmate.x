@@ -95,8 +95,8 @@ final case class Heater(id: Long = 0,
 final case class HeaterSetting(id: Long = 0,
                                heaterId: Long = 0,
                                temp: Int = 0,
-                               dateOn: Int = 0,
-                               dateOff: Int = 0) extends Entity:
+                               dateOn: Long = 0,
+                               dateOff: Long = 0) extends Entity:
   def display = s"$dateOn: $temp"
 
 final case class Measurement(id: Long = 0,
