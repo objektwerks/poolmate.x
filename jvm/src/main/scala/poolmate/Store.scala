@@ -4,6 +4,8 @@ import com.github.blemale.scaffeine.{Cache, Scaffeine}
 import com.typesafe.config.Config
 import com.typesafe.scalalogging.LazyLogging
 
+import java.time.LocalDate
+
 import scalikejdbc.*
 import scala.concurrent.duration.FiniteDuration
 
@@ -108,7 +110,7 @@ final class Store(conf: Config,
 
   def deactivate(license: String): Option[Account] =
     DB localTx { implicit session =>
-      val deactivated = sql"update account set deactivated = ${DateTime.currentDate}, activated = 0 where license = $license"
+      val deactivated = sql"update account set deactivated = ${LocalDate.now.toEpochDay}, activated = 0 where license = $license"
       .update()
       if deactivated > 0 then
         sql"select * from account where license = $license"
@@ -119,7 +121,7 @@ final class Store(conf: Config,
 
   def reactivate(license: String): Option[Account] =
     DB localTx { implicit session =>
-      val activated = sql"update account set activated = ${DateTime.currentDate}, deactivated = 0 where license = $license"
+      val activated = sql"update account set activated = ${LocalDate.now.toEpochDay}, deactivated = 0 where license = $license"
       .update()
       if activated > 0 then
         sql"select * from account where license = $license"
@@ -437,12 +439,12 @@ final class Store(conf: Config,
   def listFaults: List[Fault] =
     DB readOnly { implicit session =>
       sql"select * from fault order by date_of, time_of desc"
-        .map(rs => Fault(rs.int("date_of"), rs.int("time_of"), rs.int("nano_of"), rs.string("cause")))
+        .map(rs => Fault(rs.int("date_of"), rs.int("time_of"), rs.string("cause")))
         .list()
     }
 
   def addFault(fault: Fault): Unit =
     DB localTx { implicit session =>
-      sql"insert into fault(date_of, time_of, nano_of, cause) values(${fault.dateOf}, ${fault.timeOf}, ${fault.nanoOf}, ${fault.cause})"
+      sql"insert into fault(date_of, time_of, cause) values(${fault.dateOf}, ${fault.timeOf}, ${fault.cause})"
         .update()
     }
