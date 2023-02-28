@@ -6,7 +6,7 @@ import org.scalajs.dom.console.log
 
 import Component.*
 import Message.*
-import Validators.*
+import Validator.*
 
 object LoginView extends View:
   def apply(emailAddressVar: Var[String],
