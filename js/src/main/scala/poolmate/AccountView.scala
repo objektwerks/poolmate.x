@@ -5,7 +5,7 @@ import com.raquo.laminar.api.L.*
 import org.scalajs.dom.console.log
 
 import Component.*
-import Validators.*
+import Validator.*
 
 object AccountView extends View:
   def apply(accountVar: Var[Account]): HtmlElement =
