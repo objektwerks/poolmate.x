@@ -261,8 +261,8 @@ Logs
 2. test.jvm.log
 3. test.shared.log
 
-Documentation
--------------
+Resources
+---------
 1. Cask - https://com-lihaoyi.github.io/cask/index.html
 2. uPickle - https://com-lihaoyi.github.io/upickle/
 3. Requests - https://github.com/com-lihaoyi/requests-scala
