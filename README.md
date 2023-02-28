@@ -273,3 +273,20 @@ Resources
 8. Packager - https://www.scala-sbt.org/sbt-native-packager/formats/graalvm-native-image.html
 9. Gaalvm - https://www.graalvm.org/docs/introduction/
 10. Snowpack - https://www.snowpack.dev/
+
+Environment
+-----------
+>The following environment variables must be defined:
+* export POOLMATE_HOST="127.0.0.1"
+* export POOLMATE_PORT=7272
+
+* export POOLMATE_POSTGRESQL_URL="jdbc:postgresql://localhost:5432/dbname"
+* export POOLMATE_POSTGRESQL_USER="user"
+* export POOLMATE_POSTGRESQL_PASSWORD="password"
+* export POOLMATE_POSTGRESQL_POOL_INITIAL_SIZE=9
+* export POOLMATE_POSTGRESQL_POOL_MAX_SIZE=32
+* export POOLMATE_POSTGRESQL_POOL_CONNECTION_TIMEOUT_MILLIS=30000
+
+* export POOLMATE_EMAIL_HOST="mail.host.com"
+* export POOLMATE_EMAIL_ADDRESS="email@address.com"
+* export POOLMATE_EMAIL_PASSWORD="password"
