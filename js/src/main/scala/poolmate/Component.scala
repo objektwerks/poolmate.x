@@ -2,11 +2,13 @@ package poolmate
 
 import com.raquo.laminar.api.L.*
 
+import java.time.LocalDate
+
 import scala.scalajs.js.Date
 
 object Component:
   private val inputCss = "w3-input w3-hover-light-gray w3-text-indigo"
-  private val currentYear = DateTime.currentYear
+  private val currentYear = LocalDate.now.getYear
 
   def bar(elms: HtmlElement*): Div =
     div(cls("w3-bar"), elms)
