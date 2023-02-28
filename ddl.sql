@@ -142,7 +142,6 @@ CREATE TABLE email (
 CREATE TABLE fault (
   date_of BIGINT NOT NULL,
   time_of BIGINT NOT NULL,
-  nano_of BIGINT NOT NULL,
   cause VARCHAR NOT NULL,
-  PRIMARY KEY (date_of, time_of, nano_of)
+  PRIMARY KEY (date_of, time_of, cause)
 );
