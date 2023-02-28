@@ -1,6 +1,6 @@
 package poolmate
 
-object Validators:
+object Validator:
   extension (command: Command)
     def isValid: Boolean =
       command match
