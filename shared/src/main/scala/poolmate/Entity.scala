@@ -143,7 +143,7 @@ final case class Chemical(id: Long = 0,
 
 final case class Supply(id: Long = 0,
                         poolId: Long = 0,
-                        purchased: Int = 0,
+                        purchased: Long = 0,
                         item: String = "",
                         amount: Double = 0.0,
                         unit: String = "",
