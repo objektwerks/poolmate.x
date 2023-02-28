@@ -1,5 +1,7 @@
 package poolmate
 
+import java.time.{LocalDate, LocalTime}
+
 sealed trait Event
 
 final case class Authorized(license: String) extends Event
@@ -52,9 +54,8 @@ final case class SupplyAdded(supply: Supply) extends Event
 final case class RepairsListed(repairs: List[Repair]) extends Event
 final case class RepairAdded(repair: Repair) extends Event
 
-final case class Fault(dateOf: Int = DateTime.currentDate,
-                       timeOf: Int = DateTime.currentTime,
-                       nanoOf: Int = DateTime.nano,
+final case class Fault(dateOf: Long = LocalDate.now.toEpochDay,
+                       timeOf: Int = LocalTime.now.toSecondOfDay,
                        cause: String) extends Event
 
 object Fault:
