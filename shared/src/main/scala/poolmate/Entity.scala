@@ -101,7 +101,7 @@ final case class HeaterSetting(id: Long = 0,
 
 final case class Measurement(id: Long = 0,
                              poolId: Long = 0,
-                             measured: Int = 0,
+                             measured: Long = 0,
                              temp: Int = 85,
                              totalHardness: Int = 375,
                              totalChlorine: Int = 3,
