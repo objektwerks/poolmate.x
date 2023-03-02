@@ -18,7 +18,7 @@ object PoolView extends View:
 
     def updateHandler(event: Event): Unit =
       event match
-        case Fault(_, _, cause) => emitError(s"Update pool failed: $cause")
+        case Fault(cause, _) => emitError(s"Update pool failed: $cause")
         case Updated() =>
           clearErrors()
           route(PoolsPage)
