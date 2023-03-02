@@ -107,10 +107,10 @@ CREATE TABLE cleaning (
 CREATE TABLE chemical (
   id BIGSERIAL PRIMARY KEY,
   pool_id BIGINT REFERENCES pool(id),
-  added BIGINT NOT NULL,
-  chemical VARCHAR NOT NULL,
+  typeof VARCHAR NOT NULL,
   amount NUMERIC(5, 2),
-  unit VARCHAR NOT NULL
+  unit VARCHAR NOT NULL,
+  added BIGINT NOT NULL
 );
 
 CREATE TABLE supply (
