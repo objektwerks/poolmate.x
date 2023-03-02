@@ -173,11 +173,11 @@ final case class Supply(id: Long = 0,
                         unit: String = UnitOfMeasure.gl.toString,
                         cost: Int = 0,
                         purchased: Long = LocalDate.now.toEpochDay) extends Entity:
-  def display = s"$purchased: $item"
+  def display = s"${LocalDate.ofEpochDay(purchased).toString}: $item"
 
 final case class Repair(id: Long = 0,
                         poolId: Long = 0,
                         repair: String = "",
                         cost: Int = 0,
                         repaired: Long = LocalDate.now.toEpochDay) extends Entity:
-  def display = s"$repaired: $repair"
+  def display = s"${LocalDate.ofEpochDay(repaired).toString}: $repair"
