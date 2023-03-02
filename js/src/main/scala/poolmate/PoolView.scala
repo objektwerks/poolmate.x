@@ -117,15 +117,6 @@ object PoolView extends View:
             }
           )
         },
-        lbl("Built"),
-        year.amend {
-          controlled(
-            value <-- model.selectedEntityVar.signal.map(_.built.toString),
-            onInput.mapToValue.filter(_.toIntOption.nonEmpty).map(_.toInt) --> { built =>
-              model.updateSelectedEntity( model.selectedEntityVar.now().copy(built = built) )
-            }
-          )
-        },
         lbl("Volume"),
         txt.amend {
           controlled(
@@ -135,6 +126,24 @@ object PoolView extends View:
             }
           )
         },
+        lbl("Unit"),
+        listbox( UnitOfMeasure.toList ).amend {
+          controlled(
+            value <-- model.selectedEntityVar.signal.map(_.unit),
+            onChange.mapToValue --> { value =>
+              model.updateSelectedEntity( model.selectedEntityVar.now().copy(unit = value) )
+            }
+          )
+        },
+        lbl("Built"),
+        year.amend {
+          controlled(
+            value <-- model.selectedEntityVar.signal.map(_.built.toString),
+            onInput.mapToValue.filter(_.toIntOption.nonEmpty).map(_.toInt) --> { built =>
+              model.updateSelectedEntity( model.selectedEntityVar.now().copy(built = built) )
+            }
+          )
+        }
       ),
       cbar(
         btn("Add").amend {
