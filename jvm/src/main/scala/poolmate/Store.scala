@@ -344,42 +344,42 @@ final class Store(conf: Config,
     measurement.id
   }
   
-  def listCleanings(): List[Cleaning] =
-    DB readOnly { implicit session =>
-      sql"select * from cleaning order by cleaned desc"
-        .map(rs =>
-          Cleaning(
-            rs.long("id"), rs.long("pool_id"), rs.int("cleaned"), rs.boolean("brush"), rs.boolean("net"), rs.boolean("vacuum"),
-            rs.boolean("skimmer_basket"), rs.boolean("pump_basket"), rs.boolean("pump_filter"), rs.boolean("deck")
-          )
+  def listCleanings(poolId: Long): List[Cleaning] = DB readOnly { implicit session =>
+    sql"select * from cleaning where pool_id = $poolId order by cleaned desc"
+      .map(rs =>
+        Cleaning(
+          rs.long("id"),
+          rs.long("pool_id"),
+          rs.boolean("brush"),
+          rs.boolean("net"),
+          rs.boolean("skimmer_basket"),
+          rs.boolean("pump_basket"),
+          rs.boolean("pump_filter"),
+          rs.boolean("vacuum"),
+          rs.long("cleaned")
         )
-        .list()
-    }
+      )
+      .list()
+  }
 
-  def addCleaning(cleaning: Cleaning): Cleaning =
-    val id = DB localTx { implicit session =>
-      sql"""
-        insert into cleaning(pool_id, cleaned, brush, net, vacuum, skimmer_basket, pump_basket, pump_filter, deck) values(${cleaning.poolId},
-        ${cleaning.cleaned}, ${cleaning.brush}, ${cleaning.net}, ${cleaning.vacuum}, ${cleaning.skimmerBasket}, ${cleaning.pumpBasket},
-        ${cleaning.pumpFilter}, ${cleaning.deck})
-        """
-        .stripMargin
-        .updateAndReturnGeneratedKey()
-        
-    }
-    cleaning.copy(id = id)
+  def addCleaning(cleaning: Cleaning): Long = DB localTx { implicit session =>
+    sql"""
+      insert into cleaning(pool_id, brush, net, skimmer_basket, pump_basket, pump_filter, vacuum, cleaned)
+      values(${cleaning.poolId}, ${cleaning.brush}, ${cleaning.net}, ${cleaning.skimmerBasket},
+      ${cleaning.pumpBasket}, ${cleaning.pumpFilter}, ${cleaning.vacuum}, ${cleaning.cleaned})
+      """
+      .updateAndReturnGeneratedKey()
+  }
 
-  def updateCleaning(cleaning: Cleaning): Unit =
-    DB localTx { implicit session =>
-      sql"""
-        update cleaning set cleaned = ${cleaning.cleaned}, brush = ${cleaning.brush}, net = ${cleaning.net}, vacuum = ${cleaning.vacuum},
-        skimmer_basket = ${cleaning.skimmerBasket}, pump_basket = ${cleaning.pumpBasket}, pump_filter = ${cleaning.pumpFilter},
-        deck = ${cleaning.deck} where id = ${cleaning.id}
-        """
-        .stripMargin
-        .update()
-    }
-    ()
+  def updateCleaning(cleaning: Cleaning): Long = DB localTx { implicit session =>
+    sql"""
+      update cleaning set brush = ${cleaning.brush}, net = ${cleaning.net}, skimmer_basket = ${cleaning.skimmerBasket},
+      pump_basket = ${cleaning.pumpBasket}, pump_filter = ${cleaning.pumpFilter}, vacuum = ${cleaning.vacuum},
+      cleaned = ${cleaning.cleaned} where id = ${cleaning.id}
+      """
+      .update()
+    cleaning.id
+  }
 
   def listChemicals(poolId: Long): List[Chemical] = DB readOnly { implicit session =>
     sql"select * from chemical where pool_id = $poolId order by added desc"
