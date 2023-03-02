@@ -148,15 +148,14 @@ final case class Measurement(id: Long = 0,
 
 final case class Cleaning(id: Long = 0,
                           poolId: Long = 0,
-                          cleaned: Long = 0,
                           brush: Boolean = true,
                           net: Boolean = true,
-                          vacuum: Boolean = false,
                           skimmerBasket: Boolean = true,
                           pumpBasket: Boolean = false,
                           pumpFilter: Boolean = false,
-                          deck: Boolean = false) extends Entity:
-  def display = cleaned.toString
+                          vacuum: Boolean = false,
+                          cleaned: Long = LocalDate.now.toEpochDay) extends Entity:
+  def display = LocalDate.ofEpochDay(cleaned).toString
 
 final case class Chemical(id: Long = 0,
                           poolId: Long = 0,
