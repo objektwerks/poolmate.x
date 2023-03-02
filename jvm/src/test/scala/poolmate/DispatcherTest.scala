@@ -86,14 +86,14 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
     var cleaning = Cleaning(poolId = pool.id, cleaned = 20010201)
     cleaning = testAddCleaning(dispatcher, pool, cleaning)
     testListCleanings(dispatcher, pool)
-    testUpdateCleaning(dispatcher, pool, cleaning.copy(deck = true))
+    testUpdateCleaning(dispatcher, pool, cleaning.copy(vacuum = true))
 
-    var chemical = Chemical(poolId = pool.id, added = 20010101, chemical = "chlorine", amount = 1.0, unit = UoM.gallon.abrv)
+    var chemical = Chemical(poolId = pool.id, added = 20010101, chemical = "chlorine", amount = 1.0, unit = UnitOfMeasure.gl.toString)
     chemical = testAddChemical(dispatcher, pool, chemical)
     testListChemicals(dispatcher, pool)
     testUpdateChemical(dispatcher, pool, chemical.copy(amount = 2.0))
 
-    var supply = Supply(poolId = pool.id, purchased = 20010101, item = "chlorine", amount = 1.0, unit = UoM.gallon.abrv, cost = 5)
+    var supply = Supply(poolId = pool.id, purchased = 20010101, item = "chlorine", amount = 1.0, unit = UnitOfMeasure.gl.toString, cost = 5)
     supply = testAddSupply(dispatcher, pool, supply)
     testListSupplies(dispatcher, pool)
     testUpdateSupply(dispatcher, pool, supply.copy(cost = 6))
@@ -150,7 +150,7 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
 
   def testUpdatePool(dispatcher: Dispatcher, pool: Pool): Unit =
     val update = UpdatePool(pool.license, pool)
-    dispatcher.dispatch(update) shouldBe Updated()
+    dispatcher.dispatch(update) shouldBe Updated(pool.id)
 
   def testAddSurface(dispatcher: Dispatcher, pool: Pool, surface: Surface): Surface =
     val add = AddSurface(pool.license, surface)
@@ -168,7 +168,7 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
 
   def testUpdateSurface(dispatcher: Dispatcher, pool: Pool, surface: Surface): Unit =
     val update = UpdateSurface(pool.license, surface)
-    dispatcher.dispatch(update) shouldBe Updated()
+    dispatcher.dispatch(update) shouldBe Updated(surface.id)
 
   def testAddDeck(dispatcher: Dispatcher, pool: Pool, deck: Deck): Deck =
     val add = AddDeck(pool.license, deck)
@@ -186,7 +186,7 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
 
   def testUpdateDeck(dispatcher: Dispatcher, pool: Pool, deck: Deck): Unit =
     val update = UpdateDeck(pool.license, deck)
-    dispatcher.dispatch(update) shouldBe Updated()
+    dispatcher.dispatch(update) shouldBe Updated(deck.id)
 
   def testAddPump(dispatcher: Dispatcher, pool: Pool, pump: Pump): Pump =
     val add = AddPump(pool.license, pump)
@@ -204,7 +204,7 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
 
   def testUpdatePump(dispatcher: Dispatcher, pool: Pool, pump: Pump): Unit =
     val update = UpdatePump(pool.license, pump)
-    dispatcher.dispatch(update) shouldBe Updated()
+    dispatcher.dispatch(update) shouldBe Updated(pump.id)
 
   def testAddTimer(dispatcher: Dispatcher, pool: Pool, timer: Timer): Timer =
     val add = AddTimer(pool.license, timer)
@@ -222,7 +222,7 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
 
   def testUpdateTimer(dispatcher: Dispatcher, pool: Pool, timer: Timer): Unit =
     val update = UpdateTimer(pool.license, timer)
-    dispatcher.dispatch(update) shouldBe Updated()
+    dispatcher.dispatch(update) shouldBe Updated(timer.id)
 
   def testAddTimerSetting(dispatcher: Dispatcher, pool: Pool, timerSetting: TimerSetting): TimerSetting =
     val add = AddTimerSetting(pool.license, timerSetting)
@@ -240,7 +240,7 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
 
   def testUpdateTimerSetting(dispatcher: Dispatcher, pool: Pool, timerSetting: TimerSetting): Unit =
     val update = UpdateTimerSetting(pool.license, timerSetting)
-    dispatcher.dispatch(update) shouldBe Updated()
+    dispatcher.dispatch(update) shouldBe Updated(timerSetting.id)
 
   def testAddHeater(dispatcher: Dispatcher, pool: Pool, heater: Heater): Heater =
     val add = AddHeater(pool.license, heater)
@@ -258,7 +258,7 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
 
   def testUpdateHeater(dispatcher: Dispatcher, pool: Pool, heater: Heater): Unit =
     val update = UpdateHeater(pool.license, heater)
-    dispatcher.dispatch(update) shouldBe Updated()
+    dispatcher.dispatch(update) shouldBe Updated(heater.id)
 
   def testAddHeaterSetting(dispatcher: Dispatcher, pool: Pool, heaterSetting: HeaterSetting): HeaterSetting =
     val add = AddHeaterSetting(pool.license, heaterSetting)
@@ -276,7 +276,7 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
 
   def testUpdateHeaterSetting(dispatcher: Dispatcher, pool: Pool, heaterSetting: HeaterSetting): Unit =
     val update = UpdateHeaterSetting(pool.license, heaterSetting)
-    dispatcher.dispatch(update) shouldBe Updated()
+    dispatcher.dispatch(update) shouldBe Updated(heaterSetting.id)
 
   def testAddMeasurement(dispatcher: Dispatcher, pool: Pool, measurement: Measurement): Measurement =
     val add = AddMeasurement(pool.license, measurement)
@@ -294,7 +294,7 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
 
   def testUpdateMeasurement(dispatcher: Dispatcher, pool: Pool, measurement: Measurement): Unit =
     val update = UpdateMeasurement(pool.license, measurement)
-    dispatcher.dispatch(update) shouldBe Updated()
+    dispatcher.dispatch(update) shouldBe Updated(measurement.id)
 
   def testAddCleaning(dispatcher: Dispatcher, pool: Pool, cleaning: Cleaning): Cleaning =
     val add = AddCleaning(pool.license, cleaning)
@@ -312,7 +312,7 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
 
   def testUpdateCleaning(dispatcher: Dispatcher, pool: Pool, cleaning: Cleaning): Unit =
     val update = UpdateCleaning(pool.license, cleaning)
-    dispatcher.dispatch(update) shouldBe Updated()
+    dispatcher.dispatch(update) shouldBe Updated(cleaning.id)
 
   def testAddChemical(dispatcher: Dispatcher, pool: Pool, chemical: Chemical): Chemical =
     val add = AddChemical(pool.license, chemical)
@@ -330,7 +330,7 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
 
   def testUpdateChemical(dispatcher: Dispatcher, pool: Pool, chemical: Chemical): Unit =
     val update = UpdateChemical(pool.license, chemical)
-    dispatcher.dispatch(update) shouldBe Updated()
+    dispatcher.dispatch(update) shouldBe Updated(chemical.id)
 
   def testAddSupply(dispatcher: Dispatcher, pool: Pool, supply: Supply): Supply =
     val add = AddSupply(pool.license, supply)
@@ -348,7 +348,7 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
 
   def testUpdateSupply(dispatcher: Dispatcher, pool: Pool, supply: Supply): Unit =
     val update = UpdateSupply(pool.license, supply)
-    dispatcher.dispatch(update) shouldBe Updated()
+    dispatcher.dispatch(update) shouldBe Updated(supply.id)
 
   def testAddRepair(dispatcher: Dispatcher, pool: Pool, repair: Repair): Repair =
     val add = AddRepair(pool.license, repair)
@@ -366,7 +366,7 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
 
   def testUpdateRepair(dispatcher: Dispatcher, pool: Pool, repair: Repair): Unit =
     val update = UpdateRepair(pool.license, repair)
-    dispatcher.dispatch(update) shouldBe Updated()
+    dispatcher.dispatch(update) shouldBe Updated(repair.id)
 
   def testEmail(store: Store): Unit =
     store.listUnprocessedEmails.size shouldBe 1
@@ -377,4 +377,4 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
   def testFault(store: Store): Unit =
     val fault = Fault("fault")
     store.addFault(fault)
-    store.listFaults.size shouldBe 1
+    store.listFaults().size shouldBe 1

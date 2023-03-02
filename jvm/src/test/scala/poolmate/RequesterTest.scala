@@ -8,7 +8,7 @@ import org.scalatest.matchers.should.Matchers
 
 import scala.sys.process.Process
 
-import Serializers.given
+import Serializer.given
 
 import upickle.default.*
 
