@@ -381,26 +381,37 @@ final class Store(conf: Config,
     }
     ()
 
-  def listChemicals(): List[Chemical] =
-    DB readOnly { implicit session =>
-      sql"select * from chemical order by added desc"
-        .map(rs => Chemical(rs.long("id"), rs.long("pool_id"), rs.int("added"), rs.string("chemical"), rs.double("amount"), rs.string("unit")))
-        .list()
-    }
+  def listChemicals(poolId: Long): List[Chemical] = DB readOnly { implicit session =>
+    sql"select * from chemical where pool_id = $poolId order by added desc"
+      .map(rs =>
+        Chemical(
+          rs.long("id"),
+          rs.long("pool_id"),
+          rs.string("chemical"),
+          rs.double("amount"),
+          rs.string("unit"),
+          rs.long("added")
+        )
+      )
+      .list()
+  }
 
-  def addChemical(chemical: Chemical): Chemical =
-    val id = DB localTx { implicit session =>
-      sql"insert into chemical(pool_id, added, chemical, amount, unit) values(${chemical.poolId}, ${chemical.added}, ${chemical.chemical}, ${chemical.amount}, ${chemical.unit})"
+  def addChemical(chemical: Chemical): Long = DB localTx { implicit session =>
+    sql"""
+      insert into chemical(pool_id, chemical, amount, unit, added)
+      values(${chemical.poolId}, ${chemical.chemical.toString}, ${chemical.amount}, ${chemical.unit.toString}, ${chemical.added})
+      """
       .updateAndReturnGeneratedKey()
-    }
-    chemical.copy(id = id)
+  }
 
-  def updateChemical(chemical: Chemical): Unit =
-    DB localTx { implicit session =>
-      sql"update chemical set added = ${chemical.added}, chemical = ${chemical.chemical}, amount = ${chemical.amount}, unit = ${chemical.unit} where id = ${chemical.id}"
+  def updateChemical(chemical: Chemical): Long = DB localTx { implicit session =>
+    sql"""
+      update chemical set chemical = ${chemical.chemical.toString}, amount = ${chemical.amount}, unit = ${chemical.unit.toString},
+      added = ${chemical.added} where id = ${chemical.id}
+      """
       .update()
-    }
-    ()
+    chemical.id
+  }
 
   def listSupplies(): List[Supply] =
     DB readOnly { implicit session =>
