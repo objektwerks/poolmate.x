@@ -34,18 +34,24 @@ object PageRouter:
     pattern = root / "app" / "pool" / "chemicals" / segment[Long] / endOfSegments
   )
 
-  val routes = List(
+  val routees = List(
     Route.static(HomePage, root / endOfSegments),
     Route.static(RegisterPage, root / "register" / endOfSegments),
     Route.static(LoginPage, root / "login" / endOfSegments),
     Route.static(AppPage, root / "app" / endOfSegments),
     Route.static(AccountPage, root / "app" / "account" / endOfSegments),
     Route.static(PoolsPage, root / "app" / "pools" / endOfSegments),
-    poolRoute
+    poolRoute,
+    Route.static(CleaningsPage, root / "app" / "pool" / "cleanings" / endOfSegments),
+    cleaningRoute,
+    Route.static(MeasurementsPage, root / "app" / "pool" / "measurements" / endOfSegments),
+    measurementRoute,
+    Route.static(ChemicalsPage, root / "app" / "pool" / "chemicals" / endOfSegments),
+    chemicalRoute
   )
 
   val router = new com.raquo.waypoint.Router[Page](
-    routes = routes,
+    routes = routees,
     serializePage = page => write(page)(pageRW),
     deserializePage = pageAsString => read(pageAsString)(pageRW),
     getPageTitle = _.title,
