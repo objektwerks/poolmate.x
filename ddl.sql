@@ -116,19 +116,19 @@ CREATE TABLE chemical (
 CREATE TABLE supply (
   id BIGSERIAL PRIMARY KEY,
   pool_id BIGINT REFERENCES pool(id),
-  purchased BIGINT NOT NULL,
   item VARCHAR NOT NULL,
   amount NUMERIC(4, 2) NOT NULL,
   unit VARCHAR NOT NULL,
-  cost Int NOT NULL
+  cost Int NOT NULL,
+  purchased BIGINT NOT NULL
 );
 
 CREATE TABLE repair (
   id BIGSERIAL PRIMARY KEY,
   pool_id BIGINT REFERENCES pool(id),
-  repaired BIGINT NOT NULL,
   repair VARCHAR NOT NULL,
-  cost INT NOT NULL
+  cost INT NOT NULL,
+  repaired BIGINT NOT NULL
 );
 
 CREATE TABLE email (
