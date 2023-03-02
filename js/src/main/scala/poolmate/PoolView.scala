@@ -94,13 +94,13 @@ object PoolView extends View:
           btn("Surfaces").amend {
             onClick --> { _ =>
               log("Surfaces menu item onClick")
-              // route(SurfacesPage)
+              route(SurfacesPage)
             }
           },
           btn("Decks").amend {
             onClick --> { _ =>
               log("Decks menu item onClick")
-              // route(DecksPage)
+              route(DecksPage)
             }
           },
         )
