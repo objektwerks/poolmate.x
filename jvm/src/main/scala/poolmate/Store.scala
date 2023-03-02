@@ -341,7 +341,7 @@ final class Store(conf: Config,
       .updateAndReturnGeneratedKey()
   }
 
-  def updateMeasurement(measurement: Measurement): Long = DB localTx { implicit session =>
+  def updateMeasurement(measurement: Measurement): Unit = DB localTx { implicit session =>
     sql"""
       update measurement set total_chlorine = ${measurement.totalChlorine}, free_chlorine = ${measurement.freeChlorine},
       combined_chlorine = ${measurement.combinedChlorine}, ph = ${measurement.ph}, calcium_hardness = ${measurement.calciumHardness},
@@ -351,7 +351,6 @@ final class Store(conf: Config,
       where id = ${measurement.id}
       """
       .update()
-    measurement.id
   }
   
   def listCleanings(poolId: Long): List[Cleaning] = DB readOnly { implicit session =>
@@ -381,14 +380,13 @@ final class Store(conf: Config,
       .updateAndReturnGeneratedKey()
   }
 
-  def updateCleaning(cleaning: Cleaning): Long = DB localTx { implicit session =>
+  def updateCleaning(cleaning: Cleaning): Unit = DB localTx { implicit session =>
     sql"""
       update cleaning set brush = ${cleaning.brush}, net = ${cleaning.net}, skimmer_basket = ${cleaning.skimmerBasket},
       pump_basket = ${cleaning.pumpBasket}, pump_filter = ${cleaning.pumpFilter}, vacuum = ${cleaning.vacuum},
       cleaned = ${cleaning.cleaned} where id = ${cleaning.id}
       """
       .update()
-    cleaning.id
   }
 
   def listChemicals(poolId: Long): List[Chemical] = DB readOnly { implicit session =>
@@ -414,13 +412,12 @@ final class Store(conf: Config,
       .updateAndReturnGeneratedKey()
   }
 
-  def updateChemical(chemical: Chemical): Long = DB localTx { implicit session =>
+  def updateChemical(chemical: Chemical): Unit = DB localTx { implicit session =>
     sql"""
       update chemical set chemical = ${chemical.chemical.toString}, amount = ${chemical.amount}, unit = ${chemical.unit.toString},
       added = ${chemical.added} where id = ${chemical.id}
       """
       .update()
-    chemical.id
   }
 
   def listSupplies(): List[Supply] =
