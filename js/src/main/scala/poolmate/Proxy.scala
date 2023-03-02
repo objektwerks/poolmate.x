@@ -14,7 +14,7 @@ import scala.scalajs.js
 import scala.scalajs.js.Thenable.Implicits.*
 import scala.util.control.NonFatal
 
-import Serializers.given
+import Serializer.given
 
 import upickle.default.{read, write}
 
