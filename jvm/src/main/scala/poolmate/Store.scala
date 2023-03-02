@@ -423,20 +423,36 @@ final class Store(conf: Config,
   def listSupplies(): List[Supply] =
     DB readOnly { implicit session =>
       sql"select * from supply order by purchased desc"
-        .map(rs => Supply(rs.long("id"), rs.long("pool_id"), rs.int("purchased"), rs.string("item"), rs.double("amount"), rs.string("unit"), rs.int("cost")))
+        .map(rs =>
+          Supply(
+            rs.long("id"),
+            rs.long("pool_id"),
+            rs.string("item"),
+            rs.double("amount"),
+            rs.string("unit"),
+            rs.int("cost"),
+            rs.long("purchased")
+          )
+        )
         .list()
     }
 
   def addSupply(supply: Supply): Supply =
     val id = DB localTx { implicit session =>
-      sql"insert into supply(pool_id, purchased, item, amount, unit, cost) values(${supply.poolId}, ${supply.purchased}, ${supply.item}, ${supply.amount}, ${supply.unit}, ${supply.cost})"
+      sql"""
+        insert into supply(pool_id, item, amount, unit, cost, purchased)
+        values(${supply.poolId}, ${supply.item}, ${supply.amount}, ${supply.unit}, ${supply.cost}, ${supply.purchased})
+        """
       .updateAndReturnGeneratedKey()
     }
     supply.copy(id = id)
 
   def updateSupply(supply: Supply): Unit =
     DB localTx { implicit session =>
-      sql"update supply set purchased = ${supply.purchased}, item = ${supply.item}, amount = ${supply.amount}, unit = ${supply.unit}, cost = ${supply.cost} where id = ${supply.id}"
+      sql"""
+        update supply set item = ${supply.item}, amount = ${supply.amount}, unit = ${supply.unit},
+        cost = ${supply.cost}, purchased = ${supply.purchased} where id = ${supply.id}
+        """
       .update()
     }
     ()
