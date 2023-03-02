@@ -67,6 +67,7 @@ final case class Pool(id: Long = 0,
                       name: String = "",
                       built: Long = 0,
                       volume: Int = 1000,
+                      unit: String = UnitOfMeasure.gl.toString,
                       cost: Int = 0) extends Entity:
   def display = name
 
