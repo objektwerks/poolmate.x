@@ -21,7 +21,7 @@ object ChemicalView extends View:
     def updateHandler(event: Event): Unit =
       event match
         case Fault(cause, _) => emitError(cause)
-        case Updated(id) =>
+        case Updated(_) =>
           clearErrors()
           route(ChemicalsPage)
         case _ => log(s"Chemicals -> update handler failed: $event")
@@ -43,7 +43,7 @@ object ChemicalView extends View:
           controlled(
             value <-- model.selectedEntityVar.signal.map(_.unit),
             onChange.mapToValue --> { value =>
-              model.updateSelectedEntity( model.selectedEntityVar.now().copy(typeof = value) )
+              model.updateSelectedEntity( model.selectedEntityVar.now().copy(chemical = value) )
             }
           )
         },
