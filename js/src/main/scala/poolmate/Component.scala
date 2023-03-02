@@ -25,6 +25,9 @@ object Component:
   def dropdown(header: Button, buttons: Button*): Div =
     div(cls("w3-dropdown-hover"), header, div(cls("w3-dropdown-content w3-bar-block w3-card-4"), buttons))
 
+  def checkbox: Input =
+    input(cls("w3-input"), tpe("checkbox"))
+
   def lbl(text: String): Label =
     label(cls("w3-left-align w3-text-indigo"), text)
 
