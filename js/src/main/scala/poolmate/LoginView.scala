@@ -14,7 +14,7 @@ object LoginView extends View:
             accountVar: Var[Account]): HtmlElement =
     def handler(event: Event): Unit =
       event match
-        case Fault(_, _, cause) => emitError(s"Login failed: $cause")
+        case Fault(cause, _) => emitError(s"Login failed: $cause")
         case LoggedIn(account) =>
           clearErrors()
           accountVar.set(account)
