@@ -16,6 +16,24 @@ object PageRouter:
     pattern = root / "app" / "pools" / segment[Long] / endOfSegments
   )
 
+  val cleaningRoute = Route[CleaningPage, Long](
+    encode = page => page.id,
+    decode = arg => CleaningPage(id = arg),
+    pattern = root / "app" / "pool" / "cleanings" / segment[Long] / endOfSegments
+  )
+
+  val measurementRoute = Route[MeasurementPage, Long](
+    encode = page => page.id,
+    decode = arg => MeasurementPage(id = arg),
+    pattern = root / "app" / "pool" / "measurements" / segment[Long] / endOfSegments
+  )
+
+  val chemicalRoute = Route[ChemicalPage, Long](
+    encode = page => page.id,
+    decode = arg => ChemicalPage(id = arg),
+    pattern = root / "app" / "pool" / "chemicals" / segment[Long] / endOfSegments
+  )
+
   val routes = List(
     Route.static(HomePage, root / endOfSegments),
     Route.static(RegisterPage, root / "register" / endOfSegments),
