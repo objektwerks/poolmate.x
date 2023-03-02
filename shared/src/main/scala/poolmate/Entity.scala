@@ -156,9 +156,9 @@ final case class Cleaning(id: Long = 0,
 final case class Chemical(id: Long = 0,
                           poolId: Long = 0,
                           added: Long = 0,
-                          chemical: String = "",
+                          chemical: String = TypeOfChemical.LiquidChlorine.toString,
                           amount: Double = 0.0,
-                          unit: String = "") extends Entity:
+                          unit: String = UnitOfMeasure.gl.toString) extends Entity:
   def display = s"$added: $chemical"
 
 final case class Supply(id: Long = 0,
