@@ -64,7 +64,7 @@ object PoolView extends View:
           btn("Repairs").amend {
             onClick --> { _ =>
               log("Repairs menu item onClick")
-              // route(RepairsPate)
+              // route(RepairsPage)
             }
           }
         ),
