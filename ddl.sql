@@ -94,14 +94,13 @@ CREATE TABLE measurement (
 CREATE TABLE cleaning (
   id BIGSERIAL PRIMARY KEY,
   pool_id BIGINT REFERENCES pool(id),
-  cleaned BIGINT NOT NULL,
   brush BOOL NOT NULL,
   net BOOL NOT NULL,
-  vacuum BOOL NOT NULL,
   skimmer_basket BOOL NOT NULL,
   pump_basket BOOL NOT NULL,
   pump_filter BOOL NOT NULL,
-  deck BOOL NOT NULL
+  vacuum BOOL NOT NULL,
+  cleaned BIGINT NOT NULL
 );
 
 CREATE TABLE chemical (
