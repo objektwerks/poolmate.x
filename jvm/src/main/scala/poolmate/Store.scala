@@ -436,15 +436,20 @@ final class Store(conf: Config,
     }
     ()
 
-  def listFaults: List[Fault] =
-    DB readOnly { implicit session =>
-      sql"select * from fault order by date_of, time_of desc"
-        .map(rs => Fault(rs.int("date_of"), rs.int("time_of"), rs.string("cause")))
-        .list()
-    }
+  def listFaults(): List[Fault] = DB readOnly { implicit session =>
+    sql"select * from fault order by occurred desc"
+      .map(rs =>
+        Fault(
+          rs.string("cause"),
+          rs.string("occurred")
+        )
+      )
+      .list()
+  }
 
-  def addFault(fault: Fault): Unit =
-    DB localTx { implicit session =>
-      sql"insert into fault(date_of, time_of, cause) values(${fault.dateOf}, ${fault.timeOf}, ${fault.cause})"
-        .update()
-    }
+  def addFault(fault: Fault): Long = DB localTx { implicit session =>
+    sql"""
+      insert into fault(cause, occurred) values(${fault.cause}, ${fault.occurred})
+      """
+      .updateAndReturnGeneratedKey()
+  }
