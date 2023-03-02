@@ -167,17 +167,17 @@ final case class Chemical(id: Long = 0,
   def display = LocalDate.ofEpochDay(added).toString
 
 final case class Supply(id: Long = 0,
-                        poolId: Long = 0,
-                        purchased: Long = 0,
+                        poolId: Long = 0,                        
                         item: String = "",
                         amount: Double = 0.0,
-                        unit: String = "",
-                        cost: Int = 0) extends Entity:
+                        unit: String = UnitOfMeasure.gl.toString,
+                        cost: Int = 0,
+                        purchased: Long = LocalDate.now.toEpochDay) extends Entity:
   def display = s"$purchased: $item"
 
 final case class Repair(id: Long = 0,
                         poolId: Long = 0,
-                        repaired: Long = 0,
                         repair: String = "",
-                        cost: Int = 0) extends Entity:
+                        cost: Int = 0,
+                        repaired: Long = LocalDate.now.toEpochDay) extends Entity:
   def display = s"$repaired: $repair"
