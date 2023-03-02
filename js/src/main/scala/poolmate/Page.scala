@@ -5,14 +5,12 @@ import com.raquo.laminar.api.L.*
 import upickle.default.*
 
 object Page:
+  given pageRW: ReadWriter[Page] = ReadWriter.merge( entityPageRW )
+
   given poolPageRW: ReadWriter[PoolPage] = macroRW
   given cleaningPageRW: ReadWriter[CleaningPage] = macroRW
   given measurementPageRW: ReadWriter[MeasurementPage] = macroRW
   given chemicalPageRW: ReadWriter[ChemicalPage] = macroRW
-
-  given pageRW: ReadWriter[Page] = ReadWriter.merge(
-    entityPageRW
-  )
 
   given entityPageRW: ReadWriter[EntityPage] = ReadWriter.merge(
     poolPageRW, cleaningPageRW, measurementPageRW, chemicalPageRW
