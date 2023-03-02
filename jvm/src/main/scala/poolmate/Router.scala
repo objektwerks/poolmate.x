@@ -6,7 +6,7 @@ import com.typesafe.scalalogging.LazyLogging
 
 import java.time.Instant
 
-import Serializers.given
+import Serializer.given
 
 import upickle.default.{read, write}
 
