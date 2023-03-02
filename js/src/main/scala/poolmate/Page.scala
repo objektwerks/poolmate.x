@@ -31,6 +31,8 @@ case object DecksPage extends Page
 case object CleaningsPage extends Page
 case object MeasurementsPage extends Page
 case object ChemicalsPage extends Page
+case object SuppliesPage extends Page
+case object RepairsPage extends Page
 
 sealed trait EntityPage extends Page:
   val id: Long
