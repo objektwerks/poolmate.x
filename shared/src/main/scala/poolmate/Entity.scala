@@ -104,7 +104,7 @@ final case class TimerSetting(id: Long = 0,
                               created: Long = LocalDate.now.toEpochDay,
                               timeOn: Int = 0,
                               timeOff: Int = 0) extends Entity:
-  def display = s"$created: $timeOn - $timeOff"
+  def display = s"${LocalDate.ofEpochDay(created).toString}: $timeOn - $timeOff"
 
 final case class Heater(id: Long = 0,
                         poolId: Long = 0,
@@ -118,7 +118,7 @@ final case class HeaterSetting(id: Long = 0,
                                temp: Int = 0,
                                dateOn: Long = LocalDate.now.toEpochDay,
                                dateOff: Long = 0) extends Entity:
-  def display = s"$dateOn: $temp"
+  def display = s"${LocalDate.ofEpochDay(dateOn).toString}: $temp"
 
 object Measurement:
   val totalChlorineRange = Range(1, 5).inclusive
