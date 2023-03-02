@@ -135,6 +135,15 @@ object PoolView extends View:
             }
           )
         },
+        lbl("Cost"),
+        dbl.amend {
+          controlled(
+            value <-- model.selectedEntityVar.signal.map(_.cost.toString),
+            onInput.mapToValue.filter(_.toIntOption.nonEmpty).map(_.toInt) --> { cost =>
+              model.updateSelectedEntity( model.selectedEntityVar.now().copy(cost = cost) )
+            }
+          )
+        },
         lbl("Built"),
         year.amend {
           controlled(
