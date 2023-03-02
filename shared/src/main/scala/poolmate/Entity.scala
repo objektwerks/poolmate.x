@@ -119,27 +119,32 @@ final case class HeaterSetting(id: Long = 0,
                                dateOff: Long = 0) extends Entity:
   def display = s"$dateOn: $temp"
 
+object Measurement:
+  val totalChlorineRange = Range(1, 5).inclusive
+  val freeChlorineRange = Range(1, 5).inclusive
+  val combinedChlorineRange = Set(0.0, 0.1, 0.2, 0.3, 0.4, 0.5)
+  val phRange = Set(6.2, 6.3, 6.4, 6.5, 6.6, 6.7, 6.8, 6.9, 7.0, 7.1, 7.2, 7.3, 7.4, 7.5, 7.6, 7.7, 7.8, 7.9, 8.0, 8.1, 8.2, 8.3, 8.4)
+  val calciumHardnessRange = Range(250, 500).inclusive
+  val totalAlkalinityRange = Range(80, 120).inclusive
+  val cyanuricAcidRange = Range(30, 100).inclusive
+  val totalBromineRange = Range(2, 10).inclusive
+  val saltRange = Range(2700, 3400).inclusive
+  val temperatureRange = Range(50, 100).inclusive
+
 final case class Measurement(id: Long = 0,
                              poolId: Long = 0,
-                             measured: Long = 0,
-                             temp: Int = 85,
-                             totalHardness: Int = 375,
                              totalChlorine: Int = 3,
-                             totalBromine: Int = 5,
                              freeChlorine: Int = 3,
+                             combinedChlorine: Double = 0.0,
                              ph: Double = 7.4,
+                             calciumHardness: Int = 375,
                              totalAlkalinity: Int = 100,
-                             cyanuricAcid: Long = 50) extends Entity:
-  def display = s"$measured: $ph ph"
-
-object Measurement:
-  val tempRange = 0 to 100
-  val totalHardnessRange = 1 to 1000
-  val totalChlorineRange = 0 to 10
-  val totalBromineRange = 0 to 20
-  val freeChlorineRange = 0 to 10
-  val totalAlkalinityRange = 0 to 240
-  val cyanuricAcidRange = 0 to 300
+                             cyanuricAcid: Int = 50,
+                             totalBromine: Int = 5,
+                             salt: Int = 3200,
+                             temperature: Int = 85,
+                             measured: Long = LocalDate.now.toEpochDay) extends Entity:
+  def display = LocalDate.ofEpochDay(measured).toString
 
 final case class Cleaning(id: Long = 0,
                           poolId: Long = 0,

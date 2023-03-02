@@ -168,8 +168,8 @@ object Validator:
       measurement.id >= 0 &&
       measurement.poolId > 0 &&
       measurement.measured > 0 &&
-      tempRange.contains(measurement.temp) &&
-      totalHardnessRange.contains(measurement.totalHardness) &&
+      temperatureRange.contains(measurement.temperature) &&
+      calciumHardnessRange.contains(measurement.calciumHardness) &&
       totalChlorineRange.contains(measurement.totalChlorine) &&
       totalBromineRange.contains(measurement.totalBromine) &&
       freeChlorineRange.contains(measurement.freeChlorine) &&
