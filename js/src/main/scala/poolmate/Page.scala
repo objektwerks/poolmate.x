@@ -30,7 +30,9 @@ case object SurfacesPage extends Page
 case object DecksPage extends Page
 case object PumpsPage extends Page
 case object TimersPage extends Page
+case object TimerSettingsPage extends Page
 case object HeatersPage extends Page
+case object HeaterSettingsPage extends Page
 case object CleaningsPage extends Page
 case object MeasurementsPage extends Page
 case object ChemicalsPage extends Page
