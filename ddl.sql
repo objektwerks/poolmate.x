@@ -78,15 +78,17 @@ CREATE TABLE heater_setting (
 CREATE TABLE measurement (
   id BIGSERIAL PRIMARY KEY,
   pool_id BIGINT REFERENCES pool(id),
-  measured BIGINT NOT NULL,
-  temp INT NOT NULL,
-  total_hardness INT NOT NULL,
   total_chlorine INT NOT NULL,
-  total_bromine INT NOT NULL,
   free_chlorine INT NOT NULL,
+  combined_chlorine NUMERIC(2, 1) NOT NULL,
   ph NUMERIC(2, 1) NOT NULL,
+  calcium_hardness INT NOT NULL,
   total_alkalinity INT NOT NULL,
-  cyanuric_acid INT NOT NULL
+  cyanuric_acid INT NOT NULL,
+  total_bromine INT NOT NULL,
+  salt INT NOT NULL,
+  temperature INT NOT NUll,
+  measured BIGINT NOT NULL
 );
 
 CREATE TABLE cleaning (
