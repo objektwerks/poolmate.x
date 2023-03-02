@@ -1,6 +1,6 @@
 package poolmate
 
-object Serializers:
+object Serializer:
   import upickle.default.*
 
   given accountRW: ReadWriter[Account] = macroRW
