@@ -73,42 +73,42 @@ final case class Pool(id: Long = 0,
 
 final case class Surface(id: Long = 0,
                          poolId: Long = 0,
-                         installed: Long = 0,
+                         installed: Long = LocalDate.now.toEpochDay,
                          kind: String = "",
                          cost: Int = 0) extends Entity:
   def display = kind
 
 final case class Deck(id: Long = 0,
                       poolId: Long = 0,
-                      installed: Long = 0,
+                      installed: Long = LocalDate.now.toEpochDay,
                       kind: String = "",
                       cost: Int = 0) extends Entity:
   def display = kind
 
 final case class Pump(id: Long = 0,
                       poolId: Long = 0,
-                      installed: Long = 0,
+                      installed: Long = LocalDate.now.toEpochDay,
                       model: String = "",
                       cost: Int = 0) extends Entity:
   def display = model
 
 final case class Timer(id: Long = 0,
                        poolId: Long = 0,
-                       installed: Long = 0,
+                       installed: Long = LocalDate.now.toEpochDay,
                        model: String = "",
                        cost: Int = 0) extends Entity:
   def display = model
 
 final case class TimerSetting(id: Long = 0,
                               timerId: Long = 0,
-                              created: Long = 0,
+                              created: Long = LocalDate.now.toEpochDay,
                               timeOn: Int = 0,
                               timeOff: Int = 0) extends Entity:
   def display = s"$created: $timeOn - $timeOff"
 
 final case class Heater(id: Long = 0,
                         poolId: Long = 0,
-                        installed: Long = 0,
+                        installed: Long = LocalDate.now.toEpochDay,
                         model: String = "",
                         cost: Int = 0) extends Entity:
   def display = installed.toString
@@ -116,7 +116,7 @@ final case class Heater(id: Long = 0,
 final case class HeaterSetting(id: Long = 0,
                                heaterId: Long = 0,
                                temp: Int = 0,
-                               dateOn: Long = 0,
+                               dateOn: Long = LocalDate.now.toEpochDay,
                                dateOff: Long = 0) extends Entity:
   def display = s"$dateOn: $temp"
 
