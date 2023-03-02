@@ -2,10 +2,30 @@ package poolmate
 
 import java.time.{LocalDate, LocalTime}
 
-enum UoM(val abrv: String):
-  case ounce extends UoM("oz")
-  case gallon extends UoM("gl")
-  case pounds extends UoM("lb")
+enum UnitOfMeasure:
+  case gl, l, lb, kg, tablet
+
+object UnitOfMeasure:
+  def toList: List[String] = UnitOfMeasure.values.map(uom => uom.toString).toList
+  def toPoolList: List[String] = List( UnitOfMeasure.gl.toString, UnitOfMeasure.l.toString )
+  def gallonsToLiters(gallons: Double): Double = gallons * 3.785
+  def litersToGallons(liters: Double): Double = liters * 0.264
+  def poundsToKilograms(pounds: Double): Double = pounds * 0.454
+  def kilogramsToPounds(kilograms: Double): Double = kilograms * 2.205
+
+enum TypeOfChemical(val display: String):
+  case LiquidChlorine extends TypeOfChemical("Liquid Chlorine")
+  case Trichlor extends TypeOfChemical("Trichlor")
+  case Dichlor extends TypeOfChemical("Dichlor")
+  case CalciumHypochlorite extends TypeOfChemical("Calcium Hypochlorite")
+  case Stabilizer extends TypeOfChemical("Stabilizer")
+  case Algaecide extends TypeOfChemical("Algaecide")
+  case MuriaticAcid extends TypeOfChemical("Muriatic Acid")
+  case Salt extends TypeOfChemical("Salt")
+
+object TypeOfChemical:
+  def toEnum(display: String): TypeOfChemical = TypeOfChemical.valueOf(display.filterNot(_.isWhitespace))
+  def toList: List[String] = TypeOfChemical.values.map(toc => toc.display).toList
 
 final case class Email(id: String,
                        license: String,
