@@ -10,6 +10,7 @@ object Model:
   val emailAddressVar = Var("")
   val pinVar = Var("")
   val accountVar = Var(Account())
+
   val pools = Model[Pool](Var(List.empty[Pool]), Var(Pool()), Pool(), poolOrdering)
   val surfaces = Model[Surface](Var(List.empty[Surface]), Var(Surface()), Surface(), surfaceOrdering)
   val decks = Model[Deck](Var(List.empty[Deck]), Var(Deck()), Deck(), deckOrdering)
