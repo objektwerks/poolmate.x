@@ -444,20 +444,28 @@ final class Store(conf: Config,
   def listRepairs(): List[Repair] =
     DB readOnly { implicit session =>
       sql"select * from repair order by repaired desc"
-        .map(rs => Repair(rs.long("id"), rs.long("pool_id"), rs.int("repaired"), rs.string("repair"), rs.int("cost")))
+        .map(rs =>
+          Repair(
+            rs.long("id"),
+            rs.long("pool_id"),
+            rs.string("repair"),
+            rs.int("cost"),
+            rs.long("repaired")
+          )
+        )
         .list()
     }
 
   def addRepair(repair: Repair): Repair =
     val id = DB localTx { implicit session =>
-      sql"insert into repair(pool_id, repaired, repair, cost) values(${repair.poolId}, ${repair.repaired}, ${repair.repair}, ${repair.cost})"
+      sql"insert into repair(pool_id, repair, cost, repaired) values(${repair.poolId}, ${repair.repair}, ${repair.cost}), ${repair.repaired}"
       .updateAndReturnGeneratedKey()
     }
     repair.copy(id = id)
 
   def updateRepair(repair: Repair): Unit =
     DB localTx { implicit session =>
-      sql"update repair set repaired = ${repair.repaired}, repair = ${repair.repair}, cost = ${repair.cost} where id = ${repair.id}"
+      sql"update repair set repair = ${repair.repair}, cost = ${repair.cost}, repaired = ${repair.repaired} where id = ${repair.id}"
       .update()
     }
     ()
