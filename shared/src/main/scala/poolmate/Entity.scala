@@ -159,11 +159,11 @@ final case class Cleaning(id: Long = 0,
 
 final case class Chemical(id: Long = 0,
                           poolId: Long = 0,
-                          added: Long = 0,
                           chemical: String = TypeOfChemical.LiquidChlorine.toString,
-                          amount: Double = 0.0,
-                          unit: String = UnitOfMeasure.gl.toString) extends Entity:
-  def display = s"$added: $chemical"
+                          amount: Double = 1.0, 
+                          unit: String = UnitOfMeasure.gl.toString,
+                          added: Long = LocalDate.now.toEpochDay) extends Entity:
+  def display = LocalDate.ofEpochDay(added).toString
 
 final case class Supply(id: Long = 0,
                         poolId: Long = 0,
