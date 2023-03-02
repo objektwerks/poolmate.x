@@ -165,17 +165,20 @@ object Validator:
   extension (measurement: Measurement)
     def isValid: Boolean =
       import Measurement.*
+
       measurement.id >= 0 &&
       measurement.poolId > 0 &&
-      measurement.measured > 0 &&
-      temperatureRange.contains(measurement.temperature) &&
-      calciumHardnessRange.contains(measurement.calciumHardness) &&
       totalChlorineRange.contains(measurement.totalChlorine) &&
-      totalBromineRange.contains(measurement.totalBromine) &&
       freeChlorineRange.contains(measurement.freeChlorine) &&
+      combinedChlorineRange.contains(measurement.combinedChlorine) &&
       (measurement.ph >= 6.2 && measurement.ph <= 8.4) &&
+      calciumHardnessRange.contains(measurement.calciumHardness) &&
       totalAlkalinityRange.contains(measurement.totalAlkalinity) &&
-      cyanuricAcidRange.contains(measurement.cyanuricAcid)
+      cyanuricAcidRange.contains(measurement.cyanuricAcid) &&
+      totalBromineRange.contains(measurement.totalBromine) &&
+      saltRange.contains(measurement.salt) &&
+      temperatureRange.contains(measurement.temperature) &&
+      measurement.measured > 0
 
   extension (cleaning: Cleaning)
     def isValid: Boolean =
@@ -187,10 +190,10 @@ object Validator:
     def isValid: Boolean =
       chemical.id >= 0 &&
       chemical.poolId > 0 &&
-      chemical.added > 0 &&
       chemical.chemical.nonEmpty &&
       chemical.amount > 0.00 &&
       chemical.unit.nonEmpty
+      chemical.added > 0
 
   extension (supply: Supply)
     def isValid: Boolean =
