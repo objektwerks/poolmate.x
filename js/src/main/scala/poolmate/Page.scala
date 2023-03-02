@@ -45,6 +45,9 @@ sealed trait EntityPage extends Page:
 final case class PoolPage(id: Long = 0) extends EntityPage
 final case class SurfacePage(id: Long = 0) extends EntityPage
 final case class DeckPage(id: Long = 0) extends EntityPage
+final case class PumpPage(id: Long = 0) extends EntityPage
+final case class TimerPage(id: Long = 0) extends EntityPage
+final case class HeaterPage(id: Long = 0) extends EntityPage
 
 final case class CleaningPage(id: Long = 0) extends EntityPage
 final case class MeasurementPage(id: Long = 0) extends EntityPage
