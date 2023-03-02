@@ -140,8 +140,7 @@ CREATE TABLE email (
 );
 
 CREATE TABLE fault (
-  date_of BIGINT NOT NULL,
-  time_of BIGINT NOT NULL,
+  id BIGSERIAL PRIMARY KEY,
   cause VARCHAR NOT NULL,
-  PRIMARY KEY (date_of, time_of, cause)
+  occurred VARCHAR NOT NULL
 );

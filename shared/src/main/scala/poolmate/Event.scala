@@ -1,6 +1,6 @@
 package poolmate
 
-import java.time.{LocalDate, LocalTime}
+import java.time.Instant
 
 sealed trait Event
 
@@ -54,10 +54,7 @@ final case class SupplyAdded(supply: Supply) extends Event
 final case class RepairsListed(repairs: List[Repair]) extends Event
 final case class RepairAdded(repair: Repair) extends Event
 
-final case class Fault(dateOf: Long = LocalDate.now.toEpochDay,
-                       timeOf: Int = LocalTime.now.toSecondOfDay,
-                       cause: String) extends Event
-
 object Fault:
-  def apply(message: String): Fault = Fault(cause = message)
-  def apply(throwable: Throwable): Fault = Fault(cause = throwable.getMessage)
+  def apply(message: String, throwable: Throwable): Fault = Fault(s"$message ${throwable.getMessage}")
+
+final case class Fault(cause: String, occurred: String = Instant.now.toString) extends Event
