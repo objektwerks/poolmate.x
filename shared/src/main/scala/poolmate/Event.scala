@@ -55,6 +55,7 @@ final case class RepairsListed(repairs: List[Repair]) extends Event
 final case class RepairAdded(repair: Repair) extends Event
 
 object Fault:
+  def apply(throwable: Throwable): Fault = Fault(s"${throwable.getMessage}")
   def apply(message: String, throwable: Throwable): Fault = Fault(s"$message ${throwable.getMessage}")
 
 final case class Fault(cause: String, occurred: String = Instant.now.toString) extends Event
