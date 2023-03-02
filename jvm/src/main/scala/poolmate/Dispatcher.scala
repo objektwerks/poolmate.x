@@ -83,23 +83,23 @@ final class Dispatcher(authorizer: Authorizer,
       case list: ListMeasurements =>
         service.listMeasurements(list.poolId).fold(throwable => Fault(throwable), entities => MeasurementsListed(entities))
       case add: AddMeasurement =>
-        service.addMeasurement(add.measurement).fold(throwable => Fault(throwable), entity => MeasurementAdded(entity))
+        service.addMeasurement(add.measurement).fold(throwable => Fault(throwable), id => MeasurementAdded(add.measurement.copy(id = id)))
       case update: UpdateMeasurement =>
-        service.updateMeasurement(update.measurement).fold(throwable => Fault(throwable), _ => Updated())
+        service.updateMeasurement(update.measurement).fold(throwable => Fault(throwable), count => Updated(count))
 
       case list: ListCleanings =>
         service.listCleanings(list.poolId).fold(throwable => Fault(throwable), entities => CleaningsListed(entities))
       case add: AddCleaning =>
-        service.addCleaning(add.cleaning).fold(throwable => Fault(throwable), entity => CleaningAdded(entity))
+        service.addCleaning(add.cleaning).fold(throwable => Fault(throwable), id => CleaningAdded(add.cleaning.copy(id = id)))
       case update: UpdateCleaning =>
-        service.updateCleaning(update.cleaning).fold(throwable => Fault(throwable), _ => Updated())
+        service.updateCleaning(update.cleaning).fold(throwable => Fault(throwable), count => Updated(count))
 
       case list: ListChemicals =>
         service.listChemicals(list.poolId).fold(throwable => Fault(throwable), entities => ChemicalsListed(entities))
       case add: AddChemical =>
-        service.addChemical(add.chemical).fold(throwable => Fault(throwable), entity => ChemicalAdded(entity))
+        service.addChemical(add.chemical).fold(throwable => Fault(throwable), id => ChemicalAdded(add.chemical.copy(id = id)))
       case update: UpdateChemical =>
-        service.updateChemical(update.chemical).fold(throwable => Fault(throwable), _ => Updated())
+        service.updateChemical(update.chemical).fold(throwable => Fault(throwable), count => Updated(count))
 
       case list: ListSupplies =>
         service.listSupplies(list.poolId).fold(throwable => Fault(throwable), entities => SuppliesListed(entities))

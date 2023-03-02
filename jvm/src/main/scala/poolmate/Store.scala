@@ -133,20 +133,30 @@ final class Store(conf: Config,
   def listPools(license: String): List[Pool] =
     DB readOnly { implicit session =>
       sql"select * from pool where license = $license order by built desc"
-        .map(rs => Pool(rs.long("id"), rs.string("license"), rs.string("name"), rs.int("built"), rs.int("volume"), rs.int("cost")))
+        .map(rs =>
+          Pool(
+            rs.long("id"),
+            rs.string("license"),
+            rs.string("name"),
+            rs.int("built"),
+            rs.int("volume"),
+            rs.string("unit"),
+            rs.int("cost")
+          )
+        )
         .list()
     }
 
   def addPool(pool: Pool): Pool =
     val id = DB localTx { implicit session =>
-      sql"insert into pool(license, name, built, volume, cost) values(${pool.license}, ${pool.name}, ${pool.built}, ${pool.volume}, ${pool.cost})"
+      sql"insert into pool(license, name, built, volume, unit, cost) values(${pool.license}, ${pool.name}, ${pool.built}, ${pool.volume}, ${pool.unit}, ${pool.cost})"
       .updateAndReturnGeneratedKey()
     }
     pool.copy(id = id)
     
   def updatePool(pool: Pool): Unit =
     DB localTx { implicit session =>
-      sql"update pool set name = ${pool.name}, built = ${pool.built}, volume = ${pool.volume}, cost = ${pool.cost} where id = ${pool.id}"
+      sql"update pool set name = ${pool.name}, built = ${pool.built}, volume = ${pool.volume}, unit = ${pool.unit}, cost = ${pool.cost} where id = ${pool.id}"
       .update()
     }
     ()
