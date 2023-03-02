@@ -7,7 +7,7 @@ import com.raquo.waypoint.*
 import upickle.default.*
 
 import Page.given
-import Serializers.given
+import Serializer.given
 
 object PageRouter:
   val poolRoute = Route[PoolPage, Long](
