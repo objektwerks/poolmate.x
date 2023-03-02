@@ -6,15 +6,12 @@ import com.raquo.waypoint.*
 
 import upickle.default.*
 
+import Page.given
 import Serializers.given
 
 object PageRouter:
-  given poolPageRW: ReadWriter[PoolPage] = macroRW
-  given entityPageRW: ReadWriter[EntityPage] = macroRW
-  given pageRW: ReadWriter[Page] = macroRW
-  
   val poolRoute = Route[PoolPage, Long](
-    encode = poolPage => poolPage.id,
+    encode = page => page.id,
     decode = arg => PoolPage(id = arg),
     pattern = root / "app" / "pools" / segment[Long] / endOfSegments
   )
