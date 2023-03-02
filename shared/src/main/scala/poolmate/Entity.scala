@@ -111,7 +111,7 @@ final case class Heater(id: Long = 0,
                         installed: Long = LocalDate.now.toEpochDay,
                         model: String = "",
                         cost: Int = 0) extends Entity:
-  def display = installed.toString
+  def display = model
 
 final case class HeaterSetting(id: Long = 0,
                                heaterId: Long = 0,
