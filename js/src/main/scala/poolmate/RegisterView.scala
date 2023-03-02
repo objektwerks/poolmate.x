@@ -12,7 +12,7 @@ object RegisterView extends View:
             accountVar: Var[Account]): HtmlElement =
     def handler(event: Event): Unit =
       event match
-        case Fault(_, _, cause) => emitError(s"Register failed: $cause")
+        case Fault(cause, _) => emitError(s"Register failed: $cause")
         case Registered(account) =>
           clearErrors()
           accountVar.set(account)
