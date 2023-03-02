@@ -56,15 +56,15 @@ final class Service(store: Store):
 
   def listMeasurements(poolId: Long): Either[Throwable, List[Measurement]] = Try( store.listMeasurements(poolId) ).toEither
   def addMeasurement(measurement: Measurement): Either[Throwable, Long] = Try( store.addMeasurement(measurement) ).toEither
-  def updateMeasurement(measurement: Measurement): Either[Throwable, Long] = Try( store.updateMeasurement(measurement) ).toEither
+  def updateMeasurement(measurement: Measurement): Either[Throwable, Unit] = Try( store.updateMeasurement(measurement) ).toEither
 
   def listCleanings(poolId: Long): Either[Throwable, List[Cleaning]] = Try( store.listCleanings(poolId) ).toEither
   def addCleaning(cleaning: Cleaning): Either[Throwable, Long] = Try( store.addCleaning(cleaning) ).toEither
-  def updateCleaning(cleaning: Cleaning): Either[Throwable, Long] = Try( store.updateCleaning(cleaning) ).toEither
+  def updateCleaning(cleaning: Cleaning): Either[Throwable, Unit] = Try( store.updateCleaning(cleaning) ).toEither
 
   def listChemicals(poolId: Long): Either[Throwable, List[Chemical]] = Try( store.listChemicals(poolId) ).toEither
   def addChemical(chemical: Chemical): Either[Throwable, Long] = Try( store.addChemical(chemical) ).toEither
-  def updateChemical(chemical: Chemical): Either[Throwable, Long] = Try( store.updateChemical(chemical) ).toEither
+  def updateChemical(chemical: Chemical): Either[Throwable, Unit] = Try( store.updateChemical(chemical) ).toEither
 
   def listSupplies(poolId: Long): Either[Throwable, List[Supply]] = Try( store.listSupplies() ).toEither
   def addSupply(supply: Supply): Either[Throwable, Supply] = Try( store.addSupply(supply) ).toEither
