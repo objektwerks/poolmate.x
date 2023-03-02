@@ -55,3 +55,6 @@ final case class HeaterSettingPage(id: Long = 0) extends EntityPage
 final case class CleaningPage(id: Long = 0) extends EntityPage
 final case class MeasurementPage(id: Long = 0) extends EntityPage
 final case class ChemicalPage(id: Long = 0) extends EntityPage
+final case class SupplyPage(id: Long = 0) extends EntityPage
+final case class RepairPage(id: Long = 0) extends EntityPage
+
