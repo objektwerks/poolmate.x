@@ -14,10 +14,10 @@ CREATE TABLE pool (
   id BIGSERIAL PRIMARY KEY,
   license VARCHAR(36) REFERENCES account(license),
   name VARCHAR(24) NOT NULL,
-  built INT NOT NULL,
   volume INT NOT NULL,
   unit VARCHAR(6) NOT NULL,
-  cost INT NOT NULL
+  cost INT NOT NULL,
+  built INT NOT NULL
 );
 
 CREATE TABLE surface (
