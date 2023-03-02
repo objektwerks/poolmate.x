@@ -58,13 +58,13 @@ object PoolView extends View:
           btn("Supplies").amend {
             onClick --> { _ =>
               log("Supplies menu item onClick")
-              // route(SuppliesPage)
+              route(SuppliesPage)
             }
           },
           btn("Repairs").amend {
             onClick --> { _ =>
               log("Repairs menu item onClick")
-              // route(RepairsPage)
+              route(RepairsPage)
             }
           }
         ),
