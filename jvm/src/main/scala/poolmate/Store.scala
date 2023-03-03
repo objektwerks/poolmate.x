@@ -60,18 +60,25 @@ final class Store(conf: Config,
     DB readOnly { implicit session =>
       sql"select * from email where processed = false"
         .map(rs => 
-          Email(rs.string("id"), rs.string("license"), rs.string("address"), rs.int("date_sent"),
-                rs.int("time_sent"), rs.boolean("processed"), rs.boolean("valid")
-              )
+          Email(
+            rs.string("id"),
+            rs.string("license"),
+            rs.string("address"),
+            rs.int("date_sent"),
+            rs.int("time_sent"),
+            rs.boolean("processed"),
+            rs.boolean("valid")
+          )
         )
         .list()
     }
 
   def addEmail(email: Email): Unit =
     DB localTx { implicit session =>
-      sql"""insert into email(id, license, address, date_sent, time_sent, processed, valid)
-            values(${email.id}, ${email.license}, ${email.address}, ${email.dateSent},
-             ${email.timeSent}, ${email.processed}, ${email.valid})
+      sql"""
+          insert into email(id, license, address, date_sent, time_sent, processed, valid)
+          values(${email.id}, ${email.license}, ${email.address}, ${email.dateSent},
+          ${email.timeSent}, ${email.processed}, ${email.valid})
          """
         .stripMargin
         .update()
@@ -138,10 +145,10 @@ final class Store(conf: Config,
             rs.long("id"),
             rs.string("license"),
             rs.string("name"),
-            rs.int("built"),
             rs.int("volume"),
             rs.string("unit"),
-            rs.int("cost")
+            rs.int("cost"),
+            rs.int("built")
           )
         )
         .list()
@@ -149,7 +156,10 @@ final class Store(conf: Config,
 
   def addPool(pool: Pool): Pool =
     val id = DB localTx { implicit session =>
-      sql"insert into pool(license, name, built, volume, unit, cost) values(${pool.license}, ${pool.name}, ${pool.built}, ${pool.volume}, ${pool.unit}, ${pool.cost})"
+      sql"""
+         insert into pool(license, name, volume, unit, cost, built) 
+         values(${pool.license}, ${pool.name}, ${pool.volume}, ${pool.unit}, ${pool.cost}, ${pool.built})
+         """
       .updateAndReturnGeneratedKey()
     }
     pool.copy(id = id)
