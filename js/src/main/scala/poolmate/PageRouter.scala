@@ -16,6 +16,12 @@ object PageRouter:
     pattern = root / "app" / "pools" / segment[Long] / endOfSegments
   )
 
+  val surfaceRoute = Route[SurfacePage, Long](
+    encode = page => page.id,
+    decode = arg => SurfacePage(id = arg),
+    pattern = root / "app" / "pool" / "surfaces" / segment[Long] / endOfSegments
+  )
+
   val cleaningRoute = Route[CleaningPage, Long](
     encode = page => page.id,
     decode = arg => CleaningPage(id = arg),
