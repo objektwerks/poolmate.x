@@ -305,14 +305,20 @@ final class Store(conf: Config,
 
   def addTimerSetting(timerSetting: TimerSetting): TimerSetting =
     val id = DB localTx { implicit session =>
-      sql"insert into timer_setting(timer_id, created, time_on, time_off) values(${timerSetting.timerId}, ${timerSetting.created}, ${timerSetting.timeOn}, ${timerSetting.timeOff})"
+      sql"""
+          insert into timer_setting(timer_id, created, time_on, time_off) 
+          alues(${timerSetting.timerId}, ${timerSetting.created}, ${timerSetting.timeOn}, ${timerSetting.timeOff})
+         """
       .updateAndReturnGeneratedKey()
     }
     timerSetting.copy(id = id)
 
   def updateTimerSetting(timerSetting: TimerSetting): Unit =
     DB localTx { implicit session =>
-      sql"update timer_setting set created = ${timerSetting.created}, time_on = ${timerSetting.timeOn}, time_off = ${timerSetting.timeOff} where id = ${timerSetting.id}"
+      sql"""
+          update timer_setting set created = ${timerSetting.created}, time_on = ${timerSetting.timeOn}, time_off = ${timerSetting.timeOff} 
+          where id = ${timerSetting.id}
+         """
       .update()
     }
     ()
