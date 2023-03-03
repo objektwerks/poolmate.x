@@ -565,5 +565,5 @@ final class Store(conf: Config,
 
   def addFault(fault: Fault): Long = DB localTx { implicit session =>
     sql"insert into fault(cause, occurred) values(${fault.cause}, ${fault.occurred})"
-    .updateAndReturnGeneratedKey()
+      .updateAndReturnGeneratedKey()
   }
