@@ -38,17 +38,17 @@ final class Store(conf: Config,
   def listAccounts(): List[Account] =
     DB readOnly { implicit session =>
       sql"select * from account"
-        .map(rs =>
-          Account(
-            rs.long("id"),
-            rs.string("license"),
-            rs.string("email_address"),
-            rs.string("pin"),
-            rs.int("activated"),
-            rs.int("deactivated")
-          )
+      .map(rs =>
+        Account(
+          rs.long("id"),
+          rs.string("license"),
+          rs.string("email_address"),
+          rs.string("pin"),
+          rs.int("activated"),
+          rs.int("deactivated")
         )
-        .list()
+      )
+      .list()
     }
 
   def addAccount(account: Account): Account =
@@ -71,18 +71,18 @@ final class Store(conf: Config,
   def listUnprocessedEmails: List[Email] =
     DB readOnly { implicit session =>
       sql"select * from email where processed = false"
-        .map(rs => 
-          Email(
-            rs.string("id"),
-            rs.string("license"),
-            rs.string("address"),
-            rs.int("date_sent"),
-            rs.int("time_sent"),
-            rs.boolean("processed"),
-            rs.boolean("valid")
-          )
+      .map(rs => 
+        Email(
+          rs.string("id"),
+          rs.string("license"),
+          rs.string("address"),
+          rs.int("date_sent"),
+          rs.int("time_sent"),
+          rs.boolean("processed"),
+          rs.boolean("valid")
         )
-        .list()
+      )
+      .list()
     }
 
   def addEmail(email: Email): Unit =
@@ -92,19 +92,55 @@ final class Store(conf: Config,
           values(${email.id}, ${email.license}, ${email.address}, ${email.dateSent},
           ${email.timeSent}, ${email.processed}, ${email.valid})
          """
-        .update()
+      .update()
     }
 
   def processEmail(email: Email): Unit =
     DB localTx { implicit session =>
       sql"update email set processed = ${email.processed}, valid = ${email.valid} where id = ${email.id}"
-        .update()
+      .update()
     }
     ()
     
   def login(email: String, pin: String): Option[Account] =
     DB readOnly { implicit session =>
       sql"select * from account where email_address = $email and pin = $pin"
+      .map(rs =>
+        Account(
+          rs.long("id"),
+          rs.string("license"),
+          rs.string("email_address"),
+          rs.string("pin"),
+          rs.int("activated"),
+          rs.int("deactivated")
+        )
+      )
+      .single()
+    }
+
+  def isAuthorized(license: String): Boolean =
+    cache.getIfPresent(license) match
+      case Some(_) =>
+        logger.debug(s"*** store cache get: $license")
+        true
+      case None =>
+        val optionalLicense = DB readOnly { implicit session =>
+          sql"select license from account where license = $license"
+          .map(rs => rs.string("license"))
+          .single()
+        }
+        if optionalLicense.isDefined then
+          cache.put(license, license)
+          logger.debug(s"*** store cache put: $license")
+          true
+        else false
+
+  def deactivate(license: String): Option[Account] =
+    DB localTx { implicit session =>
+      val deactivated = sql"update account set deactivated = ${LocalDate.now.toEpochDay}, activated = 0 where license = $license"
+                        .update()
+      if deactivated > 0 then
+        sql"select * from account where license = $license"
         .map(rs =>
           Account(
             rs.long("id"),
@@ -116,62 +152,26 @@ final class Store(conf: Config,
           )
         )
         .single()
-    }
-
-  def isAuthorized(license: String): Boolean =
-    cache.getIfPresent(license) match
-      case Some(_) =>
-        logger.debug(s"*** store cache get: $license")
-        true
-      case None =>
-        val optionalLicense = DB readOnly { implicit session =>
-          sql"select license from account where license = $license"
-            .map(rs => rs.string("license"))
-            .single()
-        }
-        if optionalLicense.isDefined then
-          cache.put(license, license)
-          logger.debug(s"*** store cache put: $license")
-          true
-        else false
-
-  def deactivate(license: String): Option[Account] =
-    DB localTx { implicit session =>
-      val deactivated = sql"update account set deactivated = ${LocalDate.now.toEpochDay}, activated = 0 where license = $license"
-      .update()
-      if deactivated > 0 then
-        sql"select * from account where license = $license"
-          .map(rs =>
-            Account(
-              rs.long("id"),
-              rs.string("license"),
-              rs.string("email_address"),
-              rs.string("pin"),
-              rs.int("activated"),
-              rs.int("deactivated")
-            )
-          )
-          .single()
       else None
     }
 
   def reactivate(license: String): Option[Account] =
     DB localTx { implicit session =>
       val activated = sql"update account set activated = ${LocalDate.now.toEpochDay}, deactivated = 0 where license = $license"
-      .update()
+                      .update()
       if activated > 0 then
         sql"select * from account where license = $license"
-          .map(rs =>
-            Account(
-              rs.long("id"),
-              rs.string("license"),
-              rs.string("email_address"),
-              rs.string("pin"),
-              rs.int("activated"),
-              rs.int("deactivated")
-            )
+        .map(rs =>
+          Account(
+            rs.long("id"),
+            rs.string("license"),
+            rs.string("email_address"),
+            rs.string("pin"),
+            rs.int("activated"),
+            rs.int("deactivated")
           )
-          .single()
+        )
+        .single()
       else None
     }
 
