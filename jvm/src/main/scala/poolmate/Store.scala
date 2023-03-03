@@ -195,8 +195,8 @@ final class Store(conf: Config,
   def addPool(pool: Pool): Pool =
     val id = DB localTx { implicit session =>
       sql"""
-         insert into pool(license, name, volume, unit, cost, built) 
-         values(${pool.license}, ${pool.name}, ${pool.volume}, ${pool.unit}, ${pool.cost}, ${pool.built})
+          insert into pool(license, name, volume, unit, cost, built) 
+          values(${pool.license}, ${pool.name}, ${pool.volume}, ${pool.unit}, ${pool.cost}, ${pool.built})
          """
       .updateAndReturnGeneratedKey()
     }
@@ -204,7 +204,10 @@ final class Store(conf: Config,
     
   def updatePool(pool: Pool): Unit =
     DB localTx { implicit session =>
-      sql"update pool set name = ${pool.name}, built = ${pool.built}, volume = ${pool.volume}, unit = ${pool.unit}, cost = ${pool.cost} where id = ${pool.id}"
+      sql"""
+          pdate pool set name = ${pool.name}, volume = ${pool.volume}, unit = ${pool.unit}, cost = ${pool.cost}, built = ${pool.built} 
+          where id = ${pool.id}
+         """
       .update()
     }
     ()
