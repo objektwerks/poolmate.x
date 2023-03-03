@@ -92,7 +92,6 @@ final class Store(conf: Config,
           values(${email.id}, ${email.license}, ${email.address}, ${email.dateSent},
           ${email.timeSent}, ${email.processed}, ${email.valid})
          """
-        .stripMargin
         .update()
     }
 
