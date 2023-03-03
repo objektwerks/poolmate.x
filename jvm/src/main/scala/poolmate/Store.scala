@@ -503,9 +503,9 @@ final class Store(conf: Config,
   def addSupply(supply: Supply): Supply =
     val id = DB localTx { implicit session =>
       sql"""
-        insert into supply(pool_id, item, amount, unit, cost, purchased)
-        values(${supply.poolId}, ${supply.item}, ${supply.amount}, ${supply.unit}, ${supply.cost}, ${supply.purchased})
-        """
+          insert into supply(pool_id, item, amount, unit, cost, purchased)
+          values(${supply.poolId}, ${supply.item}, ${supply.amount}, ${supply.unit}, ${supply.cost}, ${supply.purchased})
+         """
       .updateAndReturnGeneratedKey()
     }
     supply.copy(id = id)
@@ -513,9 +513,9 @@ final class Store(conf: Config,
   def updateSupply(supply: Supply): Unit =
     DB localTx { implicit session =>
       sql"""
-        update supply set item = ${supply.item}, amount = ${supply.amount}, unit = ${supply.unit},
-        cost = ${supply.cost}, purchased = ${supply.purchased} where id = ${supply.id}
-        """
+          update supply set item = ${supply.item}, amount = ${supply.amount}, unit = ${supply.unit},
+          cost = ${supply.cost}, purchased = ${supply.purchased} where id = ${supply.id}
+         """
       .update()
     }
     ()
