@@ -178,18 +178,18 @@ final class Store(conf: Config,
   def listPools(license: String): List[Pool] =
     DB readOnly { implicit session =>
       sql"select * from pool where license = $license order by built desc"
-        .map(rs =>
-          Pool(
-            rs.long("id"),
-            rs.string("license"),
-            rs.string("name"),
-            rs.int("volume"),
-            rs.string("unit"),
-            rs.int("cost"),
-            rs.int("built")
-          )
+      .map(rs =>
+        Pool(
+          rs.long("id"),
+          rs.string("license"),
+          rs.string("name"),
+          rs.int("volume"),
+          rs.string("unit"),
+          rs.int("cost"),
+          rs.int("built")
         )
-        .list()
+      )
+      .list()
     }
 
   def addPool(pool: Pool): Pool =
@@ -215,8 +215,8 @@ final class Store(conf: Config,
   def listSurfaces(): List[Surface] =
     DB readOnly { implicit session =>
       sql"select * from surface order by installed desc"
-        .map(rs => Surface(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("kind"), rs.int("cost")))
-        .list()
+      .map(rs => Surface(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("kind"), rs.int("cost")))
+      .list()
     }
 
   def addSurface(surface: Surface): Surface =
@@ -236,8 +236,8 @@ final class Store(conf: Config,
   def listDecks(): List[Deck] =
     DB readOnly { implicit session =>
       sql"select * from deck order by installed desc"
-        .map(rs => Deck(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("kind"), rs.int("cost")))
-        .list()
+      .map(rs => Deck(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("kind"), rs.int("cost")))
+      .list()
     }
 
   def addDeck(deck: Deck): Deck =
@@ -257,8 +257,8 @@ final class Store(conf: Config,
   def listPumps(): List[Pump] =
     DB readOnly { implicit session =>
       sql"select * from pump order by installed desc"
-        .map(rs => Pump(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("model"), rs.int("cost")))
-        .list()
+      .map(rs => Pump(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("model"), rs.int("cost")))
+      .list()
     }
 
   def addPump(pump: Pump): Pump =
@@ -278,8 +278,8 @@ final class Store(conf: Config,
   def listTimers(): List[Timer] =
     DB readOnly { implicit session =>
       sql"select * from timer order by installed desc"
-        .map(rs => Timer(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("model"), rs.int("cost")))
-        .list()
+      .map(rs => Timer(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("model"), rs.int("cost")))
+      .list()
     }
 
   def addTimer(timer: Timer): Timer =
@@ -299,8 +299,8 @@ final class Store(conf: Config,
   def listTimerSettings(): List[TimerSetting] =
     DB readOnly { implicit session =>
       sql"select * from timer_setting order by created desc"
-        .map(rs => TimerSetting(rs.long("id"), rs.long("timer_id"), rs.int("created"), rs.int("time_on"), rs.int("time_off")))
-        .list()
+      .map(rs => TimerSetting(rs.long("id"), rs.long("timer_id"), rs.int("created"), rs.int("time_on"), rs.int("time_off")))
+      .list()
     }
 
   def addTimerSetting(timerSetting: TimerSetting): TimerSetting =
@@ -326,8 +326,8 @@ final class Store(conf: Config,
   def listHeaters(): List[Heater] =
     DB readOnly { implicit session =>
       sql"select * from heater order by installed desc"
-        .map(rs => Heater(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("model"), rs.int("cost")))
-        .list()
+      .map(rs => Heater(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("model"), rs.int("cost")))
+      .list()
     }
 
   def addHeater(heater: Heater): Heater =
@@ -347,8 +347,8 @@ final class Store(conf: Config,
   def listHeaterSettings(): List[HeaterSetting] =
     DB readOnly { implicit session =>
       sql"select * from heater_setting order by date_on desc"
-        .map(rs => HeaterSetting(rs.long("id"), rs.long("heater_id"), rs.int("temp"), rs.int("date_on"), rs.int("date_off")))
-        .list()
+      .map(rs => HeaterSetting(rs.long("id"), rs.long("heater_id"), rs.int("temp"), rs.int("date_on"), rs.int("date_off")))
+      .list()
     }
 
   def addHeaterSetting(heaterSetting: HeaterSetting): HeaterSetting =
