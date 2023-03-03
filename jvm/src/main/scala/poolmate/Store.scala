@@ -537,7 +537,10 @@ final class Store(conf: Config,
 
   def addRepair(repair: Repair): Repair =
     val id = DB localTx { implicit session =>
-      sql"insert into repair(pool_id, repair, cost, repaired) values(${repair.poolId}, ${repair.repair}, ${repair.cost}), ${repair.repaired}"
+      sql"""
+          insert into repair(pool_id, repair, cost, repaired) 
+          values(${repair.poolId}, ${repair.repair}, ${repair.cost}), ${repair.repaired}
+         """
       .updateAndReturnGeneratedKey()
     }
     repair.copy(id = id)
@@ -561,8 +564,6 @@ final class Store(conf: Config,
   }
 
   def addFault(fault: Fault): Long = DB localTx { implicit session =>
-    sql"""
-      insert into fault(cause, occurred) values(${fault.cause}, ${fault.occurred})
-      """
-      .updateAndReturnGeneratedKey()
+    sql"insert into fault(cause, occurred) values(${fault.cause}, ${fault.occurred})"
+    .updateAndReturnGeneratedKey()
   }
