@@ -436,19 +436,19 @@ final class Store(conf: Config,
 
   def addCleaning(cleaning: Cleaning): Long = DB localTx { implicit session =>
     sql"""
-      insert into cleaning(pool_id, brush, net, skimmer_basket, pump_basket, pump_filter, vacuum, cleaned)
-      values(${cleaning.poolId}, ${cleaning.brush}, ${cleaning.net}, ${cleaning.skimmerBasket},
-      ${cleaning.pumpBasket}, ${cleaning.pumpFilter}, ${cleaning.vacuum}, ${cleaning.cleaned})
-      """
+        insert into cleaning(pool_id, brush, net, skimmer_basket, pump_basket, pump_filter, vacuum, cleaned)
+        values(${cleaning.poolId}, ${cleaning.brush}, ${cleaning.net}, ${cleaning.skimmerBasket},
+        ${cleaning.pumpBasket}, ${cleaning.pumpFilter}, ${cleaning.vacuum}, ${cleaning.cleaned})
+       """
       .updateAndReturnGeneratedKey()
   }
 
   def updateCleaning(cleaning: Cleaning): Unit = DB localTx { implicit session =>
     sql"""
-      update cleaning set brush = ${cleaning.brush}, net = ${cleaning.net}, skimmer_basket = ${cleaning.skimmerBasket},
-      pump_basket = ${cleaning.pumpBasket}, pump_filter = ${cleaning.pumpFilter}, vacuum = ${cleaning.vacuum},
-      cleaned = ${cleaning.cleaned} where id = ${cleaning.id}
-      """
+        update cleaning set brush = ${cleaning.brush}, net = ${cleaning.net}, skimmer_basket = ${cleaning.skimmerBasket},
+        pump_basket = ${cleaning.pumpBasket}, pump_filter = ${cleaning.pumpFilter}, vacuum = ${cleaning.vacuum},
+        cleaned = ${cleaning.cleaned} where id = ${cleaning.id}
+       """
       .update()
   }
 
