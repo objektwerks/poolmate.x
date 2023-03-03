@@ -449,22 +449,22 @@ final class Store(conf: Config,
         pump_basket = ${cleaning.pumpBasket}, pump_filter = ${cleaning.pumpFilter}, vacuum = ${cleaning.vacuum},
         cleaned = ${cleaning.cleaned} where id = ${cleaning.id}
        """
-      .update()
+    .update()
   }
 
   def listChemicals(poolId: Long): List[Chemical] = DB readOnly { implicit session =>
     sql"select * from chemical where pool_id = $poolId order by added desc"
-      .map(rs =>
-        Chemical(
-          rs.long("id"),
-          rs.long("pool_id"),
-          rs.string("chemical"),
-          rs.double("amount"),
-          rs.string("unit"),
-          rs.long("added")
-        )
+    .map(rs =>
+      Chemical(
+        rs.long("id"),
+        rs.long("pool_id"),
+        rs.string("chemical"),
+        rs.double("amount"),
+        rs.string("unit"),
+        rs.long("added")
       )
-      .list()
+    )
+    .list()
   }
 
   def addChemical(chemical: Chemical): Long = DB localTx { implicit session =>
@@ -472,7 +472,7 @@ final class Store(conf: Config,
         insert into chemical(pool_id, chemical, amount, unit, added)
         values(${chemical.poolId}, ${chemical.chemical.toString}, ${chemical.amount}, ${chemical.unit.toString}, ${chemical.added})
        """
-      .updateAndReturnGeneratedKey()
+    .updateAndReturnGeneratedKey()
   }
 
   def updateChemical(chemical: Chemical): Unit = DB localTx { implicit session =>
@@ -480,7 +480,7 @@ final class Store(conf: Config,
         update chemical set chemical = ${chemical.chemical.toString}, amount = ${chemical.amount}, unit = ${chemical.unit.toString},
         added = ${chemical.added} where id = ${chemical.id}
        """
-      .update()
+    .update()
   }
 
   def listSupplies(): List[Supply] =
