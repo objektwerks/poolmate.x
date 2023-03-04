@@ -14,7 +14,7 @@ lazy val common = Defaults.coreDefaultSettings ++ Seq(
   scalaVersion := "3.2.2"
 )
 
-lazy val poolmate = project.in(file("."))
+lazy val poolmate: Project = project.in(file("."))
   .aggregate(sharedJs, sharedJvm, js, jvm)
   .settings(common)
   .settings(
