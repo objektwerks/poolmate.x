@@ -96,6 +96,8 @@ object PageRouter:
     Route.static(AccountPage, root / "app" / "account" / endOfSegments),
     Route.static(PoolsPage, root / "app" / "pools" / endOfSegments),
     poolRoute,
+    Route.static(SurfacesPage, root / "app" / "surfaces" / endOfSegments),
+    surfaceRoute,
     Route.static(CleaningsPage, root / "app" / "pool" / "cleanings" / endOfSegments),
     cleaningRoute,
     Route.static(MeasurementsPage, root / "app" / "pool" / "measurements" / endOfSegments),
