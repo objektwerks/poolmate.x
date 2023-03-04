@@ -104,6 +104,8 @@ object PageRouter:
     pumpRoute,
     Route.static(TimersPage, root / "app" / "timers" / endOfSegments),
     timerRoute,
+    Route.static(TimerSettingsPage, root / "app" / "timersettings" / endOfSegments),
+    timerSettingRoute,
     Route.static(CleaningsPage, root / "app" / "pool" / "cleanings" / endOfSegments),
     cleaningRoute,
     Route.static(MeasurementsPage, root / "app" / "pool" / "measurements" / endOfSegments),
