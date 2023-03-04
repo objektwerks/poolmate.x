@@ -117,7 +117,9 @@ object PageRouter:
     Route.static(ChemicalsPage, root / "app" / "pool" / "chemicals" / endOfSegments),
     chemicalRoute,
     Route.static(SuppliesPage, root / "app" / "pool" / "supplies" / endOfSegments),
-    supplyRoute
+    supplyRoute,
+    Route.static(RepairsPage, root / "app" / "pool" / "repairs" / endOfSegments),
+    repairRoute
   )
 
   val router = new com.raquo.waypoint.Router[Page](
