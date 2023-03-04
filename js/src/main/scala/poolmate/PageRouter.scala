@@ -52,6 +52,12 @@ object PageRouter:
     pattern = root / "app" / "pool" / "heaters" / segment[Long] / endOfSegments
   )
 
+  val heaterSettingRoute = Route[HeaterSettingPage, Long](
+    encode = page => page.id,
+    decode = arg => HeaterSettingPage(id = arg),
+    pattern = root / "app" / "pool" / "heatersettings" / segment[Long] / endOfSegments
+  )
+
   val cleaningRoute = Route[CleaningPage, Long](
     encode = page => page.id,
     decode = arg => CleaningPage(id = arg),
