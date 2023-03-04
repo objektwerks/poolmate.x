@@ -7,6 +7,11 @@ Todo
 1. Complete UI
 2. Test UI
 
+Charts
+------
+>Chart.js, via scalablytyped converter, does not work all too well at this time.
+>Alternatively charts could be generated as png files via JFreeChart on the server.
+
 Install
 -------
 1. brew install postgresql
