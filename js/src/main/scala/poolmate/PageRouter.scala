@@ -102,6 +102,8 @@ object PageRouter:
     deckRoute,
     Route.static(PumpsPage, root / "app" / "pumps" / endOfSegments),
     pumpRoute,
+    Route.static(TimersPage, root / "app" / "timers" / endOfSegments),
+    timerRoute,
     Route.static(CleaningsPage, root / "app" / "pool" / "cleanings" / endOfSegments),
     cleaningRoute,
     Route.static(MeasurementsPage, root / "app" / "pool" / "measurements" / endOfSegments),
