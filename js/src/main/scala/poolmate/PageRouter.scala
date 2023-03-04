@@ -28,6 +28,12 @@ object PageRouter:
     pattern = root / "app" / "pool" / "decks" / segment[Long] / endOfSegments
   )
 
+  val pumpRoute = Route[PumpPage, Long](
+    encode = page => page.id,
+    decode = arg => PumpPage(id = arg),
+    pattern = root / "app" / "pool" / "pumps" / segment[Long] / endOfSegments
+  )
+
   val cleaningRoute = Route[CleaningPage, Long](
     encode = page => page.id,
     decode = arg => CleaningPage(id = arg),
