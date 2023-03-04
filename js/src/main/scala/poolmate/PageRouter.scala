@@ -82,6 +82,12 @@ object PageRouter:
     pattern = root / "app" / "pool" / "supplies" / segment[Long] / endOfSegments
   )
 
+  val repairRoute = Route[RepairPage, Long](
+    encode = page => page.id,
+    decode = arg => RepairPage(id = arg),
+    pattern = root / "app" / "pool" / "repairs" / segment[Long] / endOfSegments
+  )
+
   val routees = List(
     Route.static(HomePage, root / endOfSegments),
     Route.static(RegisterPage, root / "register" / endOfSegments),
