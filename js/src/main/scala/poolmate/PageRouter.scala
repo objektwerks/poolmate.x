@@ -100,6 +100,8 @@ object PageRouter:
     surfaceRoute,
     Route.static(DecksPage, root / "app" / "decks" / endOfSegments),
     deckRoute,
+    Route.static(PumpsPage, root / "app" / "pumps" / endOfSegments),
+    pumpRoute,
     Route.static(CleaningsPage, root / "app" / "pool" / "cleanings" / endOfSegments),
     cleaningRoute,
     Route.static(MeasurementsPage, root / "app" / "pool" / "measurements" / endOfSegments),
