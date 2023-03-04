@@ -49,6 +49,10 @@ lazy val js = (project in file("js"))
       "com.lihaoyi" %%% "upickle" % upickleVersion,
       "io.github.cquiroz" %%% "scala-java-time" % scalaJavaTimeVersion
     ),
+    useYarn := true,
+    externalNpm := {
+      poolmate.base.getAbsoluteFile()
+    },
     Compile / fastLinkJS / scalaJSLinkerOutputDirectory := target.value / public,
     Compile / fullLinkJS / scalaJSLinkerOutputDirectory := target.value / public
   )
