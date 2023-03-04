@@ -108,6 +108,8 @@ object PageRouter:
     timerSettingRoute,
     Route.static(HeatersPage, root / "app" / "heaters" / endOfSegments),
     heaterRoute,
+    Route.static(HeaterSettingsPage, root / "app" / "heatersettings" / endOfSegments),
+    heaterSettingRoute,
     Route.static(CleaningsPage, root / "app" / "pool" / "cleanings" / endOfSegments),
     cleaningRoute,
     Route.static(MeasurementsPage, root / "app" / "pool" / "measurements" / endOfSegments),
