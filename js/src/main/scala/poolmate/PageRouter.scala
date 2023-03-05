@@ -147,7 +147,10 @@ object PageRouter:
     .collect[SurfacePage] { page => SurfaceView(Model.surfaces.setSelectedEntityById(page.id), Model.license) }
 
     .collectStatic(DecksPage) { DecksView(Model.pools.selectedEntityVar.now().id, Model.decks, Model.license) }
-    .collect[DeckPage] { page => DeckView(Model.decks.setSelectedEntityById(page.id), Model.license) } 
+    .collect[DeckPage] { page => DeckView(Model.decks.setSelectedEntityById(page.id), Model.license) }
+
+    .collectStatic(PumpsPage) { PumpsView(Model.pools.selectedEntityVar.now().id, Model.pumps, Model.license) }
+    .collect[PumpPage] { page => PumpView(Model.pumps.setSelectedEntityById(page.id), Model.license) }
 
     .collectStatic(CleaningsPage) { CleaningsView(Model.pools.selectedEntityVar.now().id, Model.cleanings, Model.license) }
     .collect[CleaningPage] { page => CleaningView(Model.cleanings.setSelectedEntityById(page.id), Model.license) }
