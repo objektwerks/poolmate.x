@@ -134,15 +134,20 @@ object PageRouter:
 
   val splitter = SplitRender[Page, HtmlElement](router.currentPageSignal)
     .collectStatic(HomePage) { RootView() }
+
     .collectStatic(RegisterPage) { RegisterView(Model.emailAddressVar, Model.pinVar, Model.accountVar) }
     .collectStatic(LoginPage) { LoginView(Model.emailAddressVar, Model.pinVar, Model.accountVar) }
+
     .collectStatic(AppPage) { AppView(Model.accountVar) }
     .collectStatic(AccountPage) { AccountView(Model.accountVar) }
     .collectStatic(PoolsPage) { PoolsView(Model.pools, Model.accountVar) }
     .collect[PoolPage] { page => PoolView(Model.pools.setSelectedEntityById(page.id), Model.accountVar) }
 
     .collectStatic(SurfacesPage) { SurfacesView(Model.pools.selectedEntityVar.now().id, Model.surfaces, Model.license) }
-    .collect[SurfacePage] { page => SurfaceView(Model.surfaces.setSelectedEntityById(page.id), Model.license) } 
+    .collect[SurfacePage] { page => SurfaceView(Model.surfaces.setSelectedEntityById(page.id), Model.license) }
+
+    .collectStatic(DecksPage) { DecksView(Model.pools.selectedEntityVar.now().id, Model.decks, Model.license) }
+    .collect[DeckPage] { page => DeckView(Model.decks.setSelectedEntityById(page.id), Model.license) } 
 
     .collectStatic(CleaningsPage) { CleaningsView(Model.pools.selectedEntityVar.now().id, Model.cleanings, Model.license) }
     .collect[CleaningPage] { page => CleaningView(Model.cleanings.setSelectedEntityById(page.id), Model.license) }
