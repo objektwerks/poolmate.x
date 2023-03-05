@@ -160,3 +160,6 @@ object PageRouter:
 
     .collectStatic(ChemicalsPage) { ChemicalsView(Model.pools.selectedEntityVar.now().id, Model.chemicals, Model.license) }
     .collect[ChemicalPage] { page => ChemicalView(Model.chemicals.setSelectedEntityById(page.id), Model.license) }
+
+    .collectStatic(SuppliesPage) { SuppliesView(Model.pools.selectedEntityVar.now().id, Model.supplies, Model.license) }
+    .collect[SupplyPage] { page => SupplyView(Model.supplies.setSelectedEntityById(page.id), Model.license) }
