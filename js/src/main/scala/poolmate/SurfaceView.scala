@@ -6,7 +6,7 @@ import Component.*
 import Validator.*
 
 object SurfaceView extends View:
-  def apply(model: Model[Supply], license: String): HtmlElement =
+  def apply(model: Model[Surface], license: String): HtmlElement =
     def addHandler(event: Event): Unit = ???
 
     def updateHandler(event: Event): Unit = ???
