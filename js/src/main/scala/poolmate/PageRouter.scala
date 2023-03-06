@@ -162,7 +162,7 @@ object PageRouter:
     .collect[HeaterPage] { page => HeaterView(Model.heaters.setSelectedEntityById(page.id), Model.license) }
 
     .collectStatic(HeaterSettingsPage) { HeaterSettingsView(Model.pools.selectedEntityVar.now().id, Model.heatersettings, Model.license) }
-    .collect[HeaterSettingPage] { page => HeaterSettingView(Model.heatersettings.setSelectedEntityById(page.id), Model.license) }
+    .collect[HeaterSettingPage] { page => HeaterSettingView(Model.heaters.selectedEntityVar.now().id, Model.heatersettings.setSelectedEntityById(page.id), Model.license) }
 
     .collectStatic(CleaningsPage) { CleaningsView(Model.pools.selectedEntityVar.now().id, Model.cleanings, Model.license) }
     .collect[CleaningPage] { page => CleaningView(Model.cleanings.setSelectedEntityById(page.id), Model.license) }
