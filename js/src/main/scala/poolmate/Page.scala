@@ -15,15 +15,14 @@ object Page:
   given timerSettingPageRW: ReadWriter[TimerSettingPage] = macroRW
   given heaterPageRW: ReadWriter[HeaterPage] = macroRW
   given heaterSettingPageRW: ReadWriter[HeaterSettingPage] = macroRW
-
   given cleaningPageRW: ReadWriter[CleaningPage] = macroRW
   given measurementPageRW: ReadWriter[MeasurementPage] = macroRW
   given chemicalPageRW: ReadWriter[ChemicalPage] = macroRW
   given supplyPageRW: ReadWriter[SupplyPage] = macroRW
   given repairPageRW: ReadWriter[RepairPage] = macroRW
   given entityPageRW: ReadWriter[EntityPage] = ReadWriter.merge(
-    poolPageRW, surfacePageRW, deckPageRW,
-    cleaningPageRW, measurementPageRW, chemicalPageRW, supplyPageRW, repairPageRW
+    poolPageRW, surfacePageRW, deckPageRW, pumpPageRW, timerPageRW, timerSettingPageRW, heaterPageRW,
+    heaterSettingPageRW, cleaningPageRW, measurementPageRW, chemicalPageRW, supplyPageRW, repairPageRW
   )
 
 sealed trait Page:
