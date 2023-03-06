@@ -84,8 +84,8 @@ object PageRouter:
 
   val repairRoute = Route[RepairPage, (Long, Long)](
     encode = page => (page.poolId, page.id),
-    decode = (poolId, id) => RepairPage(id = arg),
-    pattern = root / "app" / "pools" / "repairs" / segment[Long] / endOfSegments
+    decode = (poolId, id) => RepairPage(poolId, id),
+    pattern = root / "app" / "pools" / segment[Long] / "repairs" / segment[Long] / endOfSegments
   )
 
   val routees = List(
