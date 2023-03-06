@@ -24,7 +24,7 @@ object PageRouter:
 
   val deckRoute = Route[DeckPage, (Long, Long)](
     encode = page => (page.poolId, page.id),
-    decode = arg => DeckPage(id = arg),
+    decode = (poolId, id) => DeckPage(poolId, id),
     pattern = root / "app" / "pool" / "decks" / segment[Long] / endOfSegments
   )
 
