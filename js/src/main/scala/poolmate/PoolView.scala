@@ -6,7 +6,7 @@ import Component.*
 import Validator.*
 
 object PoolView extends View:
-  def apply(model: Model[Pool], accountVar: Var[Account]): HtmlElement =
+  def apply(model: Model[Pool], license: String): HtmlElement =
     def addHandler(event: Event): Unit =
       event match
         case Fault(cause, _) => emitError(s"Add pool failed: $cause")
@@ -159,7 +159,7 @@ object PoolView extends View:
           disabled <-- model.selectedEntityVar.signal.map { pool => !(pool.id.isZero && pool.isValid) }
           onClick --> { _ =>
             log(s"Pool -> Add onClick")
-            val command = AddPool(accountVar.now().license, model.selectedEntityVar.now())
+            val command = AddPool(license, model.selectedEntityVar.now())
             call(command, addHandler)
 
           }
@@ -168,7 +168,7 @@ object PoolView extends View:
           disabled <-- model.selectedEntityVar.signal.map { pool => !(pool.id.isGreaterThanZero && pool.isValid) }
           onClick --> { _ =>
             log(s"Pool -> Update onClick")
-            val command = UpdatePool(accountVar.now().license, model.selectedEntityVar.now())
+            val command = UpdatePool(license, model.selectedEntityVar.now())
             call(command, updateHandler)
           }
         }
