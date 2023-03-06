@@ -14,6 +14,7 @@ object Page:
   given cleaningPageRW: ReadWriter[CleaningPage] = macroRW
   given measurementPageRW: ReadWriter[MeasurementPage] = macroRW
   given chemicalPageRW: ReadWriter[ChemicalPage] = macroRW
+  given supplyPageRW: ReadWriter[SupplyPage] = macroRW
 
   given entityPageRW: ReadWriter[EntityPage] = ReadWriter.merge(
     poolPageRW, cleaningPageRW, measurementPageRW, chemicalPageRW
