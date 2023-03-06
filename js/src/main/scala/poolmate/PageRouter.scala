@@ -36,55 +36,55 @@ object PageRouter:
 
   val timerRoute = Route[TimerPage, (Long, Long)](
     encode = page => (page.poolId, page.id),
-    decode = arg => TimerPage(id = arg),
+    decode = (poolId, id) => TimerPage(id = arg),
     pattern = root / "app" / "pools" / "timers" / segment[Long] / endOfSegments
   )
 
   val timerSettingRoute = Route[TimerSettingPage, (Long, Long)](
     encode = page => (page.timerId, page.id),
-    decode = arg => TimerSettingPage(id = arg),
+    decode = (timerId, id) => TimerSettingPage(id = arg),
     pattern = root / "app" / "pools" / "timersettings" / segment[Long] / endOfSegments
   )
 
   val heaterRoute = Route[HeaterPage, (Long, Long)](
     encode = page => (page.poolId, page.id),
-    decode = arg => HeaterPage(id = arg),
+    decode = (poolId, id) => HeaterPage(id = arg),
     pattern = root / "app" / "pools" / "heaters" / segment[Long] / endOfSegments
   )
 
   val heaterSettingRoute = Route[HeaterSettingPage, (Long, Long)](
     encode = page => (page.heaterId, page.id),
-    decode = arg => HeaterSettingPage(id = arg),
+    decode = (heaterId, id) => HeaterSettingPage(id = arg),
     pattern = root / "app" / "pools" / "heatersettings" / segment[Long] / endOfSegments
   )
 
   val cleaningRoute = Route[CleaningPage, (Long, Long)](
     encode = page => (page.poolId, page.id),
-    decode = arg => CleaningPage(id = arg),
+    decode = (poolId, id) => CleaningPage(id = arg),
     pattern = root / "app" / "pools" / "cleanings" / segment[Long] / endOfSegments
   )
 
   val measurementRoute = Route[MeasurementPage, (Long, Long)](
     encode = page => (page.poolId, page.id),
-    decode = arg => MeasurementPage(id = arg),
+    decode = (poolId, id) => MeasurementPage(id = arg),
     pattern = root / "app" / "pools" / "measurements" / segment[Long] / endOfSegments
   )
 
   val chemicalRoute = Route[ChemicalPage, (Long, Long)](
     encode = page => (page.poolId, page.id),
-    decode = arg => ChemicalPage(id = arg),
+    decode = (poolId, id) => ChemicalPage(id = arg),
     pattern = root / "app" / "pools" / "chemicals" / segment[Long] / endOfSegments
   )
 
   val supplyRoute = Route[SupplyPage, (Long, Long)](
     encode = page => (page.poolId, page.id),
-    decode = arg => SupplyPage(id = arg),
+    decode = (poolId, id) => SupplyPage(id = arg),
     pattern = root / "app" / "pools" / "supplies" / segment[Long] / endOfSegments
   )
 
   val repairRoute = Route[RepairPage, (Long, Long)](
     encode = page => (page.poolId, page.id),
-    decode = arg => RepairPage(id = arg),
+    decode = (poolId, id) => RepairPage(id = arg),
     pattern = root / "app" / "pools" / "repairs" / segment[Long] / endOfSegments
   )
 
