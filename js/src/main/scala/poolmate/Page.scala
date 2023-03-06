@@ -14,6 +14,7 @@ object Page:
   given timerPageRW: ReadWriter[TimerPage] = macroRW
   given timerSettingPageRW: ReadWriter[TimerSettingPage] = macroRW
   given heaterPageRW: ReadWriter[HeaterPage] = macroRW
+  given heaterSettingPageRW: ReadWriter[HeaterSettingPage] = macroRW
 
   given cleaningPageRW: ReadWriter[CleaningPage] = macroRW
   given measurementPageRW: ReadWriter[MeasurementPage] = macroRW
