@@ -36,8 +36,8 @@ object PageRouter:
 
   val timerRoute = Route[TimerPage, (Long, Long)](
     encode = page => (page.poolId, page.id),
-    decode = (poolId, id) => TimerPage(id = arg),
-    pattern = root / "app" / "pools" / "timers" / segment[Long] / endOfSegments
+    decode = (poolId, id) => TimerPage(poolId, id),
+    pattern = root / "app" / "pools" / segment[Long] / "timers" / segment[Long] / endOfSegments
   )
 
   val timerSettingRoute = Route[TimerSettingPage, (Long, Long, Long)](
