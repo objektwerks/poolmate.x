@@ -6,7 +6,7 @@ import Component.*
 import Validator.*
 
 object TimerSettingView extends View:
-  def apply(model: Model[TimerSetting], license: String): HtmlElement =
+  def apply(timerId: Long, model: Model[TimerSetting], license: String): HtmlElement =
     def addHandler(event: Event): Unit = ???
 
     def updateHandler(event: Event): Unit = ???

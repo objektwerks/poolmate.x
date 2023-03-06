@@ -156,7 +156,7 @@ object PageRouter:
     .collect[TimerPage] { page => TimerView(Model.timers.setSelectedEntityById(page.id), Model.license) }
 
     .collectStatic(TimerSettingsPage) { TimerSettingsView(Model.pools.selectedEntityVar.now().id, Model.timersettings, Model.license) }
-    .collect[TimerSettingPage] { page => TimerSettingView(Model.timersettings.setSelectedEntityById(page.id), Model.license) }
+    .collect[TimerSettingPage] { page => TimerSettingView(Model.timers.selectedEntityVar.now().id, Model.timersettings.setSelectedEntityById(page.id), Model.license) }
 
     .collectStatic(HeatersPage) { HeatersView(Model.pools.selectedEntityVar.now().id, Model.heaters, Model.license) }
     .collect[HeaterPage] { page => HeaterView(Model.heaters.setSelectedEntityById(page.id), Model.license) }
