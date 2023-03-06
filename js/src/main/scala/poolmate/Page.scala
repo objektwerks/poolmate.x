@@ -10,6 +10,7 @@ object Page:
   given poolPageRW: ReadWriter[PoolPage] = macroRW
   given surfacePageRW: ReadWriter[SurfacePage] = macroRW
   given deckPageRW: ReadWriter[DeckPage] = macroRW
+  given pumpPageRW: ReadWriter[PumpPage] = macroRW
 
   given cleaningPageRW: ReadWriter[CleaningPage] = macroRW
   given measurementPageRW: ReadWriter[MeasurementPage] = macroRW
