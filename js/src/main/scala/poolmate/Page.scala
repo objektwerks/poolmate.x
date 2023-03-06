@@ -8,6 +8,8 @@ object Page:
   given pageRW: ReadWriter[Page] = ReadWriter.merge( entityPageRW )
 
   given poolPageRW: ReadWriter[PoolPage] = macroRW
+  given surfacePageRW: ReadWriter[SurfacePage] = macroRW
+
   given cleaningPageRW: ReadWriter[CleaningPage] = macroRW
   given measurementPageRW: ReadWriter[MeasurementPage] = macroRW
   given chemicalPageRW: ReadWriter[ChemicalPage] = macroRW
