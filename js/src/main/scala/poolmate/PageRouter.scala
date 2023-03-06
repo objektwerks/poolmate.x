@@ -66,8 +66,8 @@ object PageRouter:
 
   val measurementRoute = Route[MeasurementPage, (Long, Long)](
     encode = page => (page.poolId, page.id),
-    decode = (poolId, id) => MeasurementPage(id = arg),
-    pattern = root / "app" / "pools" / "measurements" / segment[Long] / endOfSegments
+    decode = (poolId, id) => MeasurementPage(poolId, id),
+    pattern = root / "app" / "pools" / segment[Long] / "measurements" / segment[Long] / endOfSegments
   )
 
   val chemicalRoute = Route[ChemicalPage, (Long, Long)](
