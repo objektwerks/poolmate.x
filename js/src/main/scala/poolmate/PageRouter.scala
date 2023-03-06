@@ -16,10 +16,10 @@ object PageRouter:
     pattern = root / "app" / "pools" / segment[Long] / endOfSegments
   )
 
-  val surfaceRoute = Route[SurfacePage, Long](
-    encode = page => page.id,
-    decode = arg => SurfacePage(id = arg),
-    pattern = root / "app" / "pool" / "surfaces" / segment[Long] / endOfSegments
+  val surfaceRoute = Route[SurfacePage, (Long, Long)](
+    encode = page => (page.poolId, page.id),
+    decode = (poolId, id) => SurfacePage(poolId, id),
+    pattern = root / "app" / "pools" / "pool" / segment[Long] / "surfaces" / segment[Long] / endOfSegments
   )
 
   val deckRoute = Route[DeckPage, Long](
