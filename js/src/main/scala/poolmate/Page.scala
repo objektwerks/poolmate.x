@@ -13,6 +13,7 @@ object Page:
   given pumpPageRW: ReadWriter[PumpPage] = macroRW
   given timerPageRW: ReadWriter[TimerPage] = macroRW
   given timerSettingPageRW: ReadWriter[TimerSettingPage] = macroRW
+  given heaterPageRW: ReadWriter[HeaterPage] = macroRW
 
   given cleaningPageRW: ReadWriter[CleaningPage] = macroRW
   given measurementPageRW: ReadWriter[MeasurementPage] = macroRW
