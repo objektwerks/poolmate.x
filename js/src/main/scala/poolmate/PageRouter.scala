@@ -140,7 +140,7 @@ object PageRouter:
 
     .collectStatic(AppPage) { AppView(Model.accountVar) }
     .collectStatic(AccountPage) { AccountView(Model.accountVar) }
-    .collectStatic(PoolsPage) { PoolsView(Model.pools, Model.accountVar) }
+    .collectStatic(PoolsPage) { PoolsView(Model.pools, Model.license) }
     .collect[PoolPage] { page => PoolView(Model.pools.setSelectedEntityById(page.id), Model.license) }
 
     .collectStatic(SurfacesPage) { SurfacesView(Model.pools.selectedEntityVar.now().id, Model.surfaces, Model.license) }
