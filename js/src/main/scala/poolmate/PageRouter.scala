@@ -72,8 +72,8 @@ object PageRouter:
 
   val chemicalRoute = Route[ChemicalPage, (Long, Long)](
     encode = page => (page.poolId, page.id),
-    decode = (poolId, id) => ChemicalPage(id = arg),
-    pattern = root / "app" / "pools" / "chemicals" / segment[Long] / endOfSegments
+    decode = (poolId, id) => ChemicalPage(poolId, id),
+    pattern = root / "app" / "pools" / segment[Long] / "chemicals" / segment[Long] / endOfSegments
   )
 
   val supplyRoute = Route[SupplyPage, (Long, Long)](
