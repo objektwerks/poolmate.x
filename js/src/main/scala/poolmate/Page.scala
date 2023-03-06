@@ -15,9 +15,10 @@ object Page:
   given measurementPageRW: ReadWriter[MeasurementPage] = macroRW
   given chemicalPageRW: ReadWriter[ChemicalPage] = macroRW
   given supplyPageRW: ReadWriter[SupplyPage] = macroRW
-
+  given repairPageRW: ReadWriter[RepairPage] = macroRW
   given entityPageRW: ReadWriter[EntityPage] = ReadWriter.merge(
-    poolPageRW, cleaningPageRW, measurementPageRW, chemicalPageRW
+    poolPageRW, surfacePageRW, deckPageRW,
+    cleaningPageRW, measurementPageRW, chemicalPageRW, supplyPageRW, repairPageRW
   )
 
 sealed trait Page:
