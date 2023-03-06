@@ -53,14 +53,14 @@ sealed trait EntityPage extends Page:
 
 final case class PoolPage(id: Long = 0) extends EntityPage
 final case class SurfacePage(poolId: Long, id: Long = 0) extends EntityPage
-final case class DeckPage(id: Long = 0) extends EntityPage
-final case class PumpPage(id: Long = 0) extends EntityPage
-final case class TimerPage(id: Long = 0) extends EntityPage
-final case class TimerSettingPage(id: Long = 0) extends EntityPage
-final case class HeaterPage(id: Long = 0) extends EntityPage
-final case class HeaterSettingPage(id: Long = 0) extends EntityPage
-final case class CleaningPage(id: Long = 0) extends EntityPage
-final case class MeasurementPage(id: Long = 0) extends EntityPage
-final case class ChemicalPage(id: Long = 0) extends EntityPage
-final case class SupplyPage(id: Long = 0) extends EntityPage
-final case class RepairPage(id: Long = 0) extends EntityPage
+final case class DeckPage(poolId: Long, id: Long = 0) extends EntityPage
+final case class PumpPage(poolId: Long, id: Long = 0) extends EntityPage
+final case class TimerPage(poolId: Long, id: Long = 0) extends EntityPage
+final case class TimerSettingPage(timerId: Long, id: Long = 0) extends EntityPage
+final case class HeaterPage(poolId: Long, id: Long = 0) extends EntityPage
+final case class HeaterSettingPage(heaterId: Long, id: Long = 0) extends EntityPage
+final case class CleaningPage(poolId: Long, id: Long = 0) extends EntityPage
+final case class MeasurementPage(poolId: Long, id: Long = 0) extends EntityPage
+final case class ChemicalPage(poolId: Long, id: Long = 0) extends EntityPage
+final case class SupplyPage(poolId: Long, id: Long = 0) extends EntityPage
+final case class RepairPage(poolId: Long, id: Long = 0) extends EntityPage
