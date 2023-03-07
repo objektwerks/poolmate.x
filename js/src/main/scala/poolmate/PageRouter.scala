@@ -10,6 +10,7 @@ import Page.given
 import Serializer.given
 
 object PageRouter:
+  val poolsRoute = Route.static(PoolsPage, root / "app" / "pools" / endOfSegments)
   val poolRoute = Route[PoolPage, Long](
     encode = page => page.id,
     decode = arg => PoolPage(id = arg),
@@ -94,7 +95,7 @@ object PageRouter:
     Route.static(LoginPage, root / "login" / endOfSegments),
     Route.static(AppPage, root / "app" / endOfSegments),
     Route.static(AccountPage, root / "app" / "account" / endOfSegments),
-    Route.static(PoolsPage, root / "app" / "pools" / endOfSegments),
+    poolsRoute,
     poolRoute,
     Route.static(SurfacesPage, root / "app" / "pools" / "pool" / "surfaces" / endOfSegments),
     surfaceRoute,
