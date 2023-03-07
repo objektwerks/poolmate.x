@@ -73,6 +73,7 @@ object PageRouter:
     pattern = root / "app" / "pools" / segment[Long] / "cleanings" / segment[Long] / endOfSegments
   )
 
+  val measurementsRoute = Route.static(MeasurementsPage, root / "app" / "pools" / "pool" / "measurements" / endOfSegments)
   val measurementRoute = Route[MeasurementPage, (Long, Long)](
     encode = page => (page.poolId, page.id),
     decode = (poolId, id) => MeasurementPage(poolId, id),
@@ -133,8 +134,9 @@ object PageRouter:
     cleaningsRoute,
     cleaningRoute,
 
-    Route.static(MeasurementsPage, root / "app" / "pools" / "pool" / "measurements" / endOfSegments),
+    measurementsRoute,
     measurementRoute,
+
     Route.static(ChemicalsPage, root / "app" / "pools" / "pool" / "chemicals" / endOfSegments),
     chemicalRoute,
     Route.static(SuppliesPage, root / "app" / "pools" / "pool" / "supplies" / endOfSegments),
