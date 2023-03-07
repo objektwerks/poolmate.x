@@ -66,6 +66,7 @@ object PageRouter:
     pattern = root / "app" / "pools" / segment[Long]/ "heaters" / segment[Long] /  "heatersettings" / segment[Long] / endOfSegments
   )
 
+  val cleaningsRoute = Route.static(CleaningsPage, root / "app" / "pools" / "pool" / "cleanings" / endOfSegments)
   val cleaningRoute = Route[CleaningPage, (Long, Long)](
     encode = page => (page.poolId, page.id),
     decode = (poolId, id) => CleaningPage(poolId, id),
@@ -129,8 +130,9 @@ object PageRouter:
     heaterSettingsRoute,
     heaterSettingRoute,
 
-    Route.static(CleaningsPage, root / "app" / "pools" / "pool" / "cleanings" / endOfSegments),
+    cleaningsRoute,
     cleaningRoute,
+
     Route.static(MeasurementsPage, root / "app" / "pools" / "pool" / "measurements" / endOfSegments),
     measurementRoute,
     Route.static(ChemicalsPage, root / "app" / "pools" / "pool" / "chemicals" / endOfSegments),
