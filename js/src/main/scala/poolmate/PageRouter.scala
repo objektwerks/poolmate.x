@@ -45,6 +45,7 @@ object PageRouter:
     pattern = root / "app" / "pools" / segment[Long] / "timers" / segment[Long] / endOfSegments
   )
 
+  val timerSettingsRoute = Route.static(TimerSettingsPage, root / "app" / "pools" / "pool" / "timers" / "timer" / "timersettings" / endOfSegments)
   val timerSettingRoute = Route[TimerSettingPage, (Long, Long, Long)](
     encode = page => (page.poolId, page.timerId, page.id),
     decode = (poolId, timerId, id) => TimerSettingPage(poolId, timerId, id),
@@ -117,8 +118,9 @@ object PageRouter:
     timersRoute,
     timerRoute,
 
-    Route.static(TimerSettingsPage, root / "app" / "pools" / "pool" / "timers" / "timer" / "timersettings" / endOfSegments),
+    timerSettingsRoute,
     timerSettingRoute,
+
     Route.static(HeatersPage, root / "app" / "pools" / "pool" / "heaters" / endOfSegments),
     heaterRoute,
     Route.static(HeaterSettingsPage, root / "app" / "pools" / "pool" / "heaters" / "heater" / "heatersettings" / endOfSegments),
