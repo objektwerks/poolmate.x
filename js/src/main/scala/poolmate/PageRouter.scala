@@ -31,6 +31,7 @@ object PageRouter:
     pattern = root / "app" / "pools" / segment[Long] / "decks" / segment[Long] / endOfSegments
   )
 
+  val pumpsRoute = Route.static(PumpsPage, root / "app" / "pools" / "pool" / "pumps" / endOfSegments)
   val pumpRoute = Route[PumpPage, (Long, Long)](
     encode = page => (page.poolId, page.id),
     decode = (poolId, id) => PumpPage(poolId, id),
@@ -109,8 +110,9 @@ object PageRouter:
     decksRoute,
     deckRoute,
 
-    Route.static(PumpsPage, root / "app" / "pools" / "pool" / "pumps" / endOfSegments),
+    pumpsRoute,
     pumpRoute,
+
     Route.static(TimersPage, root / "app" / "pools" / "pool" / "timers" / endOfSegments),
     timerRoute,
     Route.static(TimerSettingsPage, root / "app" / "pools" / "pool" / "timers" / "timer" / "timersettings" / endOfSegments),
