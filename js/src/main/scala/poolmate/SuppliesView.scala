@@ -15,5 +15,38 @@ object SuppliesView extends View:
         case _ => log(s"Supplies -> handler failed: $event")
 
     div(
-      
+      bar(
+        btn("Pool").amend {
+          onClick --> { _ =>
+            log("Supplies -> Pool menu item onClick")
+            route(PoolPage(poolId))
+          }
+        }      
+      ),
+      div(
+        onLoad --> { _ => 
+          val command = ListSupplies(license, poolId)
+          call(command, handler)
+        },
+        hdr("Supplies"),
+        err(errorBus),
+        listview(
+          split(model.entitiesVar, (id: Long) => SupplyPage(id))
+        )
+      ),
+      cbar(
+        btn("New").amend {
+          onClick --> { _ =>
+            log(s"Supplies -> New button onClick")
+            route(SupplyPage(poolId, model.selectedEntityVar.now().id))
+          }
+        },        
+        btn("Refresh").amend {
+          onClick --> { _ =>
+            log(s"Supplies -> Refresh button onClick")
+            val command = ListSupplies(license, poolId)
+            call(command, handler)
+          }
+        }
+      )
     )
