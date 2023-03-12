@@ -15,5 +15,38 @@ object TimersView extends View:
         case _ => log(s"Timers -> handler failed: $event")
 
     div(
-      
+      bar(
+        btn("Pool").amend {
+          onClick --> { _ =>
+            log("Timers -> Pool menu item onClick")
+            route(PoolPage(poolId))
+          }
+        }      
+      ),
+      div(
+        onLoad --> { _ => 
+          val command = ListTimers(license, poolId)
+          call(command, handler)
+        },
+        hdr("Timers"),
+        err(errorBus),
+        listview(
+          split(model.entitiesVar, (id: Long) => TimerPage(id))
+        )
+      ),
+      cbar(
+        btn("New").amend {
+          onClick --> { _ =>
+            log(s"Timers -> New button onClick")
+            route(TimerPage(poolId, model.selectedEntityVar.now().id))
+          }
+        },        
+        btn("Refresh").amend {
+          onClick --> { _ =>
+            log(s"Timers -> Refresh button onClick")
+            val command = ListTimers(license, poolId)
+            call(command, handler)
+          }
+        }
+      )
     )
