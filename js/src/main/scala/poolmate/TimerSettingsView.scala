@@ -5,7 +5,7 @@ import com.raquo.laminar.api.L.*
 import Component.*
 
 object TimerSettingsView extends View:
-  def apply(timerId: Long, model: Model[TimerSetting], license: String): HtmlElement =
+  def apply(poolId: Long, timerId: Long, model: Model[TimerSetting], license: String): HtmlElement =
     def handler(event: Event): Unit =
       event match
         case Fault(cause, _) => emitError(cause)
@@ -31,7 +31,7 @@ object TimerSettingsView extends View:
         hdr("TimerSettings"),
         err(errorBus),
         listview(
-          split(model.entitiesVar, (id: Long) => TimerSettingPage(timerId))
+          split(model.entitiesVar, (id: Long) => TimerSettingPage(poolId, timerId))
         )
       ),
       cbar(
