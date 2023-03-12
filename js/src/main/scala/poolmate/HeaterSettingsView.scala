@@ -3,7 +3,6 @@ package poolmate
 import com.raquo.laminar.api.L.*
 
 import Component.*
-import Validator.*
 
 object HeaterSettingsView extends View:
   def apply(poolId: Long, heaterId: Long, model: Model[HeaterSetting], license: String): HtmlElement =
