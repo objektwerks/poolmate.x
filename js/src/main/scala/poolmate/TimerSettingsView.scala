@@ -19,7 +19,7 @@ object TimerSettingsView extends View:
         btn("Timer").amend {
           onClick --> { _ =>
             log("TimerSettings -> Pool menu item onClick")
-            route(TimerPage(timerId))
+            route(TimerPage(poolId, timerId))
           }
         }      
       ),
