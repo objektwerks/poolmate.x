@@ -9,9 +9,9 @@ object TimerSettingsView extends View:
     def handler(event: Event): Unit =
       event match
         case Fault(cause, _) => emitError(cause)
-        case TimerSettingsListed(timerSettings: List[TimerSetting]) =>
+        case TimerSettingsListed(timersettings: List[TimerSetting]) =>
           clearErrors()
-          model.setEntities(timerSettings)
+          model.setEntities(timersettings)
         case _ => log(s"TimerSettings -> handler failed: $event")
 
     div(
