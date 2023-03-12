@@ -4,8 +4,8 @@ Pool
 
 Todo
 ----
-1. Complete UI
-2. Test UI
+1. Build entity views.
+2. Test UI.
 
 Charts
 ------
