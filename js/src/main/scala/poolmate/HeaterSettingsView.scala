@@ -6,7 +6,7 @@ import Component.*
 import Validator.*
 
 object HeaterSettingsView extends View:
-  def apply(poolId: Long, model: Model[HeaterSetting], license: String): HtmlElement =
+  def apply(poolId: Long, heaterId: Long, model: Model[HeaterSetting], license: String): HtmlElement =
     def handler(event: Event): Unit = ???
 
     div(
