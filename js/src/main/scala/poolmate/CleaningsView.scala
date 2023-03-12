@@ -20,7 +20,7 @@ object CleaningsView extends View:
         btn("Pool").amend {
           onClick --> { _ =>
             log("Cleanings -> Pool menu item onClick")
-            route(PoolPage(id = poolId))
+            route(PoolPage(poolId))
           }
         }      
       ),
