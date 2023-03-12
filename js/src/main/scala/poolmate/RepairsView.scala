@@ -15,5 +15,38 @@ object RepairsView extends View:
         case _ => log(s"Repairs -> handler failed: $event")
 
     div(
-      
+      bar(
+        btn("Pool").amend {
+          onClick --> { _ =>
+            log("Repairs -> Pool menu item onClick")
+            route(PoolPage(poolId))
+          }
+        }      
+      ),
+      div(
+        onLoad --> { _ => 
+          val command = ListRepairs(license, poolId)
+          call(command, handler)
+        },
+        hdr("Repairs"),
+        err(errorBus),
+        listview(
+          split(model.entitiesVar, (id: Long) => RepairPage(id))
+        )
+      ),
+      cbar(
+        btn("New").amend {
+          onClick --> { _ =>
+            log(s"Repairs -> New button onClick")
+            route(RepairPage(poolId, model.selectedEntityVar.now().id))
+          }
+        },        
+        btn("Refresh").amend {
+          onClick --> { _ =>
+            log(s"Repairs -> Refresh button onClick")
+            val command = ListRepairs(license, poolId)
+            call(command, handler)
+          }
+        }
+      )
     )
