@@ -37,14 +37,14 @@ object TimerSettingsView extends View:
       cbar(
         btn("New").amend {
           onClick --> { _ =>
-            log(s"Timers -> New button onClick")
-            route(TimerPage(poolId, model.selectedEntityVar.now().id))
+            log(s"TimerSettings -> New button onClick")
+            route(TimerSettingPage(poolId, timerId, model.selectedEntityVar.now().id))
           }
         },        
         btn("Refresh").amend {
           onClick --> { _ =>
-            log(s"Timers -> Refresh button onClick")
-            val command = ListTimers(license, poolId)
+            log(s"TimerSettings -> Refresh button onClick")
+            val command = ListTimerSettings(license, poolId)
             call(command, handler)
           }
         }
