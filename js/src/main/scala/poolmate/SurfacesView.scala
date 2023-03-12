@@ -20,7 +20,7 @@ object SurfacesView extends View:
         btn("Pool").amend {
           onClick --> { _ =>
             log("Surfaces -> Pool menu item onClick")
-            route(PoolPage(id = poolId))
+            route(PoolPage(poolId))
           }
         }      
       ),
