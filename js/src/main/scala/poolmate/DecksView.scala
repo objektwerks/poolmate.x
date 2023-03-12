@@ -16,5 +16,38 @@ object DecksView extends View:
         case _ => log(s"Decks -> handler failed: $event")
 
     div(
-      
+      bar(
+        btn("Pool").amend {
+          onClick --> { _ =>
+            log("Decks -> Pool menu item onClick")
+            route(PoolPage(poolId))
+          }
+        }      
+      ),
+      div(
+        onLoad --> { _ => 
+          val command = ListDecks(license, poolId)
+          call(command, handler)
+        },
+        hdr("Decks"),
+        err(errorBus),
+        listview(
+          split(model.entitiesVar, (id: Long) => DeckPage(id))
+        )
+      ),
+      cbar(
+        btn("New").amend {
+          onClick --> { _ =>
+            log(s"Decks -> New button onClick")
+            route(DeckPage(poolId, model.selectedEntityVar.now().id))
+          }
+        },        
+        btn("Refresh").amend {
+          onClick --> { _ =>
+            log(s"Decks -> Refresh button onClick")
+            val command = ListDecks(license, poolId)
+            call(command, handler)
+          }
+        }
+      )
     )
