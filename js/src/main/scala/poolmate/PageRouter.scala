@@ -184,14 +184,14 @@ object PageRouter:
     .collectStatic(TimersPage) { TimersView(Model.pools.selectedEntityVar.now().id, Model.timers, Model.license) }
     .collect[TimerPage] { page => TimerView(Model.timers.setSelectedEntityById(page.id), Model.license) }
 
-    .collectStatic(TimerSettingsPage) { TimerSettingsView(Model.pools.selectedEntityVar.now().id, Model.timersettings, Model.license) }
-    .collect[TimerSettingPage] { page => TimerSettingView(Model.timers.selectedEntityVar.now().id, Model.timersettings.setSelectedEntityById(page.id), Model.license) }
+    .collectStatic(TimerSettingsPage) { TimerSettingsView(Model.timers.selectedEntityVar.now().id, Model.timersettings, Model.license) }
+    .collect[TimerSettingPage] { page => TimerSettingView(Model.timersettings.selectedEntityVar.now().id, Model.timersettings.setSelectedEntityById(page.id), Model.license) }
 
     .collectStatic(HeatersPage) { HeatersView(Model.pools.selectedEntityVar.now().id, Model.heaters, Model.license) }
     .collect[HeaterPage] { page => HeaterView(Model.heaters.setSelectedEntityById(page.id), Model.license) }
 
-    .collectStatic(HeaterSettingsPage) { HeaterSettingsView(Model.pools.selectedEntityVar.now().id, Model.heatersettings, Model.license) }
-    .collect[HeaterSettingPage] { page => HeaterSettingView(Model.heaters.selectedEntityVar.now().id, Model.heatersettings.setSelectedEntityById(page.id), Model.license) }
+    .collectStatic(HeaterSettingsPage) { HeaterSettingsView(Model.heaters.selectedEntityVar.now().id, Model.heatersettings, Model.license) }
+    .collect[HeaterSettingPage] { page => HeaterSettingView(Model.heatersettings.selectedEntityVar.now().id, Model.heatersettings.setSelectedEntityById(page.id), Model.license) }
 
     .collectStatic(CleaningsPage) { CleaningsView(Model.pools.selectedEntityVar.now().id, Model.cleanings, Model.license) }
     .collect[CleaningPage] { page => CleaningView(Model.cleanings.setSelectedEntityById(page.id), Model.license) }
