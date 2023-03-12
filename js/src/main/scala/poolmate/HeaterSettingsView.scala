@@ -12,39 +12,39 @@ object HeaterSettingsView extends View:
         case HeaterSettingsListed(heatersettings: List[HeaterSetting]) =>
           clearErrors()
           model.setEntities(heatersettings)
-        case _ => log(s"TimerSettings -> handler failed: $event")
+        case _ => log(s"HeaterSettings -> handler failed: $event")
 
     div(
       bar(
         btn("Heater").amend {
           onClick --> { _ =>
             log("HeaterSettings -> Pool menu item onClick")
-            route(HeaterPage(heaterId))
+            route(HeaterPage(poolId, heaterId))
           }
         }      
       ),
       div(
         onLoad --> { _ => 
-          val command = ListTimerSettings(license, timerId)
+          val command = ListHeaterSettings(license, heaterId)
           call(command, handler)
         },
-        hdr("TimerSettings"),
+        hdr("HeaterSettings"),
         err(errorBus),
         listview(
-          split(model.entitiesVar, (id: Long) => TimerSettingPage(poolId, timerId))
+          split(model.entitiesVar, (id: Long) => HeaterSettingPage(poolId, heaterId))
         )
       ),
       cbar(
         btn("New").amend {
           onClick --> { _ =>
-            log(s"TimerSettings -> New button onClick")
-            route(TimerSettingPage(poolId, timerId, model.selectedEntityVar.now().id))
+            log(s"HeaterSettings -> New button onClick")
+            route(HeaterSettingPage(poolId, heaterId, model.selectedEntityVar.now().id))
           }
         },        
         btn("Refresh").amend {
           onClick --> { _ =>
-            log(s"TimerSettings -> Refresh button onClick")
-            val command = ListTimerSettings(license, poolId)
+            log(s"HeaterSettings -> Refresh button onClick")
+            val command = ListHeaterSettings(license, poolId)
             call(command, handler)
           }
         }
