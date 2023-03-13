@@ -26,5 +26,60 @@ object PumpView extends View:
         case _ => log(s"Pump -> update handler failed: $event")
 
     div(
-      
+      bar(
+        btn("Pumps").amend {
+          onClick --> { _ =>
+            log("Pump -> Pumps menu item onClick")
+            route(PumpsPage)
+          }
+        },
+      ),
+      hdr("Pump"),
+      err(errorBus),
+      lbl("Installed"),
+      date.amend {
+        controlled(
+          value <-- model.selectedEntityVar.signal.map(pump => localDateOfLongToString(pump.installed)),
+          onInput.mapToValue.filter(_.nonEmpty) --> { installed =>
+            model.updateSelectedEntity( model.selectedEntityVar.now().copy(installed = localDateOfStringToLong(installed)) )
+          }
+        )
+      },
+      lbl("Model"),
+      txt.amend {
+        controlled(
+          value <-- model.selectedEntityVar.signal.map(_.model),
+          onChange.mapToValue.filter(_.nonEmpty) --> { m =>
+            model.updateSelectedEntity( model.selectedEntityVar.now().copy(model = m) )
+          }
+        )
+      },
+      lbl("Cost"),
+      int.amend {
+        controlled(
+          value <-- model.selectedEntityVar.signal.map(_.cost.toString),
+          onInput.mapToValue.filter(_.toIntOption.nonEmpty).map(_.toInt) --> { cost =>
+            model.updateSelectedEntity( model.selectedEntityVar.now().copy(cost = cost) )
+          }
+        )
+      },
+      cbar(
+        btn("Add").amend {
+          disabled <-- model.selectedEntityVar.signal.map { pump => !(pump.id.isZero && pump.isValid) }
+          onClick --> { _ =>
+            log(s"Pump -> Add onClick")
+            val command = AddPump(license, model.selectedEntityVar.now())
+            call(command, addHandler)
+
+          }
+        },
+        btn("Update").amend {
+          disabled <-- model.selectedEntityVar.signal.map { pump => !(pump.id.isGreaterThanZero && pump.isValid) }
+          onClick --> { _ =>
+            log(s"Pump -> Update onClick")
+            val command = UpdatePump(license, model.selectedEntityVar.now())
+            call(command, updateHandler)
+          }
+        }
+      )
     )
