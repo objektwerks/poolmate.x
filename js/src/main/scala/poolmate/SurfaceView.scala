@@ -50,7 +50,7 @@ object SurfaceView extends View:
       txt.amend {
         controlled(
           value <-- model.selectedEntityVar.signal.map(_.kind),
-          onChange.mapToValue --> { kind =>
+          onChange.mapToValue.filter(_.nonEmpty) --> { kind =>
             model.updateSelectedEntity( model.selectedEntityVar.now().copy(kind = kind) )
           }
         )
