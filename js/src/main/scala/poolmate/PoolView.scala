@@ -2,6 +2,8 @@ package poolmate
 
 import com.raquo.laminar.api.L.*
 
+import java.time.LocalDate
+
 import Component.*
 import Validator.*
 
@@ -145,9 +147,9 @@ object PoolView extends View:
           )
         },
         lbl("Built"),
-        year.amend {
+        date.amend {
           controlled(
-            value <-- model.selectedEntityVar.signal.map(_.built.toString),
+            value <-- model.selectedEntityVar.signal.map(pool => LocalDate.ofEpochDay(pool.built).toString),
             onInput.mapToValue.filter(_.toIntOption.nonEmpty).map(_.toInt) --> { built =>
               model.updateSelectedEntity( model.selectedEntityVar.now().copy(built = built) )
             }
