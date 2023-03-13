@@ -5,6 +5,7 @@ import com.raquo.laminar.api.L.*
 import java.time.LocalDate
 
 import Component.*
+import Entity.*
 import Validator.*
 
 object SurfaceView extends View:
@@ -40,9 +41,9 @@ object SurfaceView extends View:
       lbl("Installed"),
       date.amend {
         controlled(
-          value <-- model.selectedEntityVar.signal.map(surface => LocalDate.ofEpochDay(surface.installed).toString),
+          value <-- model.selectedEntityVar.signal.map(surface => localDateOfLongToString(surface.installed)),
           onInput.mapToValue.filter(_.nonEmpty) --> { installed =>
-            model.updateSelectedEntity( model.selectedEntityVar.now().copy(installed = LocalDate.parse(installed).toEpochDay) )
+            model.updateSelectedEntity( model.selectedEntityVar.now().copy(installed = localDateOfStringToLong(installed)) )
           }
         )
       },
