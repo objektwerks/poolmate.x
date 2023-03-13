@@ -35,7 +35,7 @@ object SurfaceView extends View:
           }
         },
       ),
-      hdr("Pool"),
+      hdr("Surface"),
       err(errorBus),
       lbl("Installed"),
       date.amend {
