@@ -132,8 +132,8 @@ object PoolView extends View:
         listbox( UnitOfMeasure.toList ).amend {
           controlled(
             value <-- model.selectedEntityVar.signal.map(_.unit),
-            onChange.mapToValue --> { value =>
-              model.updateSelectedEntity( model.selectedEntityVar.now().copy(unit = value) )
+            onChange.mapToValue --> { unit =>
+              model.updateSelectedEntity( model.selectedEntityVar.now().copy(unit = unit) )
             }
           )
         },
