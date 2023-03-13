@@ -17,7 +17,13 @@ object PumpView extends View:
           route(PumpsPage)
         case _ => log(s"Pump -> add handler failed: $event")
 
-    def updateHandler(event: Event): Unit = ???
+    def updateHandler(event: Event): Unit =
+      event match
+        case Fault(cause, _) => emitError(s"Update pump failed: $cause")
+        case Updated(_) =>
+          clearErrors()
+          route(PumpsPage)
+        case _ => log(s"Pump -> update handler failed: $event")
 
     div(
       
