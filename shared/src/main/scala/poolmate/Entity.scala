@@ -54,6 +54,9 @@ object Entity:
   given supplyOrdering: Ordering[Supply] = Ordering.by[Supply, Long](s => s.purchased).reverse
   given repairOrdering: Ordering[Repair] = Ordering.by[Repair, Long](r => r.repaired).reverse
 
+  def localDateOfLongToString(localDate: Long): String = LocalDate.ofEpochDay(localDate).toString
+  def localDateOfStringToLong(localDate: String): Long = LocalDate.parse(localDate).toEpochDay
+
 final case class Account(id: Long = 0,
                          license: String = "",
                          emailAddress: String = "",
