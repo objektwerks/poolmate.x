@@ -4,6 +4,7 @@ import com.raquo.laminar.api.L.*
 
 import Component.*
 import Validator.*
+import java.time.LocalDate
 
 object SurfaceView extends View:
   def apply(model: Model[Surface], license: String): HtmlElement =
@@ -25,5 +26,60 @@ object SurfaceView extends View:
         case _ => log(s"Surface -> update handler failed: $event")
 
     div(
-      
+      bar(
+        btn("Surfaces").amend {
+          onClick --> { _ =>
+            log("Surface -> Surfaces menu item onClick")
+            route(SurfacesPage)
+          }
+        },
+      ),
+      hdr("Pool"),
+      err(errorBus),
+      lbl("Installed"),
+      date.amend {
+        controlled(
+          value <-- model.selectedEntityVar.signal.map(surface => LocalDate.ofEpochDay(surface.installed).toString),
+          onInput.mapToValue.filter(_.toIntOption.nonEmpty).map(_.toInt) --> { installed =>
+            model.updateSelectedEntity( model.selectedEntityVar.now().copy(installed = installed) )
+          }
+        )
+      },
+      lbl("Kind"),
+      txt.amend {
+        controlled(
+          value <-- model.selectedEntityVar.signal.map(_.kind),
+          onChange.mapToValue --> { kind =>
+            model.updateSelectedEntity( model.selectedEntityVar.now().copy(kind = kind) )
+          }
+        )
+      },
+      lbl("Cost"),
+      int.amend {
+        controlled(
+          value <-- model.selectedEntityVar.signal.map(_.cost.toString),
+          onInput.mapToValue.filter(_.toIntOption.nonEmpty).map(_.toInt) --> { cost =>
+            model.updateSelectedEntity( model.selectedEntityVar.now().copy(cost = cost) )
+          }
+        )
+      },
+      cbar(
+        btn("Add").amend {
+          disabled <-- model.selectedEntityVar.signal.map { surface => !(surface.id.isZero && surface.isValid) }
+          onClick --> { _ =>
+            log(s"Surface -> Add onClick")
+            val command = AddSurface(license, model.selectedEntityVar.now())
+            call(command, addHandler)
+
+          }
+        },
+        btn("Update").amend {
+          disabled <-- model.selectedEntityVar.signal.map { surface => !(surface.id.isGreaterThanZero && surface.isValid) }
+          onClick --> { _ =>
+            log(s"Surface -> Update onClick")
+            val command = UpdateSurface(license, model.selectedEntityVar.now())
+            call(command, updateHandler)
+          }
+        }
+      )
     )
