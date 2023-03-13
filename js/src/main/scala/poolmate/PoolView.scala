@@ -5,6 +5,7 @@ import com.raquo.laminar.api.L.*
 import java.time.LocalDate
 
 import Component.*
+import Entity.*
 import Validator.*
 
 object PoolView extends View:
@@ -149,9 +150,9 @@ object PoolView extends View:
         lbl("Built"),
         date.amend {
           controlled(
-            value <-- model.selectedEntityVar.signal.map(pool => LocalDate.ofEpochDay(pool.built).toString),
+            value <-- model.selectedEntityVar.signal.map(pool => localDateOfLongToString(pool.built)),
             onInput.mapToValue.filter(_.nonEmpty) --> { built =>
-              model.updateSelectedEntity( model.selectedEntityVar.now().copy(built = LocalDate.parse(built).toEpochDay) )
+              model.updateSelectedEntity( model.selectedEntityVar.now().copy(built = localDateOfStringToLong(built)) )
             }
           )
         }
