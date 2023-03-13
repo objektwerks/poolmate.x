@@ -150,8 +150,8 @@ object PoolView extends View:
         date.amend {
           controlled(
             value <-- model.selectedEntityVar.signal.map(pool => LocalDate.ofEpochDay(pool.built).toString),
-            onInput.mapToValue.filter(_.toIntOption.nonEmpty).map(_.toInt) --> { built =>
-              model.updateSelectedEntity( model.selectedEntityVar.now().copy(built = built) )
+            onInput.mapToValue --> { built =>
+              model.updateSelectedEntity( model.selectedEntityVar.now().copy(built = LocalDate.parse(built).toEpochDay) )
             }
           )
         }
