@@ -41,7 +41,7 @@ object SurfaceView extends View:
       date.amend {
         controlled(
           value <-- model.selectedEntityVar.signal.map(surface => LocalDate.ofEpochDay(surface.installed).toString),
-          onInput.mapToValue --> { installed =>
+          onInput.mapToValue.filter(_.nonEmpty) --> { installed =>
             model.updateSelectedEntity( model.selectedEntityVar.now().copy(installed = LocalDate.parse(installed).toEpochDay) )
           }
         )
