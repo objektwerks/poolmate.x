@@ -2,9 +2,10 @@ package poolmate
 
 import com.raquo.laminar.api.L.*
 
+import java.time.LocalDate
+
 import Component.*
 import Validator.*
-import java.time.LocalDate
 
 object SurfaceView extends View:
   def apply(model: Model[Surface], license: String): HtmlElement =
