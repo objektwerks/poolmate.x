@@ -16,7 +16,13 @@ object SurfaceView extends View:
           route(SurfacesPage)
         case _ => log(s"Surface -> add handler failed: $event")
 
-    def updateHandler(event: Event): Unit = ???
+    def updateHandler(event: Event): Unit =
+      event match
+        case Fault(cause, _) => emitError(s"Update surface failed: $cause")
+        case Updated(_) =>
+          clearErrors()
+          route(SurfacesPage)
+        case _ => log(s"Surface -> update handler failed: $event")
 
     div(
       
