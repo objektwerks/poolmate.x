@@ -29,7 +29,7 @@ object DeckView extends View:
       bar(
         btn("Decks").amend {
           onClick --> { _ =>
-            log("Surface -> Decks menu item onClick")
+            log("Deck -> Decks menu item onClick")
             route(DecksPage)
           }
         },
