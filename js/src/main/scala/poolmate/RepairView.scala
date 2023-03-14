@@ -17,7 +17,13 @@ object RepairView extends View:
           route(RepairsPage)
         case _ => log(s"Repair -> add handler failed: $event")
 
-    def updateHandler(event: Event): Unit = ???
+    def updateHandler(event: Event): Unit =
+      event match
+        case Fault(cause, _) => emitError(s"Update repair failed: $cause")
+        case Updated(_) =>
+          clearErrors()
+          route(RepairsPage)
+        case _ => log(s"Repair -> update handler failed: $event")
 
     div(
       
