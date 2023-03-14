@@ -278,20 +278,20 @@ final class Store(conf: Config,
   def listTimers(): List[Timer] =
     DB readOnly { implicit session =>
       sql"select * from timer order by installed desc"
-      .map(rs => Timer(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("model"), rs.int("cost")))
+      .map(rs => Timer(rs.long("id"), rs.long("pool_id"), rs.string("model"), rs.int("cost"), rs.int("installed")))
       .list()
     }
 
   def addTimer(timer: Timer): Timer =
     val id = DB localTx { implicit session =>
-      sql"insert into timer(pool_id, installed, model, cost) values(${timer.poolId}, ${timer.installed}, ${timer.model}, ${timer.cost})"
+      sql"insert into timer(pool_id, model, cost, installed) values(${timer.poolId}, ${timer.model}, ${timer.cost}, ${timer.installed})"
       .updateAndReturnGeneratedKey()
     }
     timer.copy(id = id)
   
   def updateTimer(timer: Timer): Unit =
     DB localTx { implicit session =>
-      sql"update timer set installed = ${timer.installed}, model = ${timer.model}, cost = ${timer.cost} where id = ${timer.id}"
+      sql"update timer set model = ${timer.model}, cost = ${timer.cost}, installed = ${timer.installed} where id = ${timer.id}"
       .update()
     }
     ()

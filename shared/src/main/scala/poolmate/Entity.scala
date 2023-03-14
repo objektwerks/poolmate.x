@@ -100,9 +100,9 @@ final case class Pump(id: Long = 0,
 
 final case class Timer(id: Long = 0,
                        poolId: Long = 0,
-                       installed: Long = LocalDate.now.toEpochDay,
                        model: String = "",
-                       cost: Int = 0) extends Entity:
+                       cost: Int = 0,
+                       installed: Long = LocalDate.now.toEpochDay) extends Entity:
   def display = model
 
 final case class TimerSetting(id: Long = 0,
