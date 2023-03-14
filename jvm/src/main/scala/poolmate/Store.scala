@@ -257,20 +257,20 @@ final class Store(conf: Config,
   def listPumps(): List[Pump] =
     DB readOnly { implicit session =>
       sql"select * from pump order by installed desc"
-      .map(rs => Pump(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("model"), rs.int("cost")))
+      .map(rs => Pump(rs.long("id"), rs.long("pool_id"), rs.string("model"), rs.int("cost"), rs.int("installed")))
       .list()
     }
 
   def addPump(pump: Pump): Pump =
     val id = DB localTx { implicit session =>
-      sql"insert into pump(pool_id, installed, model, cost) values(${pump.poolId}, ${pump.installed}, ${pump.model}, ${pump.cost})"
+      sql"insert into pump(pool_id, model, cost, installed) values(${pump.poolId}, ${pump.model}, ${pump.cost}, ${pump.installed})"
       .updateAndReturnGeneratedKey()
     }
     pump.copy(id = id)  
   
   def updatePump(pump: Pump): Unit =
     DB localTx { implicit session =>
-      sql"update pump set installed = ${pump.installed}, model = ${pump.model}, cost = ${pump.cost} where id = ${pump.id}"
+      sql"update pump set model = ${pump.model}, cost = ${pump.cost}, installed = ${pump.installed} where id = ${pump.id}"
       .update()
     }
     ()
