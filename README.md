@@ -5,7 +5,9 @@ Pool
 Todo
 ----
 1. Refactor list views to contain parent id.
-2. Test UI.
+2. Post handler errors to errorbus.
+3. Add dashboard.
+4. Test UI.
 
 Charts
 ------
