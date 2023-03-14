@@ -50,5 +50,6 @@ object PoolsView extends View:
             call(command, handler)
           }
         }
-      )
+      ),
+      dashboard
     )
