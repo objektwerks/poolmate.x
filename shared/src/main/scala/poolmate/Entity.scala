@@ -56,6 +56,9 @@ object Entity:
 
   def localDateOfLongToString(localDate: Long): String = LocalDate.ofEpochDay(localDate).toString
   def localDateOfStringToLong(localDate: String): Long = LocalDate.parse(localDate).toEpochDay
+  
+  def localTimeOfLongToString(localTime: Long): String = LocalTime.ofSecondOfDay(localTime).toString
+  def localTimeOfStringToInt(localTime: String): Int = LocalTime.parse(localTime).toSecondOfDay()
 
 final case class Account(id: Long = 0,
                          license: String = "",
