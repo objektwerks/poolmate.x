@@ -23,9 +23,9 @@ CREATE TABLE pool (
 CREATE TABLE surface (
   id BIGSERIAL PRIMARY KEY,
   pool_id BIGINT REFERENCES pool(id),
-  installed BIGINT NOT NULL,
   kind VARCHAR NOT NULL,
-  cost INT NOT NULL
+  cost INT NOT NULL,
+  installed BIGINT NOT NULL
 );
 
 CREATE TABLE deck (

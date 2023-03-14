@@ -79,9 +79,9 @@ final case class Pool(id: Long = 0,
 
 final case class Surface(id: Long = 0,
                          poolId: Long = 0,
-                         installed: Long = LocalDate.now.toEpochDay,
                          kind: String = "",
-                         cost: Int = 0) extends Entity:
+                         cost: Int = 0,
+                         installed: Long = LocalDate.now.toEpochDay) extends Entity:
   def display = kind
 
 final case class Deck(id: Long = 0,
