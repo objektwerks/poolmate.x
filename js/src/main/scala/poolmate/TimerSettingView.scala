@@ -48,9 +48,9 @@ object TimerSettingView extends View:
       lbl("Time On"),
       time.amend {
         controlled(
-          value <-- model.selectedEntityVar.signal.map(_.timeOn.toString),
+          value <-- model.selectedEntityVar.signal.map(timersetting => localTimeOfLongToString(timersetting.timeOn)),
           onChange.mapToValue.filter(_.nonEmpty) --> { timeOn =>
-            model.updateSelectedEntity( model.selectedEntityVar.now().copy(timeOn = timeOn.toInt) )
+            model.updateSelectedEntity( model.selectedEntityVar.now().copy(timeOn = localTimeOfStringToInt(timeOn)) )
           }
         )
       },
