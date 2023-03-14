@@ -17,7 +17,13 @@ object HeaterSettingView extends View:
           route(HeaterPage(heaterId))
         case _ => log(s"HeaterSetting -> add handler failed: $event")
 
-    def updateHandler(event: Event): Unit = ???
+    def updateHandler(event: Event): Unit =
+      event match
+        case Fault(cause, _) => emitError(s"Update heater setting failed: $cause")
+        case Updated(_) =>
+          clearErrors()
+          route(HeaterPage(heaterId))
+        case _ => log(s"HeaterSetting -> update handler failed: $event")
 
     div(
       
