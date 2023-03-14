@@ -6,8 +6,7 @@ Todo
 ----
 1. Refactor list views to contain parent id.
 2. Post handler errors to errorbus.
-3. Add dashboard.
-4. Test UI.
+3. Test UI.
 
 Charts
 ------
