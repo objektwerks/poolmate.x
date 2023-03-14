@@ -14,7 +14,7 @@ object TimerSettingView extends View:
         case TimerSettingAdded(timersetting) =>
           clearErrors()
           model.addEntity(timersetting)
-          route(TimerPage(timerId))
+          route(TimerSettingsPage)
         case _ => log(s"TimerSetting -> add handler failed: $event")
 
     def updateHandler(event: Event): Unit =
@@ -22,15 +22,15 @@ object TimerSettingView extends View:
         case Fault(cause, _) => emitError(s"Update timer setting failed: $cause")
         case Updated(_) =>
           clearErrors()
-          route(TimerPage(timerId))
+          route(TimerSettingsPage)
         case _ => log(s"TimerSetting -> update handler failed: $event")
 
     div(
       bar(
-        btn("Timer").amend {
+        btn("Timer Settings").amend {
           onClick --> { _ =>
-            log("TimerSetting -> Timer menu item onClick")
-            route(TimerPage(timerId))
+            log("TimerSetting -> Timer Settings menu item onClick")
+            route(TimerSettingsPage)
           }
         },
       ),
