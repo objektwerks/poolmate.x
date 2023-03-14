@@ -26,5 +26,60 @@ object RepairView extends View:
         case _ => log(s"Repair -> update handler failed: $event")
 
     div(
-      
+      bar(
+        btn("Repairs").amend {
+          onClick --> { _ =>
+            log("Repair -> Repairs menu item onClick")
+            route(RepairsPage)
+          }
+        },
+      ),
+      hdr("Repair"),
+      err(errorBus),
+      lbl("Repair"),
+      txt.amend {
+        controlled(
+          value <-- model.selectedEntityVar.signal.map(_.repair),
+          onChange.mapToValue.filter(_.nonEmpty) --> { repair =>
+            model.updateSelectedEntity( model.selectedEntityVar.now().copy(repair = repair) )
+          }
+        )
+      },
+      lbl("Cost"),
+      int.amend {
+        controlled(
+          value <-- model.selectedEntityVar.signal.map(_.cost.toString),
+          onInput.mapToValue.filter(_.toIntOption.nonEmpty).map(_.toInt) --> { cost =>
+            model.updateSelectedEntity( model.selectedEntityVar.now().copy(cost = cost) )
+          }
+        )
+      },
+      lbl("Repaired"),
+      date.amend {
+        controlled(
+          value <-- model.selectedEntityVar.signal.map(repair => localDateOfLongToString(repair.repaired)),
+          onInput.mapToValue.filter(_.nonEmpty) --> { repaired =>
+            model.updateSelectedEntity( model.selectedEntityVar.now().copy(repaired = localDateOfStringToLong(repaired)) )
+          }
+        )
+      },
+      cbar(
+        btn("Add").amend {
+          disabled <-- model.selectedEntityVar.signal.map { repair => !(repair.id.isZero && repair.isValid) }
+          onClick --> { _ =>
+            log(s"Repair -> Add onClick")
+            val command = AddRepair(license, model.selectedEntityVar.now())
+            call(command, addHandler)
+
+          }
+        },
+        btn("Update").amend {
+          disabled <-- model.selectedEntityVar.signal.map { repair => !(repair.id.isGreaterThanZero && repair.isValid) }
+          onClick --> { _ =>
+            log(s"Repair -> Update onClick")
+            val command = UpdateRepair(license, model.selectedEntityVar.now())
+            call(command, updateHandler)
+          }
+        }
+      )
     )
