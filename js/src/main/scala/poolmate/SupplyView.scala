@@ -17,7 +17,13 @@ object SupplyView extends View:
           route(SuppliesPage)
         case _ => log(s"Supply -> add handler failed: $event")
 
-    def updateHandler(event: Event): Unit = ???
+    def updateHandler(event: Event): Unit =
+      event match
+        case Fault(cause, _) => emitError(s"Update supply failed: $cause")
+        case Updated(_) =>
+          clearErrors()
+          route(SuppliesPage)
+        case _ => log(s"Supply -> update handler failed: $event")
 
     div(
       
