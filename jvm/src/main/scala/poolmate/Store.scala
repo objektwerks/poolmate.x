@@ -236,20 +236,20 @@ final class Store(conf: Config,
   def listDecks(): List[Deck] =
     DB readOnly { implicit session =>
       sql"select * from deck order by installed desc"
-      .map(rs => Deck(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("kind"), rs.int("cost")))
+      .map(rs => Deck(rs.long("id"), rs.long("pool_id"), rs.string("kind"), rs.int("cost"), rs.int("installed")))
       .list()
     }
 
   def addDeck(deck: Deck): Deck =
     val id = DB localTx { implicit session =>
-      sql"insert into deck(pool_id, installed, kind, cost) values(${deck.poolId}, ${deck.installed}, ${deck.kind}, ${deck.cost})"
+      sql"insert into deck(pool_id, kind, cost, installed) values(${deck.poolId}, ${deck.kind}, ${deck.cost}, ${deck.installed})"
       .updateAndReturnGeneratedKey()
     }
     deck.copy(id = id)
 
   def updateDeck(deck: Deck): Unit =
     DB localTx { implicit session =>
-      sql"update deck set installed = ${deck.installed}, kind = ${deck.kind}, cost = ${deck.cost} where id = ${deck.id}"
+      sql"update deck set kind = ${deck.kind}, cost = ${deck.cost}, installed = ${deck.installed} where id = ${deck.id}"
       .update()
     }
     ()

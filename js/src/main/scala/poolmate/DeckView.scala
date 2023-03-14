@@ -36,15 +36,6 @@ object DeckView extends View:
       ),
       hdr("Deck"),
       err(errorBus),
-      lbl("Installed"),
-      date.amend {
-        controlled(
-          value <-- model.selectedEntityVar.signal.map(deck => localDateOfLongToString(deck.installed)),
-          onInput.mapToValue.filter(_.nonEmpty) --> { installed =>
-            model.updateSelectedEntity( model.selectedEntityVar.now().copy(installed = localDateOfStringToLong(installed)) )
-          }
-        )
-      },
       lbl("Kind"),
       txt.amend {
         controlled(
@@ -60,6 +51,15 @@ object DeckView extends View:
           value <-- model.selectedEntityVar.signal.map(_.cost.toString),
           onInput.mapToValue.filter(_.toIntOption.nonEmpty).map(_.toInt) --> { cost =>
             model.updateSelectedEntity( model.selectedEntityVar.now().copy(cost = cost) )
+          }
+        )
+      },
+      lbl("Installed"),
+      date.amend {
+        controlled(
+          value <-- model.selectedEntityVar.signal.map(deck => localDateOfLongToString(deck.installed)),
+          onInput.mapToValue.filter(_.nonEmpty) --> { installed =>
+            model.updateSelectedEntity( model.selectedEntityVar.now().copy(installed = localDateOfStringToLong(installed)) )
           }
         )
       },
