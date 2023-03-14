@@ -3,6 +3,7 @@ package poolmate
 import com.raquo.laminar.api.L.*
 
 import Component.*
+import Entity.*
 import Validator.*
 
 object RepairView extends View:
