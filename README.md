@@ -4,7 +4,7 @@ Pool
 
 Todo
 ----
-1. Build entity views.
+1. Refactor list views to contain parent id.
 2. Test UI.
 
 Charts
