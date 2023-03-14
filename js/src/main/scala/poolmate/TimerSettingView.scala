@@ -41,43 +41,43 @@ object TimerSettingView extends View:
         controlled(
           value <-- model.selectedEntityVar.signal.map(timersetting => localDateOfLongToString(timersetting.created)),
           onInput.mapToValue.filter(_.nonEmpty) --> { created =>
-            model.updateSelectedEntity( model.selectedEntityVar.now().copy(installed = localDateOfStringToLong(created)) )
+            model.updateSelectedEntity( model.selectedEntityVar.now().copy(created = localDateOfStringToLong(created)) )
           }
         )
       },
-      lbl("Model"),
-      txt.amend {
+      lbl("Time On"),
+      time.amend {
         controlled(
-          value <-- model.selectedEntityVar.signal.map(_.model),
-          onChange.mapToValue.filter(_.nonEmpty) --> { m =>
-            model.updateSelectedEntity( model.selectedEntityVar.now().copy(model = m) )
+          value <-- model.selectedEntityVar.signal.map(_.timeOn.toString),
+          onChange.mapToValue.filter(_.nonEmpty) --> { timeOn =>
+            model.updateSelectedEntity( model.selectedEntityVar.now().copy(timeOn = timeOn.toInt) )
           }
         )
       },
-      lbl("Cost"),
-      int.amend {
+      lbl("Time Off"),
+      time.amend {
         controlled(
-          value <-- model.selectedEntityVar.signal.map(_.cost.toString),
-          onInput.mapToValue.filter(_.toIntOption.nonEmpty).map(_.toInt) --> { cost =>
-            model.updateSelectedEntity( model.selectedEntityVar.now().copy(cost = cost) )
+          value <-- model.selectedEntityVar.signal.map(_.timeOff.toString),
+          onInput.mapToValue.filter(_.toIntOption.nonEmpty).map(_.toInt) --> { timeOff =>
+            model.updateSelectedEntity( model.selectedEntityVar.now().copy(timeOff = timeOff) )
           }
         )
       },
       cbar(
         btn("Add").amend {
-          disabled <-- model.selectedEntityVar.signal.map { timer => !(timer.id.isZero && timer.isValid) }
+          disabled <-- model.selectedEntityVar.signal.map { timersetting => !(timersetting.id.isZero && timersetting.isValid) }
           onClick --> { _ =>
-            log(s"Timer -> Add onClick")
-            val command = AddTimer(license, model.selectedEntityVar.now())
+            log(s"TimerSetting -> Add onClick")
+            val command = AddTimerSetting(license, model.selectedEntityVar.now())
             call(command, addHandler)
 
           }
         },
         btn("Update").amend {
-          disabled <-- model.selectedEntityVar.signal.map { timer => !(timer.id.isGreaterThanZero && timer.isValid) }
+          disabled <-- model.selectedEntityVar.signal.map { timersetting => !(timersetting.id.isGreaterThanZero && timersetting.isValid) }
           onClick --> { _ =>
-            log(s"Timer -> Update onClick")
-            val command = UpdateTimer(license, model.selectedEntityVar.now())
+            log(s"TimerSetting -> Update onClick")
+            val command = UpdateTimerSetting(license, model.selectedEntityVar.now())
             call(command, updateHandler)
           }
         }
