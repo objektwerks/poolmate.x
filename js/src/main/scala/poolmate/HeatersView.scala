@@ -12,7 +12,7 @@ object HeatersView extends View:
         case HeatersListed(heaters: List[Heater]) =>
           clearErrors()
           model.setEntities(heaters)
-        case _ => log(s"Heaters -> handler failed: $event")
+        case _ => emitError(s"Heaters handler failed: $event")
 
     div(
       bar(
