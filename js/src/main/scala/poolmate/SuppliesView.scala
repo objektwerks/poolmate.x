@@ -12,7 +12,7 @@ object SuppliesView extends View:
         case SuppliesListed(supplies: List[Supply]) =>
           clearErrors()
           model.setEntities(supplies)
-        case _ => log(s"Supplies -> handler failed: $event")
+        case _ => emitError(s"Supplies handler failed: $event")
 
     div(
       bar(
