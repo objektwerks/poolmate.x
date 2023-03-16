@@ -16,7 +16,7 @@ object AccountView extends View:
           clearErrors()
           accountVar.set(account)
           route(AppPage)
-        case _ => log(s"Account -> deactivate handler failed: $event")
+        case _ => emitError(s"Account deactivate handler failed: $event")
  
     def reactivateHandler(event: Event): Unit =
       event match
