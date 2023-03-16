@@ -15,7 +15,7 @@ object RepairView extends View:
           clearErrors()
           model.addEntity(repair)
           route(RepairsPage)
-        case _ => log(s"Repair -> add handler failed: $event")
+        case _ => emitError(s"Repair add handler failed: $event")
 
     def updateHandler(event: Event): Unit =
       event match
@@ -23,7 +23,7 @@ object RepairView extends View:
         case Updated(_) =>
           clearErrors()
           route(RepairsPage)
-        case _ => log(s"Repair -> update handler failed: $event")
+        case _ => emitError(s"Repair update handler failed: $event")
 
     div(
       bar(
