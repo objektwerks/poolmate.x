@@ -12,7 +12,7 @@ object DecksView extends View:
         case DecksListed(decks: List[Deck]) =>
           clearErrors()
           model.setEntities(decks)
-        case _ => log(s"Decks -> handler failed: $event")
+        case _ => emitError(s"Decks handler failed: $event")
 
     div(
       bar(
