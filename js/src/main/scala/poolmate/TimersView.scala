@@ -12,7 +12,7 @@ object TimersView extends View:
         case TimersListed(timers: List[Timer]) =>
           clearErrors()
           model.setEntities(timers)
-        case _ => log(s"Timers -> handler failed: $event")
+        case _ => emitError(s"Timers handler failed: $event")
 
     div(
       bar(
