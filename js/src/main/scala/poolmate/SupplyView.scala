@@ -15,7 +15,7 @@ object SupplyView extends View:
           clearErrors()
           model.addEntity(supply)
           route(SuppliesPage)
-        case _ => log(s"Supply -> add handler failed: $event")
+        case _ => emitError(s"Supply add handler failed: $event")
 
     def updateHandler(event: Event): Unit =
       event match
@@ -23,7 +23,7 @@ object SupplyView extends View:
         case Updated(_) =>
           clearErrors()
           route(SuppliesPage)
-        case _ => log(s"Supply -> update handler failed: $event")
+        case _ => emitError(s"Supply update handler failed: $event")
 
     div(
       bar(
