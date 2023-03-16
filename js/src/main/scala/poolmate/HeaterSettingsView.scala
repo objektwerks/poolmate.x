@@ -12,13 +12,13 @@ object HeaterSettingsView extends View:
         case HeaterSettingsListed(heatersettings: List[HeaterSetting]) =>
           clearErrors()
           model.setEntities(heatersettings)
-        case _ => log(s"HeaterSettings -> handler failed: $event")
+        case _ => emitError(s"HeaterSettings -> handler failed: $event")
 
     div(
       bar(
         btn("Heater").amend {
           onClick --> { _ =>
-            log("HeaterSettings -> Pool menu item onClick")
+            log("HeaterSettings -> Heater menu item onClick")
             route(HeaterPage(poolId, heaterId))
           }
         }      
