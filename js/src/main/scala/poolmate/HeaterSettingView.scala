@@ -15,7 +15,7 @@ object HeaterSettingView extends View:
           clearErrors()
           model.addEntity(heatersetting)
           route(HeaterSettingsPage)
-        case _ => log(s"HeaterSetting -> add handler failed: $event")
+        case _ => emitError(s"HeaterSetting add handler failed: $event")
 
     def updateHandler(event: Event): Unit =
       event match
@@ -23,7 +23,7 @@ object HeaterSettingView extends View:
         case Updated(_) =>
           clearErrors()
           route(HeaterSettingsPage)
-        case _ => log(s"HeaterSetting -> update handler failed: $event")
+        case _ => emitError(s"HeaterSetting update handler failed: $event")
 
     div(
       bar(
