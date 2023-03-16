@@ -17,7 +17,7 @@ object SurfaceView extends View:
           clearErrors()
           model.addEntity(surface)
           route(SurfacesPage)
-        case _ => log(s"Surface -> add handler failed: $event")
+        case _ => emitError(s"Surface -> add handler failed: $event")
 
     def updateHandler(event: Event): Unit =
       event match
@@ -25,7 +25,7 @@ object SurfaceView extends View:
         case Updated(_) =>
           clearErrors()
           route(SurfacesPage)
-        case _ => log(s"Surface -> update handler failed: $event")
+        case _ => emitError(s"Surface -> update handler failed: $event")
 
     div(
       bar(
