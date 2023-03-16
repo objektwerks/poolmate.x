@@ -12,7 +12,7 @@ object SurfacesView extends View:
         case SurfacesListed(surfaces: List[Surface]) =>
           clearErrors()
           model.setEntities(surfaces)
-        case _ => log(s"Surfaces -> handler failed: $event")
+        case _ => emitError(s"Surfaces -> handler failed: $event")
 
     div(
       bar(
