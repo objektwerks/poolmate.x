@@ -15,7 +15,7 @@ object DeckView extends View:
           clearErrors()
           model.addEntity(deck)
           route(DecksPage)
-        case _ => log(s"Deck -> add handler failed: $event")
+        case _ => emitError(s"Deck add handler failed: $event")
 
     def updateHandler(event: Event): Unit =
       event match
@@ -23,7 +23,7 @@ object DeckView extends View:
         case Updated(_) =>
           clearErrors()
           route(DecksPage)
-        case _ => log(s"Deck -> update handler failed: $event")
+        case _ => emitError(s"Deck update handler failed: $event")
 
     div(
       bar(
