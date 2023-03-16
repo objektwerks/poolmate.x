@@ -15,7 +15,7 @@ object PumpView extends View:
           clearErrors()
           model.addEntity(pump)
           route(PumpsPage)
-        case _ => log(s"Pump -> add handler failed: $event")
+        case _ => emitError(s"Pump add handler failed: $event")
 
     def updateHandler(event: Event): Unit =
       event match
@@ -23,7 +23,7 @@ object PumpView extends View:
         case Updated(_) =>
           clearErrors()
           route(PumpsPage)
-        case _ => log(s"Pump -> update handler failed: $event")
+        case _ => emitError(s"Pump update handler failed: $event")
 
     div(
       bar(
