@@ -12,7 +12,7 @@ object PumpsView extends View:
         case PumpsListed(pumps: List[Pump]) =>
           clearErrors()
           model.setEntities(pumps)
-        case _ => log(s"Pumps -> handler failed: $event")
+        case _ => emitError(s"Pumps handler failed: $event")
 
     div(
       bar(
