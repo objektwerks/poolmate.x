@@ -12,13 +12,13 @@ object TimerSettingsView extends View:
         case TimerSettingsListed(timersettings: List[TimerSetting]) =>
           clearErrors()
           model.setEntities(timersettings)
-        case _ => log(s"TimerSettings -> handler failed: $event")
+        case _ => emitError(s"TimerSettings handler failed: $event")
 
     div(
       bar(
         btn("Timer").amend {
           onClick --> { _ =>
-            log("TimerSettings -> Pool menu item onClick")
+            log("TimerSettings -> Timer menu item onClick")
             route(TimerPage(poolId, timerId))
           }
         }      
