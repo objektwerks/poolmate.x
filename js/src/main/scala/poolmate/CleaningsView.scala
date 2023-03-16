@@ -12,7 +12,7 @@ object CleaningsView extends View:
         case CleaningsListed(cleanings: List[Cleaning]) =>
           clearErrors()
           model.setEntities(cleanings)
-        case _ => log(s"Cleanings -> handler failed: $event")
+        case _ => emitError(s"Cleanings handler failed: $event")
 
     div(
       bar(
