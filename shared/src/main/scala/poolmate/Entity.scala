@@ -54,10 +54,10 @@ object Entity:
   given supplyOrdering: Ordering[Supply] = Ordering.by[Supply, Long](s => s.purchased).reverse
   given repairOrdering: Ordering[Repair] = Ordering.by[Repair, Long](r => r.repaired).reverse
 
-  def localDateOfLongToString(localDate: Long): String = LocalDate.ofEpochDay(localDate).toString
+  def localDateOfLongToString(epochDay: Long): String = LocalDate.ofEpochDay(epochDay).toString
   def localDateOfStringToLong(localDate: String): Long = LocalDate.parse(localDate).toEpochDay
   
-  def localTimeOfLongToString(localTime: Long): String = LocalTime.ofSecondOfDay(localTime).toString
+  def localTimeOfLongToString(secondOfDay: Long): String = LocalTime.ofSecondOfDay(secondOfDay).toString
   def localTimeOfStringToInt(localTime: String): Int = LocalTime.parse(localTime).toSecondOfDay()
 
 final case class Account(id: Long = 0,
