@@ -33,6 +33,12 @@ object HeaterView extends View:
             route(HeatersPage)
           }
         },
+        btn("Heater Settings").amend {
+          onClick --> { _ =>
+            log("Heater Settings menu item onClick")
+            route(HeaterSettingsPage)
+          }
+        }
       ),
       hdr("Heater"),
       err(errorBus),
