@@ -33,6 +33,12 @@ object TimerView extends View:
             route(TimersPage)
           }
         },
+        btn("Timer Settings").amend {
+          onClick --> { _ =>
+            log("Timer Settings menu item onClick")
+            route(TimerSettingsPage)
+          }
+        }
       ),
       hdr("Timer"),
       err(errorBus),
