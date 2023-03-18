@@ -30,7 +30,7 @@ object TypeOfChemical:
 final case class Email(id: String,
                        license: String,
                        address: String,
-                       dateSent: Long = LocalDate.now.toEpochDay,
+                       dateSent: Long = Entity.currentEpochDay(),
                        timeSent: Int = LocalTime.now.toSecondOfDay,
                        processed: Boolean = false,
                        valid: Boolean = false)
@@ -54,6 +54,7 @@ object Entity:
   given supplyOrdering: Ordering[Supply] = Ordering.by[Supply, Long](s => s.purchased).reverse
   given repairOrdering: Ordering[Repair] = Ordering.by[Repair, Long](r => r.repaired).reverse
 
+  def currentEpochDay(): Long = LocalDate.now.toEpochDay
   def localDateOfLongToString(epochDay: Long): String = LocalDate.ofEpochDay(epochDay).toString
   def localDateOfStringToLong(localDate: String): Long = LocalDate.parse(localDate).toEpochDay
   
@@ -64,7 +65,7 @@ final case class Account(id: Long = 0,
                          license: String = "",
                          emailAddress: String = "",
                          pin: String = "",
-                         activated: Long = LocalDate.now.toEpochDay,
+                         activated: Long = Entity.currentEpochDay(),
                          deactivated: Long = 0) extends Entity:
   def display = emailAddress
 
@@ -81,33 +82,33 @@ final case class Surface(id: Long = 0,
                          poolId: Long = 0,
                          kind: String = "",
                          cost: Int = 0,
-                         installed: Long = LocalDate.now.toEpochDay) extends Entity:
+                         installed: Long = Entity.currentEpochDay()) extends Entity:
   def display = kind
 
 final case class Deck(id: Long = 0,
                       poolId: Long = 0,
                       kind: String = "",
                       cost: Int = 0,
-                      installed: Long = LocalDate.now.toEpochDay) extends Entity:
+                      installed: Long = Entity.currentEpochDay()) extends Entity:
   def display = kind
 
 final case class Pump(id: Long = 0,
                       poolId: Long = 0,
                       model: String = "",
                       cost: Int = 0,
-                      installed: Long = LocalDate.now.toEpochDay) extends Entity:
+                      installed: Long = Entity.currentEpochDay()) extends Entity:
   def display = model
 
 final case class Timer(id: Long = 0,
                        poolId: Long = 0,
                        model: String = "",
                        cost: Int = 0,
-                       installed: Long = LocalDate.now.toEpochDay) extends Entity:
+                       installed: Long = Entity.currentEpochDay()) extends Entity:
   def display = model
 
 final case class TimerSetting(id: Long = 0,
                               timerId: Long = 0,
-                              created: Long = LocalDate.now.toEpochDay,
+                              created: Long = Entity.currentEpochDay(),
                               timeOn: Int = 0,
                               timeOff: Int = 0) extends Entity:
   def display = s"${LocalDate.ofEpochDay(created).toString}: $timeOn - $timeOff"
@@ -116,13 +117,13 @@ final case class Heater(id: Long = 0,
                         poolId: Long = 0,
                         model: String = "",
                         cost: Int = 0,
-                        installed: Long = LocalDate.now.toEpochDay) extends Entity:
+                        installed: Long = Entity.currentEpochDay()) extends Entity:
   def display = model
 
 final case class HeaterSetting(id: Long = 0,
                                heaterId: Long = 0,
                                temp: Int = 0,
-                               dateOn: Long = LocalDate.now.toEpochDay,
+                               dateOn: Long = Entity.currentEpochDay(),
                                dateOff: Long = 0) extends Entity:
   def display = s"${LocalDate.ofEpochDay(dateOn).toString}: $temp"
 
@@ -150,7 +151,7 @@ final case class Measurement(id: Long = 0,
                              totalBromine: Int = 5,
                              salt: Int = 3200,
                              temperature: Int = 85,
-                             measured: Long = LocalDate.now.toEpochDay) extends Entity:
+                             measured: Long = Entity.currentEpochDay()) extends Entity:
   def display = LocalDate.ofEpochDay(measured).toString
 
 final case class Cleaning(id: Long = 0,
@@ -161,7 +162,7 @@ final case class Cleaning(id: Long = 0,
                           pumpBasket: Boolean = false,
                           pumpFilter: Boolean = false,
                           vacuum: Boolean = false,
-                          cleaned: Long = LocalDate.now.toEpochDay) extends Entity:
+                          cleaned: Long = Entity.currentEpochDay()) extends Entity:
   def display = LocalDate.ofEpochDay(cleaned).toString
 
 final case class Chemical(id: Long = 0,
@@ -169,7 +170,7 @@ final case class Chemical(id: Long = 0,
                           chemical: String = TypeOfChemical.LiquidChlorine.toString,
                           amount: Double = 1.0, 
                           unit: String = UnitOfMeasure.gl.toString,
-                          added: Long = LocalDate.now.toEpochDay) extends Entity:
+                          added: Long = Entity.currentEpochDay()) extends Entity:
   def display = s"${LocalDate.ofEpochDay(added).toString}: $chemical"
 
 final case class Supply(id: Long = 0,
@@ -178,12 +179,12 @@ final case class Supply(id: Long = 0,
                         amount: Double = 0.0,
                         unit: String = UnitOfMeasure.gl.toString,
                         cost: Int = 0,
-                        purchased: Long = LocalDate.now.toEpochDay) extends Entity:
+                        purchased: Long = Entity.currentEpochDay()) extends Entity:
   def display = s"${LocalDate.ofEpochDay(purchased).toString}: $item"
 
 final case class Repair(id: Long = 0,
                         poolId: Long = 0,
                         repair: String = "",
                         cost: Int = 0,
-                        repaired: Long = LocalDate.now.toEpochDay) extends Entity:
+                        repaired: Long = Entity.currentEpochDay()) extends Entity:
   def display = s"${LocalDate.ofEpochDay(repaired).toString}: $repair"
