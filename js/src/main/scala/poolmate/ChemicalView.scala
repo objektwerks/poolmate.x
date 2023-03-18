@@ -5,6 +5,7 @@ import com.raquo.laminar.api.L.*
 import java.time.LocalDate
 
 import Component.*
+import Entity.*
 import Validator.*
 
 object ChemicalView extends View:
@@ -66,8 +67,13 @@ object ChemicalView extends View:
           )
         },
         lbl("Added"),
-        rotxt.amend {
-          value <-- model.selectedEntityVar.signal.map( chemical => LocalDate.ofEpochDay(chemical.added).toString )
+        date.amend {
+          controlled(
+            value <-- model.selectedEntityVar.signal.map(chemical => localDateOfLongToString(chemical.added)),
+            onInput.mapToValue.filter(_.nonEmpty) --> { added =>
+              model.updateSelectedEntity( model.selectedEntityVar.now().copy(added = localDateOfStringToLong(added)) )
+            }
+          )
         },
       ),
       cbar(
