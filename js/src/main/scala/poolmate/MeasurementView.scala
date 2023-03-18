@@ -134,7 +134,7 @@ object MeasurementView extends View:
           controlled(
             value <-- model.selectedEntityVar.signal.map(measurement => localDateOfLongToString(measurement.measured)),
             onInput.mapToValue.filter(_.nonEmpty) --> { measured =>
-              model.updateSelectedEntity( model.selectedEntityVar.now().copy(added = localDateOfStringToLong(measured)) )
+              model.updateSelectedEntity( model.selectedEntityVar.now().copy(measured = localDateOfStringToLong(measured)) )
             }
           )
         },
