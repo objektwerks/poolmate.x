@@ -5,6 +5,7 @@ import com.raquo.laminar.api.L.*
 import java.time.LocalDate
 
 import Component.*
+import Entity.*
 import Validator.*
 
 object MeasurementView extends View:
@@ -129,8 +130,13 @@ object MeasurementView extends View:
           )
         },
         lbl("Measured"),
-        rotxt.amend {
-          value <-- model.selectedEntityVar.signal.map( measurement => LocalDate.ofEpochDay(measurement.measured).toString )
+        date.amend {
+          controlled(
+            value <-- model.selectedEntityVar.signal.map(measurement => localDateOfLongToString(measurement.measured)),
+            onInput.mapToValue.filter(_.nonEmpty) --> { measured =>
+              model.updateSelectedEntity( model.selectedEntityVar.now().copy(added = localDateOfStringToLong(measured)) )
+            }
+          )
         },
       ),
       cbar(
