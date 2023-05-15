@@ -4,8 +4,6 @@ import com.raquo.laminar.api.L.*
 
 import java.time.LocalDate
 
-import scala.scalajs.js.Date
-
 object Component:
   private val inputCss = "w3-input w3-hover-light-gray w3-text-indigo"
   private val currentYear = LocalDate.now.getYear
