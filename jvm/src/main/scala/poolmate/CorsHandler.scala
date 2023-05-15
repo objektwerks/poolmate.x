@@ -8,19 +8,11 @@ import cask.router.EndpointMetadata
 import cask.router.Decorator
 import cask.model.Response
 import cask.router.Result
-import com.typesafe.config.ConfigFactory
-import com.typesafe.scalalogging.LazyLogging
 
-import io.undertow.Undertow
 import io.undertow.server.HttpServerExchange
-import io.undertow.server.handlers.BlockingHandler
-import io.undertow.util.Headers
 import io.undertow.util.HttpString
 
-import java.util.concurrent.TimeUnit
 
-import scala.concurrent.duration._
-import scala.io.StdIn
 import scala.jdk.CollectionConverters.*
 
 given log: Logger = new Logger.Console()
