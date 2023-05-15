@@ -1,9 +1,6 @@
 package poolmate
 
-import scala.scalajs.js
-import scala.scalajs.js.JSConverters.*
-
-import com.raquo.laminar.api.L.{*, given}
+import com.raquo.laminar.api.L.*
 
 /**
  * Chart.js, via ScalaJs, is not exactly ready
