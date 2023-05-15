@@ -2,8 +2,6 @@ package poolmate
 
 import com.raquo.laminar.api.L.*
 
-import java.time.LocalDate
-
 import Component.*
 import Entity.*
 import Validator.*
