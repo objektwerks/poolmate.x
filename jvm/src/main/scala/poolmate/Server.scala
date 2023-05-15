@@ -7,8 +7,6 @@ import com.typesafe.scalalogging.LazyLogging
 import io.undertow.Undertow
 import io.undertow.server.handlers.BlockingHandler
 
-import java.util.concurrent.TimeUnit
-
 import scala.concurrent.duration._
 import scala.io.StdIn
 
