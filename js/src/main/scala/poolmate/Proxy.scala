@@ -1,7 +1,5 @@
 package poolmate
 
-import com.raquo.laminar.api.L._
-
 import org.scalajs.dom
 import org.scalajs.dom.Headers
 import org.scalajs.dom.HttpMethod
