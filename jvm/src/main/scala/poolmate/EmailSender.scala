@@ -3,12 +3,9 @@ package poolmate
 import com.typesafe.config.Config
 import com.typesafe.scalalogging.LazyLogging
 
-import javax.mail.Flags
-import jodd.mail.{Email, ImapServer, MailServer, SmtpServer}
-import jodd.mail.EmailFilter._
+import jodd.mail.{Email, MailServer, SmtpServer}
 
 import scala.annotation.tailrec
-import scala.concurrent.duration._
 import scala.language.postfixOps
 import scala.util.{Failure, Success, Using, Try}
 
