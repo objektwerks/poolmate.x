@@ -13,10 +13,10 @@ import scala.sys.process.Process
 
 import Validator.*
 
-class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
+final class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
   val conf = ConfigFactory.load("test.server.conf")
 
-  test("dispatcher") {
+  test("dispatcher"):
     Process("psql -d poolmate -f ddl.sql").run().exitValue()
     
     val store = Store(conf, Store.cache(minSize = 4, maxSize = 10, expireAfter = 24.hour))
@@ -28,9 +28,8 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
     testDispatcher(dispatcher, store)
     testEmail(store)
     testFault(store)
-  }
 
-  def testDispatcher(dispatcher: Dispatcher, store: Store): Unit = {
+  def testDispatcher(dispatcher: Dispatcher, store: Store): Unit =
     var account = testRegister(dispatcher)
     store.listAccounts().head shouldBe account
 
@@ -102,7 +101,6 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
     repair = testAddRepair(dispatcher, pool, repair)
     testListRepairs(dispatcher, pool)
     testUpdateRepair(dispatcher, pool, repair.copy(cost = 105))
-  }
 
   def testRegister(dispatcher: Dispatcher): Account =
     val command = Register(emailAddress = conf.getString("email.to"))
