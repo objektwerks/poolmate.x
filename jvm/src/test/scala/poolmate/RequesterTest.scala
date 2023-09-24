@@ -8,11 +8,11 @@ import org.scalatest.matchers.should.Matchers
 
 import scala.sys.process.Process
 
-import Serializer.given
-
 import upickle.default.*
 
-class RequesterTest extends AnyFunSuite with Matchers with LazyLogging:
+import Serializer.given
+
+final class RequesterTest extends AnyFunSuite with Matchers with LazyLogging:
   Process("psql -d poolmate -f ddl.sql").run().exitValue()
 
   val conf = ConfigFactory.load("test.server.conf")
@@ -21,7 +21,7 @@ class RequesterTest extends AnyFunSuite with Matchers with LazyLogging:
   val url = s"http://$host:$port/command"
   val server = EmbeddedServer(conf)
 
-  test("requester") {
+  test("requester"):
     server.start()
 
     val register = Register(emailAddress = conf.getString("email.to"))
@@ -51,4 +51,3 @@ class RequesterTest extends AnyFunSuite with Matchers with LazyLogging:
     require(registered.account == loggedIn.account, "Registered account not equal to LoggedIn account.")
 
     server.stop()
-  }
