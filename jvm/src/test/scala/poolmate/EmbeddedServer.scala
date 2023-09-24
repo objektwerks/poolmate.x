@@ -6,10 +6,10 @@ import com.typesafe.config.Config
 import com.typesafe.config.ConfigFactory
 import com.typesafe.scalalogging.LazyLogging
 
-import scala.concurrent.duration._
-
 import io.undertow.Undertow
 import io.undertow.server.handlers.BlockingHandler
+
+import scala.concurrent.duration.*
 
 final class EmbeddedServer(conf: Config) extends Main with LazyLogging:
   val _host = conf.getString("host")
