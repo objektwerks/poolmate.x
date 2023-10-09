@@ -57,7 +57,7 @@ final class Store(conf: Config,
           insert into account(license, email_address, pin, activated, deactivated) 
           values(${account.license}, ${account.emailAddress}, ${account.pin}, ${account.activated}, ${account.deactivated})
          """
-      .update()
+      .updateAndReturnGeneratedKey()
     }
     account.copy(id = id)
 
