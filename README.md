@@ -305,16 +305,16 @@ export POOLMATE_EMAIL_PASSWORD="password"
 
 Resources
 ---------
-1. Cask - https://com-lihaoyi.github.io/cask/index.html
-2. uPickle - https://com-lihaoyi.github.io/upickle/
-3. Requests - https://github.com/com-lihaoyi/requests-scala
-4. ScalikeJdbc - http://scalikejdbc.org
-5. H2 - https://h2database.com/html/main.html
-6. Scala-Java-Time - https://github.com/cquiroz/scala-java-time
-7. Scaffeine - https://github.com/blemale/scaffeine
-8. Packager - https://www.scala-sbt.org/sbt-native-packager/formats/graalvm-native-image.html
-9. Gaalvm - https://www.graalvm.org/docs/introduction/
-10. Snowpack - https://www.snowpack.dev/
+* [Cask](https://com-lihaoyi.github.io/cask/index.html)
+* [uPickle](https://com-lihaoyi.github.io/upickle/)
+* [Requests](https://github.com/com-lihaoyi/requests-scala)
+* [ScalikeJdbc](http://scalikejdbc.org)
+* [H2](https://h2database.com/html/main.html)
+* [Scala-Java-Time](https://github.com/cquiroz/scala-java-time)
+* [Scaffeine](https://github.com/blemale/scaffeine)
+* [Packager](https://www.scala-sbt.org/sbt-native-packager/formats/graalvm-native-image.html)
+* [Gaalvm](https://www.graalvm.org/docs/introduction/)
+* [Snowpack](https://www.snowpack.dev/)
 
 License
 -------
