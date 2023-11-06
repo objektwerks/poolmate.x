@@ -70,7 +70,7 @@ lazy val jvm = (project in file("jvm"))
       Seq(
         "com.lihaoyi" %% "cask" % caskVersion,
         "com.lihaoyi" %% "upickle" % upickleVersion,
-        "org.scalikejdbc" %% "scalikejdbc" % "4.0.0",
+        "org.scalikejdbc" %% "scalikejdbc" % "4.1.0",
         "org.postgresql" % "postgresql" % postgresqlVersion,
         "io.github.cquiroz" %% "scala-java-time" % scalaJavaTimeVersion,
         "com.github.blemale" %% "scaffeine" % "5.2.1",
