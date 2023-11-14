@@ -5,4 +5,4 @@ addSbtPlugin("io.spray" % "sbt-revolver" % "0.9.1")
 
 addSbtPlugin("com.github.sbt" % "sbt-native-packager" % "1.9.16")
 
-addSbtPlugin("org.scalablytyped.converter" % "sbt-converter" % "1.0.0-beta42")
+addSbtPlugin("org.scalablytyped.converter" % "sbt-converter" % "1.0.0-beta43")
