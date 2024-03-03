@@ -77,7 +77,7 @@ lazy val jvm = (project in file("jvm"))
         "org.jodd" % "jodd-mail" % "7.0.1",
         "com.typesafe" % "config" % "1.4.3",
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
-        "ch.qos.logback" % "logback-classic" % "1.5.0",
+        "ch.qos.logback" % "logback-classic" % "1.5.1",
         "com.lihaoyi" %% "requests" % "0.8.0" % Test,
         "org.scalatest" %% "scalatest" % scalaTestVersion % Test
       )
