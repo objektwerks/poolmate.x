@@ -4,7 +4,7 @@ lazy val caskVersion = "0.9.4"
 lazy val laminarVersion = "17.1.0"
 lazy val waypointVersion = "8.0.1"
 lazy val upickleVersion = "4.0.1"
-lazy val postgresqlVersion = "42.7.3"
+lazy val postgresqlVersion = "42.7.4"
 lazy val scalaJavaTimeVersion = "2.5.0"
 lazy val scalaTestVersion = "3.2.19"
 
