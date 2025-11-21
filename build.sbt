@@ -1,6 +1,6 @@
 name := "poolmate.x"
 
-lazy val caskVersion = "0.11.2"
+lazy val caskVersion = "0.11.3"
 lazy val laminarVersion = "17.2.1"
 lazy val waypointVersion = "8.0.1" // Don't upgrade due to breaking changes!
 lazy val upickleVersion = "4.4.1"
