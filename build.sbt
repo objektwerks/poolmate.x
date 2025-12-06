@@ -11,7 +11,7 @@ lazy val scalaTestVersion = "3.2.19"
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
   version := "0.13-SNAPSHOT",
-  scalaVersion := "3.8.0-RC2",
+  scalaVersion := "3.8.0-RC3",
   scalacOptions ++= Seq(
     "-Wunused:all"
   )
